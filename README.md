@@ -21,6 +21,10 @@ pnpm install
 
 App scripts arrive once the framework is chosen (see `docs/decisions/`).
 
+## License
+
+Code is [MIT](LICENSE). Friends of A Fierce Chase's name, logos, copy, trail data and photos are **not** covered by the license and remain the organization's; see the exclusion at the end of `LICENSE`.
+
 ## Ownership and handoff
 
 See [`HANDOFF.md`](HANDOFF.md) for every account, owner and renewal date.

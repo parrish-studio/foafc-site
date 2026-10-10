@@ -65,6 +65,10 @@ Record each decision as an ADR in `docs/decisions/`.
 - Wolf Chase Loop km figure in the source looks wrong; see `packages/module-trails/data/trails.json`.
 - Heading typeface: brief says Archivo Black, the Canva prototype hero looks like a serif — confirm.
 
+## Licensing
+
+Code is MIT (`LICENSE`). FOAFC content and branding are excluded and belong to the organization. Keep FOAFC content in `apps/foafc` (e.g. `src/content`) so the line between licensed code and excluded content stays clear; packages must contain no FOAFC content beyond seed data.
+
 ## Conventions
 
 - Package manager: pnpm. Node LTS.
