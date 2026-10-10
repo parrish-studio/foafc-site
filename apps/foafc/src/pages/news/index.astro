@@ -1,0 +1,62 @@
+---
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+// Newest first. Keystatic writes these entries; see keystatic.config.ts.
+const posts = (await getCollection('news')).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
+
+const dateFormat = new Intl.DateTimeFormat('en-US', {
+  dateStyle: 'long',
+  timeZone: 'UTC',
+});
+---
+
+<BaseLayout
+  title="News"
+  description="News and updates from Friends of A Fierce Chase in Monson, Maine."
+>
+  <div class="container page stack">
+    <div class="page-header">
+      <h1>News</h1>
+      <p class="page-header__lede">Updates from the trails and the board.</p>
+    </div>
+
+    {
+      posts.length === 0 ? (
+        <p>No posts yet.</p>
+      ) : (
+        <ul class="card-grid">
+          {posts.map((post) => (
+            <li class="card">
+              <a class="card__link" href={`/news/${post.id}/`}>
+                {post.data.coverImage && (
+                  <Image
+                    class="card__image"
+                    src={post.data.coverImage}
+                    alt={post.data.coverAlt ?? ''}
+                    width={640}
+                    height={360}
+                    widths={[320, 640, 960]}
+                    sizes="(min-width: 48rem) 20rem, 100vw"
+                    loading="lazy"
+                  />
+                )}
+                <div class="card__body">
+                  <h2 class="card__title">{post.data.title}</h2>
+                  <p class="card__meta">
+                    <time datetime={post.data.date.toISOString()}>
+                      {dateFormat.format(post.data.date)}
+                    </time>
+                  </p>
+                </div>
+              </a>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+  </div>
+</BaseLayout>

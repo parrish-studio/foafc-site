@@ -1,6 +1,8 @@
 ---
+import { Image } from 'astro:assets';
 import { parseTrailSystem, summarizeTrails } from '@parrish-studio/module-trails';
 import trailsData from '@parrish-studio/module-trails/data/trails.json';
+import heroImage from '../assets/photos/trailhead-winter.jpg';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 const system = parseTrailSystem(trailsData);
@@ -19,7 +21,17 @@ const facts = [
   description="Friends of A Fierce Chase maintains a volunteer-built cross-country ski trail system in Monson, Maine."
 >
   <div class="hero">
-    <div class="container">
+    <Image
+      class="hero__image"
+      src={heroImage}
+      alt=""
+      width={1286}
+      widths={[640, 960, 1286]}
+      sizes="100vw"
+      loading="eager"
+      fetchpriority="high"
+    />
+    <div class="container hero__content">
       <h1>Cross-country ski trails in Monson, Maine</h1>
       <p class="hero__lede">
         {system.system.name} is a volunteer-built, volunteer-groomed trail system of {

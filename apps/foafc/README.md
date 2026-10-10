@@ -35,6 +35,49 @@ status|logs|stop` to manage the running server.
   pages ship zero JavaScript. A page that uses a module's components must also
   import that module's stylesheet (see `src/pages/trails.astro`).
 
+## Images
+
+Two kinds, handled differently:
+
+- **Static brand and photography** live in `src/assets/` and are imported in a
+  page or layout, so Astro fingerprints and optimises them at build. These
+  change rarely; editing one is a code change.
+  - `src/assets/brand/` — `FOAFC_Cream_Horizontal_Logo.png` (site header, cream
+    on the forest-green bar) and `FOAFC_Color_Icon_Logo.png` (favicon). Variants
+    and the rules for choosing one are in `docs/source/logo-usage-guide.md`.
+  - `src/assets/photos/` — `trailhead-winter.jpg`, the home hero.
+- **News cover images** are uploaded by board members through Keystatic, which
+  commits them to `src/assets/news/`. Nobody needs to touch the repo.
+
+Always use `<Image>` from `astro:assets`, never a bare `<img>`: it emits WebP,
+a responsive `srcset`, and explicit `width`/`height` so nothing shifts on load.
+Give `alt=""` only when the image is decorative, as the hero is.
+
+`sharp` is a direct dependency of this app. It has to be, even though Astro
+pulls it in transitively — pnpm's isolated layout otherwise hides it and the
+build fails with `MissingSharp` at the image-generation step.
+
+### Pulling assets from the FOAFC Drive
+
+The assets live in a Drive folder owned by friendsofafiercechase@gmail.com and
+shared with the webmaster. `rclone` is configured with a read-only remote named
+`foafc`; copy a file by its Drive ID:
+
+```
+rclone backend copyid foafc: <file-id> apps/foafc/src/assets/photos/
+```
+
+`docs/source/asset-index.md` lists the folders. Do not round-trip binaries
+through a chat tool that returns base64 — it is slow and can truncate silently.
+
+### Known gap
+
+There is no high-resolution landscape photo suitable for a full-bleed hero. The
+best available is 1286x965, so the hero overlay is deliberately heavy (0.88) to
+hide softness and to stop the sign's own lettering competing with the headline.
+Replacing it with a wide, high-resolution trail photo is the single biggest
+visual upgrade available, and is only a one-line import change.
+
 ## Keystatic
 
 `keystatic.config.ts` uses GitHub mode. **Its paths are relative to the

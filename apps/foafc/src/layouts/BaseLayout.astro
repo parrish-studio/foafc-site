@@ -1,4 +1,7 @@
 ---
+import { Image } from 'astro:assets';
+import faviconSrc from '../assets/brand/FOAFC_Color_Icon_Logo.png';
+import logoSrc from '../assets/brand/FOAFC_Cream_Horizontal_Logo.png';
 import '../styles/global.css';
 
 interface Props {
@@ -12,6 +15,7 @@ const { title, description } = Astro.props;
 const navItems = [
   { href: '/', label: 'Home' },
   { href: '/trails/', label: 'Trails' },
+  { href: '/news/', label: 'News' },
 ];
 
 const currentPath = Astro.url.pathname;
@@ -29,13 +33,23 @@ const year = new Date().getFullYear();
     <title>{title} — Friends of A Fierce Chase</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+    <link rel="icon" type="image/png" href={faviconSrc.src} />
+    <link rel="apple-touch-icon" href={faviconSrc.src} />
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to main content</a>
 
     <header class="site-header">
       <div class="container site-header__inner">
-        <a class="site-header__brand" href="/">Friends of A Fierce Chase</a>
+        <a class="site-header__brand" href="/">
+          <Image
+            src={logoSrc}
+            alt="Friends of A Fierce Chase"
+            width={300}
+            densities={[1, 2]}
+            loading="eager"
+          />
+        </a>
         <nav class="site-nav" aria-label="Main">
           <ul class="site-nav__list">
             {
