@@ -19,7 +19,7 @@ Never put passwords, tokens or recovery codes in this file or anywhere in the re
 | Wix | Current live site (to be retired) | _confirm_ | _confirm_ | Business plan, prepaid | **March 2028** | _TBD_ |
 | Domain registrar — friendsofafiercechase.org | Domain | _confirm registrar and login_ | | | _confirm_ | _TBD_ |
 | DNS | Points domain at hosting | _TBD_ | | | | |
-| Hosting (Vercel or Netlify) | Site hosting | _TBD — create under friendsofafiercechase@gmail.com_ | | Free tier | — | |
+| Vercel (Hobby) | Site hosting and deploys | friendsofafiercechase@gmail.com (_to create_) | Shared org login (Hobby has no team members) | Free; non-commercial use only | — | _TBD — board password store_ |
 | Keystatic (GitHub mode) | Board content editing at `/keystatic` | Keystatic GitHub App installed on parrish-studio (_to set up_) | Jeneve | Free | — | App secrets in hosting env vars |
 | GitHub collaborators | Board editors' accounts with write access to `foafc-site` | Each editor | Jeneve | Free | — | Editors' own logins |
 | Facebook page / app | Events and trail conditions source | _confirm_ | | | | |

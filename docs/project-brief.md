@@ -18,6 +18,7 @@ Prototype: Canva Code site at https://foafc-prototype.my.canva.site/ (design "Fr
 | Oct 10, 2026 | ADR 0001 | Monorepo in the `parrish-studio` org; extract packages when client #2 exists. |
 | Oct 10, 2026 | ADR 0002 | Astro for the site; React for islands and module UI. |
 | Oct 10, 2026 | ADR 0003 | Keystatic in GitHub mode as the CMS. |
+| Oct 10, 2026 | ADR 0004 | Vercel Hobby hosting; public repo; org-owned account. |
 
 The current direction is the custom build. The audit still matters: it records the board's priorities, the existing payment and store accounts, and the "don't make anyone post twice" principle.
 
@@ -39,7 +40,7 @@ The current direction is the custom build. The audit still matters: it records t
 - Custom codebase in GitHub (`parrish-studio/foafc-site`)
 - Static site plus a light headless CMS
 - Framework: **Astro**, static by default; **React** islands and module UI (ADR 0002)
-- Hosting: **Vercel, Netlify or Cloudflare free tier (undecided)**
+- Hosting: **Vercel Hobby**, org-owned account, public repo; passes framed as suggested donations (ADR 0004)
 - CMS: **Keystatic, GitHub mode** — content in the repo, editors sign in with GitHub (ADR 0003)
 - Launch: DNS cutover of friendsofafiercechase.org away from Wix
 
@@ -102,7 +103,7 @@ Notes at the end of the board brief (Sept 19 meeting):
 
 1. ~~Next.js vs Astro~~ — **Astro** (ADR 0002)
 2. ~~Headless CMS~~ — **Keystatic, GitHub mode** (ADR 0003). Content Studio's social cross-publishing still open.
-3. Vercel vs Netlify vs Cloudflare (must support functions for Keystatic)
+3. ~~Hosting~~ — **Vercel Hobby** (ADR 0004)
 4. Data source for the live trail status and the weather widget
 5. How to pull Facebook events and posts in automatically
 6. Donation processor
