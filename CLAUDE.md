@@ -42,7 +42,7 @@ Decided: GitHub, static site + light headless CMS, free-tier hosting, DNS cutove
 - **React** for interactive islands and for every module's UI layer, so module components also work in Next.js for future clients. No `.astro` components inside `packages/`.
 - **Keystatic in GitHub mode** as the CMS (ADR 0003). Content lives in the repo; editors sign in at `/keystatic` with GitHub accounts; saves commit to `main`. Public pages stay static; only Keystatic's routes need a server adapter. Keystatic schemas belong in `apps/foafc`; reusable field definitions can come from module cores.
 
-- **Vercel, Hobby plan** (ADR 0004). Account owned by friendsofafiercechase@gmail.com; repo must be public for Hobby to deploy from the org. Hobby is non-commercial: nothing on the site may sell goods or services directly.
+- **Vercel, Hobby plan** (ADR 0004). Account owned by friendsofafiercechase@gmail.com; the repo is public (required for Hobby to deploy from the org), so never commit secrets or private board material. Hobby is non-commercial: nothing on the site may sell goods or services directly.
 
 **Open:**
 1. Live data source for trail status ("All trails open — 6 miles groomed") and the weather widget

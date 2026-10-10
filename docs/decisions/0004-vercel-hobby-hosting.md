@@ -32,4 +32,4 @@ Hosting must be free, support Astro static output plus serverless functions for 
 
 - If FOAFC ever needs to charge for something (paid event tickets, merch sold on-site rather than via Bonfire), revisit the plan: that would be commercial use requiring Vercel Pro or another host.
 - Paid client work under Parrish Studio cannot use Hobby; client sites will need Pro or another host.
-- Action items: (1) make the repo public, (2) create the Vercel account under the org email, (3) connect the repo and set Keystatic env vars, (4) record all of it in `HANDOFF.md`.
+- Action items: (1) ~~make the repo public~~ — done 2026-10-10, (2) create the Vercel account under the org email, (3) connect the repo and set Keystatic env vars, (4) record all of it in `HANDOFF.md`.
