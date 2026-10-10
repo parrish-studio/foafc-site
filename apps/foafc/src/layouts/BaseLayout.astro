@@ -1,0 +1,67 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  /** Used for <meta name="description">; keep it under ~155 characters. */
+  description: string;
+}
+
+const { title, description } = Astro.props;
+
+const navItems = [
+  { href: '/', label: 'Home' },
+  { href: '/trails/', label: 'Trails' },
+];
+
+const currentPath = Astro.url.pathname;
+const isCurrent = (href: string) =>
+  href === '/' ? currentPath === '/' : currentPath.startsWith(href);
+
+const year = new Date().getFullYear();
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title} — Friends of A Fierce Chase</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to main content</a>
+
+    <header class="site-header">
+      <div class="container site-header__inner">
+        <a class="site-header__brand" href="/">Friends of A Fierce Chase</a>
+        <nav class="site-nav" aria-label="Main">
+          <ul class="site-nav__list">
+            {
+              navItems.map((item) => (
+                <li>
+                  <a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>
+                    {item.label}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main" class="site-main">
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="container site-footer__inner">
+        <p>Friends of A Fierce Chase — Monson, Maine</p>
+        <p>A 501(c)(3) nonprofit. The trails are volunteer-built and volunteer-groomed.</p>
+        <p>© {year} Friends of A Fierce Chase</p>
+      </div>
+    </footer>
+  </body>
+</html>

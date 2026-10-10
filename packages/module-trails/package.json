@@ -2,9 +2,34 @@
   "name": "@parrish-studio/module-trails",
   "version": "0.0.0",
   "private": true,
-  "description": "Trails module: framework-agnostic schema and data access, plus a thin UI layer.",
+  "description": "Trails module: framework-agnostic schema and data access, plus a thin React UI layer.",
   "license": "MIT",
+  "type": "module",
   "exports": {
+    ".": "./src/core/index.ts",
+    "./ui": "./src/ui/index.ts",
+    "./ui/trails.css": "./src/ui/trails.css",
     "./data/trails.json": "./data/trails.json"
+  },
+  "files": [
+    "src",
+    "data",
+    "README.md"
+  ],
+  "peerDependencies": {
+    "@parrish-studio/tokens": "workspace:*",
+    "react": "^18.2.0 || ^19.0.0"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@types/react": "^19.3.0",
+    "typescript": "^5.9.3"
+  },
+  "scripts": {
+    "check": "tsc"
   }
 }

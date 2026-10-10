@@ -1,0 +1,57 @@
+---
+import { parseTrailSystem, summarizeTrails } from '@parrish-studio/module-trails';
+import trailsData from '@parrish-studio/module-trails/data/trails.json';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const system = parseTrailSystem(trailsData);
+const summary = summarizeTrails(system.trails);
+
+const facts = [
+  { label: 'Trails', value: `${system.system.trailCount} named trails` },
+  { label: 'Groomed', value: system.system.totalMilesLabel },
+  { label: 'Where', value: system.system.location },
+  { label: 'Dogs', value: 'Welcome, under verbal control' },
+];
+---
+
+<BaseLayout
+  title="Home"
+  description="Friends of A Fierce Chase maintains a volunteer-built cross-country ski trail system in Monson, Maine."
+>
+  <div class="hero">
+    <div class="container">
+      <h1>Cross-country ski trails in Monson, Maine</h1>
+      <p class="hero__lede">
+        {system.system.name} is a volunteer-built, volunteer-groomed trail system of {
+          system.system.trailCount
+        } trails covering {system.system.totalMilesLabel}. It is open to the public and supported
+        by donations.
+      </p>
+      <p class="hero__actions">
+        <a class="button" href="/trails/">See the trails</a>
+      </p>
+    </div>
+  </div>
+
+  <div class="container page stack">
+    <ul class="fact-list">
+      {
+        facts.map((fact) => (
+          <li>
+            <span class="fact-list__label">{fact.label}</span>
+            <span class="fact-list__value">{fact.value}</span>
+          </li>
+        ))
+      }
+    </ul>
+
+    <section>
+      <h2>Before you go</h2>
+      <p>
+        {summary.skateSkiingCount} of the {summary.count} trails are open to skate skiing, and the
+        system is groomed by volunteers. Check the <a href="/trails/">trail list, etiquette rules
+        and safety notice</a> before your first visit.
+      </p>
+    </section>
+  </div>
+</BaseLayout>

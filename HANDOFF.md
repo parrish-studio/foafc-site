@@ -34,7 +34,7 @@ Set in the hosting dashboard, never committed. List names and what they're for h
 
 | Name | Used by | Purpose |
 |---|---|---|
-| `KEYSTATIC_GITHUB_CLIENT_ID`, `KEYSTATIC_GITHUB_CLIENT_SECRET`, `KEYSTATIC_SECRET`, `PUBLIC_KEYSTATIC_GITHUB_APP_SLUG` | Keystatic | Editor sign-in via the Keystatic GitHub App (expected names; confirm at setup) |
+| `KEYSTATIC_GITHUB_CLIENT_ID`, `KEYSTATIC_GITHUB_CLIENT_SECRET`, `KEYSTATIC_SECRET`, `PUBLIC_KEYSTATIC_GITHUB_APP_SLUG` | Keystatic | Editor sign-in via the Keystatic GitHub App (names confirmed against @keystatic/core 0.6.9) |
 
 ## Routine tasks
 

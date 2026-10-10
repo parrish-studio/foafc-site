@@ -1,0 +1,134 @@
+/*
+ * @parrish-studio/module-trails — UI styles.
+ *
+ * Plain CSS. Every value comes from @parrish-studio/tokens semantic tokens, so
+ * a client reskin is a token swap and nothing here changes. Never add a hex
+ * value or a token primitive reference to this file.
+ *
+ * Import it once per page that renders these components:
+ *   import '@parrish-studio/module-trails/ui/trails.css';
+ */
+
+/* ---------- Trail table ---------- */
+
+.ps-trail-table-scroll {
+  overflow-x: auto;
+  /* Focusable so the overflow can be scrolled by keyboard. */
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background-color: var(--color-surface);
+}
+
+.ps-trail-table-scroll:focus-visible {
+  outline: 3px solid var(--color-focus-ring);
+  outline-offset: 2px;
+}
+
+.ps-trail-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--text-base);
+  text-align: left;
+}
+
+.ps-trail-table__caption {
+  padding: var(--space-3) var(--space-4);
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+  text-align: left;
+}
+
+.ps-trail-table th,
+.ps-trail-table td {
+  padding: var(--space-3) var(--space-4);
+  border-top: 1px solid var(--color-border);
+  vertical-align: top;
+}
+
+.ps-trail-table thead th {
+  border-top: 0;
+  background-color: var(--color-brand);
+  color: var(--color-text-inverse);
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.ps-trail-table tbody tr:nth-child(even) {
+  background-color: var(--color-surface-muted);
+}
+
+.ps-trail-table__name {
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.ps-trail-tag {
+  display: inline-block;
+  margin-inline-start: var(--space-2);
+  padding: 0 var(--space-2);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+.ps-trail-length {
+  display: block;
+  white-space: nowrap;
+}
+
+.ps-trail-length--secondary {
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
+
+/* ---------- Difficulty badge ---------- */
+
+.ps-trail-difficulty {
+  display: inline-flex;
+  align-items: baseline;
+  gap: var(--space-2);
+  white-space: nowrap;
+}
+
+.ps-trail-difficulty__glyph {
+  color: var(--color-brand);
+  font-size: var(--text-sm);
+}
+
+/*
+ * The glyph differs per level (circle / square / diamond) via difficultyGlyph()
+ * in the core. Hue is deliberately not used to encode difficulty; add
+ * per-level colour here only once the token set has semantic colours for it.
+ */
+
+/* ---------- Rules and safety ---------- */
+
+.ps-trail-rules__list {
+  margin: 0;
+  padding-inline-start: var(--space-6);
+}
+
+.ps-trail-rules__list > li + li {
+  margin-top: var(--space-2);
+}
+
+.ps-trail-safety {
+  padding: var(--space-4) var(--space-6);
+  border-radius: var(--radius-md);
+  background-color: var(--color-status-bg);
+}
+
+.ps-trail-safety > :first-child {
+  margin-top: 0;
+}
+
+.ps-trail-safety__text {
+  margin-bottom: 0;
+}

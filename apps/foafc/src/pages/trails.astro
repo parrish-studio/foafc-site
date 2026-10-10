@@ -1,0 +1,69 @@
+---
+import {
+  formatKm,
+  formatMiles,
+  parseTrailSystem,
+  sortTrailsByLength,
+  summarizeTrails,
+} from '@parrish-studio/module-trails';
+import trailsData from '@parrish-studio/module-trails/data/trails.json';
+import { TrailList, TrailRules, TrailSafetyNotice } from '@parrish-studio/module-trails/ui';
+import '@parrish-studio/module-trails/ui/trails.css';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+// Seed data lives in the module for now; it moves to this app once the CMS owns
+// trail content (see the module README).
+const system = parseTrailSystem(trailsData);
+const trails = sortTrailsByLength(system.trails);
+const summary = summarizeTrails(trails);
+---
+
+<BaseLayout
+  title="Trails"
+  description={`All ${system.system.trailCount} trails at ${system.system.name} in ${system.system.location}, with distance, difficulty and etiquette rules.`}
+>
+  <div class="container page stack">
+    <div class="page-header">
+      <h1>Trails</h1>
+      <p class="page-header__lede">
+        {system.system.name} in {system.system.location}: {system.system.trailCount} named trails
+        covering {system.system.totalMilesLabel}.
+      </p>
+    </div>
+
+    <ul class="fact-list">
+      <li>
+        <span class="fact-list__label">Trails listed</span>
+        <span class="fact-list__value">{summary.count}</span>
+      </li>
+      <li>
+        <span class="fact-list__label">Total length</span>
+        <span class="fact-list__value">{formatMiles(summary.totalMiles)}</span>
+      </li>
+      <li>
+        <span class="fact-list__label">In kilometres</span>
+        <span class="fact-list__value">{formatKm(summary.totalKm)}</span>
+      </li>
+      <li>
+        <span class="fact-list__label">Open to skate skiing</span>
+        <span class="fact-list__value">{summary.skateSkiingCount} trails</span>
+      </li>
+    </ul>
+
+    {
+      system.system.mapPdf && (
+        <p>
+          <a class="button" href={system.system.mapPdf} rel="noopener">
+            View the trail map (PDF)
+          </a>
+        </p>
+      )
+    }
+
+    <TrailList trails={trails} caption="Every trail, longest first." />
+
+    <TrailRules rules={system.rules} />
+
+    <TrailSafetyNotice notice={system.safetyNotice} heading="Know before you go" />
+  </div>
+</BaseLayout>

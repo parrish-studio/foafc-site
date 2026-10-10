@@ -6,7 +6,8 @@
   "license": "MIT",
   "main": "tokens.css",
   "exports": {
-    ".": "./tokens.css"
+    ".": "./tokens.css",
+    "./tokens.css": "./tokens.css"
   },
   "files": ["tokens.css"]
 }

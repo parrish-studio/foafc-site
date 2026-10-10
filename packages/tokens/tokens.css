@@ -41,6 +41,9 @@
   --color-action-text: var(--color-forest-900);
   --color-status-bg: var(--color-sage-200);
   --color-focus-ring: var(--color-amber-500);
+  --color-border: var(--color-sage-200);
+  --color-text-muted: var(--color-slate-600);
+  --color-surface-muted: var(--color-cream-50);
 
   /* ---------- Semantic: type scale ---------- */
   --text-sm: 0.875rem;

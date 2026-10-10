@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "foafc-dev",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": ["--filter", "@foafc/site", "dev"],
+      "port": 4321
+    }
+  ]
+}

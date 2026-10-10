@@ -1,0 +1,284 @@
+/*
+ * Global styles for the FOAFC site.
+ *
+ * Plain CSS only (no Tailwind, no CSS-in-JS). Every colour, type, spacing and
+ * radius value comes from @parrish-studio/tokens — never hard-code a value here.
+ *
+ * Tokens are imported first so the custom properties exist before anything
+ * uses them.
+ */
+
+@import '@parrish-studio/tokens/tokens.css';
+
+/* ---------- Reset ---------- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+ul,
+ol,
+figure {
+  margin: 0;
+}
+
+img,
+picture,
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* ---------- Base ---------- */
+
+html {
+  /* Anchors land below the sticky header. */
+  scroll-padding-top: var(--space-16);
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: var(--leading-body);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  line-height: var(--leading-tight);
+  color: var(--color-brand);
+}
+
+h1 {
+  font-size: var(--text-2xl);
+}
+
+h2 {
+  font-size: var(--text-xl);
+}
+
+h3 {
+  font-size: var(--text-lg);
+}
+
+p + p,
+p + ul,
+p + ol,
+h2 + p,
+h3 + p {
+  margin-top: var(--space-4);
+}
+
+a {
+  color: var(--color-brand);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+
+a:hover {
+  text-decoration-thickness: 2px;
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-focus-ring);
+  outline-offset: 2px;
+}
+
+/* ---------- Layout ---------- */
+
+.container {
+  width: 100%;
+  max-width: var(--content-max);
+  margin-inline: auto;
+  padding-inline: var(--space-4);
+}
+
+.site-main {
+  flex: 1;
+}
+
+/* Vertical rhythm for ordinary page content. Full-bleed sections (the hero)
+   sit outside it so they run flush to the header. */
+.page {
+  padding-block: var(--space-12);
+}
+
+.stack > * + * {
+  margin-top: var(--space-8);
+}
+
+/* ---------- Skip link ---------- */
+
+.skip-link {
+  position: absolute;
+  left: var(--space-4);
+  top: var(--space-2);
+  z-index: 10;
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-sm);
+  background-color: var(--color-action);
+  color: var(--color-action-text);
+  font-weight: 600;
+  text-decoration: none;
+  transform: translateY(-200%);
+}
+
+.skip-link:focus-visible {
+  transform: translateY(0);
+}
+
+/* ---------- Header ---------- */
+
+.site-header {
+  background-color: var(--color-header-bg);
+  color: var(--color-text-inverse);
+}
+
+.site-header__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding-block: var(--space-4);
+}
+
+.site-header__brand {
+  color: var(--color-text-inverse);
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  line-height: var(--leading-tight);
+  text-decoration: none;
+}
+
+.site-nav__list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-6);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.site-nav a {
+  color: var(--color-text-inverse);
+  text-decoration: none;
+}
+
+.site-nav a:hover,
+.site-nav a[aria-current='page'] {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
+
+/* ---------- Footer ---------- */
+
+.site-footer {
+  background-color: var(--color-header-bg);
+  color: var(--color-text-inverse);
+  padding-block: var(--space-8);
+  font-size: var(--text-sm);
+}
+
+.site-footer a {
+  color: var(--color-text-inverse);
+}
+
+.site-footer__inner > * + * {
+  margin-top: var(--space-2);
+}
+
+/* ---------- Page pieces ---------- */
+
+.page-header {
+  max-width: 55ch;
+}
+
+.page-header__lede {
+  margin-top: var(--space-4);
+  font-size: var(--text-lg);
+}
+
+.hero {
+  background-color: var(--color-brand);
+  color: var(--color-text-inverse);
+  padding-block: var(--space-16);
+}
+
+.hero h1 {
+  color: var(--color-text-inverse);
+  font-size: var(--text-hero);
+  max-width: 24ch;
+}
+
+.hero__lede {
+  margin-top: var(--space-4);
+  max-width: 55ch;
+  font-size: var(--text-lg);
+}
+
+.button {
+  display: inline-block;
+  padding: var(--space-3) var(--space-6);
+  border-radius: var(--radius-pill);
+  background-color: var(--color-action);
+  color: var(--color-action-text);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.button:hover {
+  text-decoration: underline;
+}
+
+.hero__actions {
+  margin-top: var(--space-8);
+}
+
+.fact-list {
+  display: grid;
+  gap: var(--space-4);
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.fact-list > li {
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background-color: var(--color-surface);
+}
+
+.fact-list__label {
+  display: block;
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
+
+.fact-list__value {
+  display: block;
+  margin-top: var(--space-1);
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  color: var(--color-brand);
+}
