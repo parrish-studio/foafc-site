@@ -20,7 +20,8 @@ Never put passwords, tokens or recovery codes in this file or anywhere in the re
 | Domain registrar — friendsofafiercechase.org | Domain | _confirm registrar and login_ | | | _confirm_ | _TBD_ |
 | DNS | Points domain at hosting | _TBD_ | | | | |
 | Hosting (Vercel or Netlify) | Site hosting | _TBD — create under friendsofafiercechase@gmail.com_ | | Free tier | — | |
-| Headless CMS | Board content editing | _TBD_ | | | | |
+| Keystatic (GitHub mode) | Board content editing at `/keystatic` | Keystatic GitHub App installed on parrish-studio (_to set up_) | Jeneve | Free | — | App secrets in hosting env vars |
+| GitHub collaborators | Board editors' accounts with write access to `foafc-site` | Each editor | Jeneve | Free | — | Editors' own logins |
 | Facebook page / app | Events and trail conditions source | _confirm_ | | | | |
 | Google account friendsofafiercechase@gmail.com | Drive assets, org identity | Org | | Free | — | _TBD_ |
 | Bonfire | Merch store | _confirm_ | | Free (print on demand) | — | |
@@ -33,7 +34,7 @@ Set in the hosting dashboard, never committed. List names and what they're for h
 
 | Name | Used by | Purpose |
 |---|---|---|
-| _none yet_ | | |
+| `KEYSTATIC_GITHUB_CLIENT_ID`, `KEYSTATIC_GITHUB_CLIENT_SECRET`, `KEYSTATIC_SECRET`, `PUBLIC_KEYSTATIC_GITHUB_APP_SLUG` | Keystatic | Editor sign-in via the Keystatic GitHub App (expected names; confirm at setup) |
 
 ## Routine tasks
 

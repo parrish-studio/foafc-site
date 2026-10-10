@@ -17,6 +17,7 @@ Prototype: Canva Code site at https://foafc-prototype.my.canva.site/ (design "Fr
 | Sept 19, 2026 | Board brief (`source/board-brief-2026-09.md`) | Build a real custom site from the prototype, host free-tier on Vercel or Netlify, add a lightweight CMS, then DNS cutover from Wix. |
 | Oct 10, 2026 | ADR 0001 | Monorepo in the `parrish-studio` org; extract packages when client #2 exists. |
 | Oct 10, 2026 | ADR 0002 | Astro for the site; React for islands and module UI. |
+| Oct 10, 2026 | ADR 0003 | Keystatic in GitHub mode as the CMS. |
 
 The current direction is the custom build. The audit still matters: it records the board's priorities, the existing payment and store accounts, and the "don't make anyone post twice" principle.
 
@@ -39,7 +40,7 @@ The current direction is the custom build. The audit still matters: it records t
 - Static site plus a light headless CMS
 - Framework: **Astro**, static by default; **React** islands and module UI (ADR 0002)
 - Hosting: **Vercel, Netlify or Cloudflare free tier (undecided)**
-- CMS: **undecided**
+- CMS: **Keystatic, GitHub mode** — content in the repo, editors sign in with GitHub (ADR 0003)
 - Launch: DNS cutover of friendsofafiercechase.org away from Wix
 
 ## 4. Site map (from the board brief and prototype)
@@ -100,8 +101,8 @@ Notes at the end of the board brief (Sept 19 meeting):
 ## 9. Open decisions
 
 1. ~~Next.js vs Astro~~ — **Astro** (ADR 0002)
-2. Headless CMS choice, and how it powers Trail Desk and Content Studio
-3. Vercel vs Netlify vs Cloudflare
+2. ~~Headless CMS~~ — **Keystatic, GitHub mode** (ADR 0003). Content Studio's social cross-publishing still open.
+3. Vercel vs Netlify vs Cloudflare (must support functions for Keystatic)
 4. Data source for the live trail status and the weather widget
 5. How to pull Facebook events and posts in automatically
 6. Donation processor

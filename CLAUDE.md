@@ -40,13 +40,13 @@ Decided: GitHub, static site + light headless CMS, free-tier hosting, DNS cutove
 
 - **Astro** for `apps/foafc`, static output by default (ADR 0002).
 - **React** for interactive islands and for every module's UI layer, so module components also work in Next.js for future clients. No `.astro` components inside `packages/`.
+- **Keystatic in GitHub mode** as the CMS (ADR 0003). Content lives in the repo; editors sign in at `/keystatic` with GitHub accounts; saves commit to `main`. Public pages stay static; only Keystatic's routes need a server adapter. Keystatic schemas belong in `apps/foafc`; reusable field definitions can come from module cores.
 
 **Open:**
-1. Headless CMS — must power the internal Trail Desk / Content Studio tools
-2. Vercel vs Netlify (or Cloudflare)
-3. Live data source for trail status ("All trails open — 6 miles groomed") and the weather widget
-4. Pulling Facebook events/posts in automatically
-5. Donation processor (existing: PayPal, Venmo; options: Stripe, Zeffy, Givebutter)
+1. Vercel vs Netlify (or Cloudflare) — must support serverless functions for Keystatic's routes
+2. Live data source for trail status ("All trails open — 6 miles groomed") and the weather widget
+3. Pulling Facebook events/posts in automatically
+4. Donation processor (existing: PayPal, Venmo; options: Stripe, Zeffy, Givebutter)
 
 Record each decision as an ADR in `docs/decisions/`.
 
