@@ -36,15 +36,17 @@ docs/                  brief, source material, decisions (ADRs)
 
 ## Stack — decided vs. open
 
-Decided: GitHub, static site + light headless CMS, React-based framework, free-tier hosting, DNS cutover from Wix at launch.
+Decided: GitHub, static site + light headless CMS, free-tier hosting, DNS cutover from Wix at launch.
 
-**Open (decide before scaffolding `apps/foafc`):**
-1. Next.js vs Astro
-2. Headless CMS — must power the internal Trail Desk / Content Studio tools
-3. Vercel vs Netlify
-4. Live data source for trail status ("All trails open — 6 miles groomed") and the weather widget
-5. Pulling Facebook events/posts in automatically
-6. Donation processor (existing: PayPal, Venmo; options: Stripe, Zeffy, Givebutter)
+- **Astro** for `apps/foafc`, static output by default (ADR 0002).
+- **React** for interactive islands and for every module's UI layer, so module components also work in Next.js for future clients. No `.astro` components inside `packages/`.
+
+**Open:**
+1. Headless CMS — must power the internal Trail Desk / Content Studio tools
+2. Vercel vs Netlify (or Cloudflare)
+3. Live data source for trail status ("All trails open — 6 miles groomed") and the weather widget
+4. Pulling Facebook events/posts in automatically
+5. Donation processor (existing: PayPal, Venmo; options: Stripe, Zeffy, Givebutter)
 
 Record each decision as an ADR in `docs/decisions/`.
 
