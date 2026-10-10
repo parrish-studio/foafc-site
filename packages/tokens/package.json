@@ -1,0 +1,12 @@
+{
+  "name": "@parrish-studio/tokens",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Design tokens as CSS custom properties. Zero dependencies.",
+  "license": "MIT",
+  "main": "tokens.css",
+  "exports": {
+    ".": "./tokens.css"
+  },
+  "files": ["tokens.css"]
+}

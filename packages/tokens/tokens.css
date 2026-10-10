@@ -1,0 +1,70 @@
+/*
+ * @parrish-studio/tokens — FOAFC theme
+ *
+ * Two layers:
+ *   1. Primitives (--color-forest-900, …): raw brand values. Only this file uses them.
+ *   2. Semantic tokens (--color-bg, --color-action, …): what components use.
+ *
+ * A client reskin replaces the primitives and, if needed, the semantic mapping.
+ * Components must never reference primitives or hard-code values.
+ *
+ * Values marked PROVISIONAL were not recorded in the brand docs; confirm against
+ * the logo files / Canva prototype before relying on them.
+ */
+
+:root {
+  /* ---------- Primitives: color ---------- */
+  --color-forest-900: #1b4332; /* confirmed — Canva brand docs */
+  --color-amber-500: #d4922a;  /* confirmed — Canva brand docs */
+  --color-cream-50: #f5f0e8;   /* confirmed — Canva brand docs */
+
+  --color-sage-200: #c9d5c4;   /* PROVISIONAL — status banner / logo background */
+  --color-brown-700: #6b4a2f;  /* PROVISIONAL */
+  --color-slate-600: #4a6378;  /* PROVISIONAL */
+  --color-navy-900: #1d2a3f;   /* PROVISIONAL — logo navy colorway */
+
+  --color-ink-900: #1c1f1d;    /* PROVISIONAL — body text */
+  --color-white: #ffffff;
+
+  /* ---------- Primitives: type ---------- */
+  --font-display: "Archivo Black", system-ui, sans-serif; /* confirm vs. prototype serif */
+  --font-body: "Source Sans 3", system-ui, sans-serif;
+
+  /* ---------- Semantic: color ---------- */
+  --color-bg: var(--color-cream-50);
+  --color-surface: var(--color-white);
+  --color-text: var(--color-ink-900);
+  --color-text-inverse: var(--color-cream-50);
+  --color-header-bg: var(--color-forest-900);
+  --color-brand: var(--color-forest-900);
+  --color-action: var(--color-amber-500);
+  --color-action-text: var(--color-forest-900);
+  --color-status-bg: var(--color-sage-200);
+  --color-focus-ring: var(--color-amber-500);
+
+  /* ---------- Semantic: type scale ---------- */
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.75rem;
+  --text-2xl: 2.5rem;
+  --text-hero: clamp(2.25rem, 5vw, 3.5rem);
+  --leading-body: 1.6;
+  --leading-tight: 1.15;
+
+  /* ---------- Spacing / shape ---------- */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-pill: 999px;
+
+  --content-max: 72rem;
+}

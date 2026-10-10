@@ -1,0 +1,10 @@
+{
+  "name": "foafc-site",
+  "private": true,
+  "description": "Friends of A Fierce Chase website and Parrish Studio platform packages",
+  "packageManager": "pnpm@9.12.0",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {}
+}
