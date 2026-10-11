@@ -19,12 +19,12 @@ Never put passwords, tokens or recovery codes in this file or anywhere in the re
 | Wix | Current live site (to be retired) | _confirm_ | _confirm_ | Business plan, prepaid | **March 2028** | _TBD_ |
 | Domain registrar — friendsofafiercechase.org | Domain | _confirm registrar and login_ | | | _confirm_ | _TBD_ |
 | DNS | Points domain at hosting | _TBD_ | | | | |
-| Vercel (Hobby) | Site hosting and deploys | friendsofafiercechase@gmail.com (_to create_) | Shared org login (Hobby has no team members) | Free; non-commercial use only | — | _TBD — board password store_ |
+| Vercel (Hobby) | Site hosting and deploys | **Jeneve's personal Vercel account** (interim — see "Open: move hosting to the org") | Jeneve only | Free; non-commercial use only | — | Jeneve's own login |
 | rclone remote `foafc` | Read-only Drive access for pulling brand assets | Webmaster's personal Google account | Jeneve | Free | Shared client ID retires during 2026 | Local `~/.config/rclone/rclone.conf` (not in the repo) |
 | Keystatic (GitHub mode) | Board content editing at `/keystatic` | Keystatic GitHub App installed on parrish-studio (_to set up_) | Jeneve | Free | — | App secrets in hosting env vars |
 | GitHub collaborators | Board editors' accounts with write access to `foafc-site` | Each editor | Jeneve | Free | — | Editors' own logins |
 | Facebook page / app | Events and trail conditions source | _confirm_ | | | | |
-| Google account friendsofafiercechase@gmail.com | Drive assets, org identity | Org | | Free | — | _TBD_ |
+| Google account friendsofafiercechase@gmail.com | Drive assets, org identity | Org | **Credentials holder unknown — the webmaster does not have them** | Free | — | _UNKNOWN — must be found; blocks org-owned hosting_ |
 | Bonfire | Merch store | _confirm_ | | Free (print on demand) | — | |
 | PayPal / Venmo | Donations | _confirm_ | | Fees per transaction | — | |
 | Google Search Console / Business Profile | SEO | _TBD_ | | Free | — | |
@@ -61,10 +61,10 @@ Vercel looks when the root directory is `apps/foafc`. Nothing else to configure.
 
 ### First-time setup, in order
 
-1. Create the Vercel account using **friendsofafiercechase@gmail.com** — not a
-   personal account. Hobby has no team members, so this shared login *is* how
-   admin access is handed over. Put the credentials in the board password store
-   and record where, below.
+1. The Vercel account. **Currently Jeneve's personal account**, as an interim
+   measure — nobody has located the login for friendsofafiercechase@gmail.com.
+   See "Open: move hosting to the org" below; this is a deliberate deviation
+   from ADR 0004, not an oversight.
 2. Import `parrish-studio/foafc-site` and apply the settings above. Deploy.
    The public site works at this point; only `/keystatic` is incomplete.
 3. Note the assigned `*.vercel.app` URL. Keystatic's GitHub App needs it.
@@ -78,6 +78,36 @@ Deploy before creating the GitHub App, not after: the app's callback URL has to
 match the real deployed domain, so the domain must exist first. The same applies
 again at the `.org` cutover — the callback URL must be updated to the new domain
 or editor sign-in breaks.
+
+### Open: move hosting to the org
+
+**The site is hosted on the webmaster's personal Vercel account.** This is
+interim. ADR 0004 decided hosting should sit on an account owned by
+friendsofafiercechase@gmail.com, and that still stands — it was deviated from
+only because nobody currently has that Gmail's password.
+
+Why it matters, in order of likelihood:
+
+1. If the webmaster is unavailable, **no one can reach hosting** — no env var
+   fix, no rollback, no DNS change. Hobby has no team members, so a second
+   admin cannot simply be invited.
+2. If that personal account is ever upgraded to Pro for paid client work,
+   FOAFC's site ends up on a plan the organisation does not control or pay for,
+   and would have to move if the subscription lapsed.
+3. Vercel Hobby is non-commercial. FOAFC qualifies (donations are explicitly
+   not commercial usage), but **paid client work must not be put on this same
+   Hobby account** — that needs a Pro team, kept separate from FOAFC.
+
+To close it:
+
+1. Find who holds the friendsofafiercechase@gmail.com login and record it in
+   the accounts table above.
+2. Create a Vercel account with that address.
+3. Transfer the project (Vercel → Project Settings → Transfer). Projects move
+   between accounts; the deployment URL and git connection carry over.
+4. Re-point the Keystatic GitHub App callback URL if the domain changes, or
+   editor sign-in breaks.
+5. Update this file and ADR 0004.
 
 ### Constraints to respect
 

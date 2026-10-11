@@ -1,7 +1,7 @@
 # ADR 0004 — Host on Vercel (Hobby), public repo, org-owned account
 
 Date: 2026-10-10
-Status: Accepted — action items pending
+Status: Accepted — amended 2026-10-11 (see Amendment), action items pending
 
 ## Context
 
@@ -32,4 +32,33 @@ Hosting must be free, support Astro static output plus serverless functions for 
 
 - If FOAFC ever needs to charge for something (paid event tickets, merch sold on-site rather than via Bonfire), revisit the plan: that would be commercial use requiring Vercel Pro or another host.
 - Paid client work under Parrish Studio cannot use Hobby; client sites will need Pro or another host.
-- Action items: (1) ~~make the repo public~~ — done 2026-10-10, (2) create the Vercel account under the org email, (3) connect the repo and set Keystatic env vars, (4) record all of it in `HANDOFF.md`.
+- Action items: (1) ~~make the repo public~~ — done 2026-10-10, (2) create the Vercel
+  account under the org email — **deferred, see Amendment**, (3) connect the repo and set
+  Keystatic env vars, (4) record all of it in `HANDOFF.md`.
+
+## Amendment — 2026-10-11: deployed on a personal account, transfer pending
+
+The decision above says the Vercel account must be created with
+friendsofafiercechase@gmail.com. That has not happened. **Nobody currently has that
+Gmail's password** — the webmaster has only shared access to the org's Drive from a
+personal Google account, not the login itself.
+
+Rather than block the first deploy on a board conversation, the site is being deployed
+to the **webmaster's personal Vercel account** as an interim measure. Vercel projects
+can be transferred between accounts, so this is reversible.
+
+The original reasoning is unchanged and still the target. What this costs in the
+meantime:
+
+- Only the webmaster can reach hosting. Hobby has no team members, so a second admin
+  cannot be invited — the board-continuity requirement in the brief is unmet.
+- If the webmaster's personal account is later upgraded to Pro for Parrish Studio client
+  work, FOAFC's site would sit on a paid plan the organisation neither controls nor
+  funds. Paid client work must therefore be kept on a separate Pro team, never added to
+  the Hobby account hosting FOAFC.
+- Hobby's non-commercial restriction is still satisfied: Vercel's fair use guidelines
+  state that asking for donations does not constitute commercial usage.
+
+Tracked as an open item in `HANDOFF.md` ("Open: move hosting to the org") with the steps
+to close it. This amendment exists so the deviation is visible rather than looking like
+the decision was simply ignored.
