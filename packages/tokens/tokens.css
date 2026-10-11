@@ -8,6 +8,13 @@
  * A client reskin replaces the primitives and, if needed, the semantic mapping.
  * Components must never reference primitives or hard-code values.
  *
+ * The contract, so this stays reusable:
+ *   - Semantic names describe a ROLE, not a component. No --color-header-bg,
+ *     no --color-eyebrow. If a new need has no role that fits, add a role.
+ *   - Nothing in this file may be FOAFC-specific beyond the primitive values.
+ *   - Every consumer (app or module) reads only semantic tokens, so swapping
+ *     this one file reskins everything.
+ *
  * Values marked PROVISIONAL were not recorded in the brand docs; confirm against
  * the logo files / Canva prototype before relying on them.
  */
@@ -16,13 +23,14 @@
   /* ---------- Primitives: color ---------- */
   --color-forest-900: #1b4332; /* Canva brand docs AND the prototype agree */
   /*
-   * The prototype and the Canva brand docs DISAGREE on these two. The values
-   * below are the prototype's, because the site is being aligned to it. The
-   * brand docs say amber #d4922a and cream #f5f0e8 — revert these two lines if
-   * the brand docs win. Nothing else needs to change either way.
+   * The published Canva Code prototype is the canonical source for brand design
+   * (colour, type, spacing). Values here are read from its embedded design data.
+   * An earlier note in the repo recorded amber as #d4922a and cream as #f5f0e8
+   * "confirmed from Canva brand docs"; that session does not appear to have
+   * actually read the prototype, so those values are superseded.
    */
-  --color-amber-500: #c19434;  /* prototype; brand docs say #d4922a */
-  --color-cream-50: #f0ebe1;   /* prototype; brand docs say #f5f0e8 */
+  --color-amber-500: #c19434;
+  --color-cream-50: #f0ebe1;
 
   --color-sage-200: #c5cfc0;   /* confirmed — read from the Canva Code prototype */
   --color-brown-700: #7a5c3e;  /* confirmed — read from the prototype */
@@ -44,28 +52,47 @@
   --font-display: "Fraunces Variable", Georgia, serif;
   --font-body: "Libre Franklin Variable", system-ui, sans-serif;
 
-  /* ---------- Semantic: color ---------- */
+  /* ---------- Semantic: color ----------
+   * Named for the ROLE a colour plays, never for the component that happens to
+   * use it today. "surface-inverse", not "header-bg"; "accent-warm", not
+   * "eyebrow". A component name here would couple the design system to this
+   * one site and break when the next client uses the same role elsewhere.
+   */
+
+  /* Surfaces, light to dark */
   --color-bg: var(--color-cream-50);
   --color-surface: var(--color-white);
+  --color-surface-muted: var(--color-cream-50);
+  --color-surface-accent: var(--color-sage-200);
+  --color-surface-inverse: var(--color-forest-900);
+
+  /* Text */
   --color-text: var(--color-ink-900);
+  --color-text-muted: var(--color-slate-600);
   --color-text-inverse: var(--color-cream-50);
-  --color-header-bg: var(--color-forest-900);
+
+  /* Brand and interaction */
   --color-brand: var(--color-forest-900);
   --color-action: var(--color-amber-500);
   --color-action-text: var(--color-forest-900);
-  --color-status-bg: var(--color-sage-200);
-  --color-focus-ring: var(--color-amber-500);
+  --color-accent-warm: var(--color-brown-700);
+
+  /* Lines and focus */
   --color-border: var(--color-muted-200);
-  --color-text-muted: var(--color-slate-600);
-  --color-surface-muted: var(--color-cream-50);
+  --color-focus-ring: var(--color-amber-500);
 
   /* ---------- Semantic: type scale ---------- */
-  --text-sm: 0.875rem;
-  --text-base: 1rem;
-  --text-lg: 1.25rem;
-  --text-xl: 1.75rem;
-  --text-2xl: 2.5rem;
-  --text-hero: clamp(2.25rem, 5vw, 3.5rem);
+  /*
+   * Read from the prototype, which is canonical for brand design. It is a
+   * compact scale: 16 body, 19 lede, 24 section title, 32 page title. A hero
+   * headline is the same 32 as any other page title — not larger.
+   */
+  --text-sm: 0.875rem; /* 14px — not in the prototype; captions and meta only */
+  --text-base: 1rem; /* 16px — body, eyebrows, site name */
+  --text-lg: 1.1875rem; /* 19px — lede paragraphs */
+  --text-xl: 1.5rem; /* 24px — section titles */
+  --text-2xl: 2rem; /* 32px — page titles */
+  --text-hero: 2rem; /* 32px — same as a page title, per the prototype */
   --leading-body: 1.6;
   --leading-tight: 1.15;
 

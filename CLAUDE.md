@@ -33,11 +33,24 @@ docs/                  brief, source material, decisions (ADRs)
 - **Plain CSS with custom properties. No MUI, no Tailwind, no CSS-in-JS.** Stability and easy client reskinning are the point.
 - All color, type, spacing and radius values come from `packages/tokens`. Components never hard-code a hex value.
 - A client reskin should be a token-file swap and nothing else.
-- **Colour source of truth is the prototype**, as of the 2026-10-11 alignment pass. The
-  prototype and the Canva brand docs disagree on two values: amber (`#c19434` vs `#d4922a`)
-  and cream (`#f0ebe1` vs `#f5f0e8`). `packages/tokens` currently uses the prototype's.
-  Both lines are commented in `tokens.css` so the brand-doc values can be restored in one
-  edit if the board prefers them. Forest green `#1b4332` is the same in both.
+
+### Source of truth
+
+- **The published Canva Code prototype is canonical for brand design** — colour, type,
+  spacing, margin and padding. Read values from it rather than from any summary in these
+  docs. Where an earlier note here disagrees with the prototype, the prototype wins and
+  the note should be corrected.
+- **Copy, site organisation and content are NOT final.** The prototype's wording is a
+  draft; treat page structure, section order and text as open until the board signs off.
+  Do not treat prototype copy as a specification the way you would its design values.
+- How to read the prototype: it is published at the URL in `docs/project-brief.md`, and
+  its exported HTML embeds the entire design as JSON — every string, colour, font and
+  font size. `curl` the page and parse the embedded data. Do not strip `<script>` tags
+  when extracting text; that is where the content lives. No Canva export is needed, and
+  the Canva connector's `read-design` returns empty for Code designs.
+- Values recorded in these docs before 2026-10-11 as "confirmed from Canva brand docs"
+  (amber `#d4922a`, cream `#f5f0e8`, Archivo Black, Source Sans 3) came from a session
+  that does not appear to have actually read the prototype. They are superseded.
 
 ## Stack — decided vs. open
 

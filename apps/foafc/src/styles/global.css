@@ -74,7 +74,7 @@ h2 {
 }
 
 h3 {
-  font-size: var(--text-lg);
+  font-size: var(--text-base);
 }
 
 p + p,
@@ -146,7 +146,7 @@ a:hover {
 /* ---------- Header ---------- */
 
 .site-header {
-  background-color: var(--color-header-bg);
+  background-color: var(--color-surface-inverse);
   color: var(--color-text-inverse);
 }
 
@@ -175,21 +175,22 @@ a:hover {
 
 .site-header__name {
   font-family: var(--font-body);
-  font-size: var(--text-lg);
-  font-weight: 600;
+  font-size: var(--text-base);
+  font-weight: 700;
   line-height: var(--leading-tight);
 }
 
-/* Small uppercase label above a heading. The prototype uses one on most
-   sections ("Find your way", "Good to know"). */
+/*
+ * Label above a heading ("Find your way", "Good to know"). Matches the
+ * prototype: body face, 16px bold, sentence case — not uppercase — and warm
+ * brown on light surfaces, gold on dark ones.
+ */
 .eyebrow {
   margin-bottom: var(--space-2);
-  color: var(--color-action);
+  color: var(--color-accent-warm);
   font-family: var(--font-body);
-  font-size: var(--text-sm);
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-size: var(--text-base);
+  font-weight: 700;
 }
 
 .hero .eyebrow {
@@ -227,7 +228,7 @@ a:hover {
 /* ---------- Footer ---------- */
 
 .site-footer {
-  background-color: var(--color-header-bg);
+  background-color: var(--color-surface-inverse);
   color: var(--color-text-inverse);
   padding-block: var(--space-8);
   font-size: var(--text-sm);
@@ -272,10 +273,11 @@ a:hover {
 }
 
 /*
- * Forest-green overlay, as in the Canva prototype. Deliberately heavy: the only
- * usable hero photo is of the trailhead sign, whose own lettering competes with
- * the headline, so the overlay pushes it down to texture. Contrast of cream text
- * stays well above 4.5:1 even where the photo underneath is pure white (snow).
+ * Forest-green overlay, as in the Canva prototype. 0.78 is the working floor:
+ * heavy enough that the trailhead sign's own lettering stays texture rather than
+ * competing with the headline, light enough that the photo still reads. Cream
+ * text keeps ~4.9:1 contrast even where the photo underneath is pure white
+ * (snow), so do not raise the transparency further without rechecking that.
  */
 .hero::after {
   content: '';
@@ -283,7 +285,12 @@ a:hover {
   inset: 0;
   z-index: -1;
   background-color: var(--color-brand);
-  opacity: 0.88;
+  opacity: 0.78;
+}
+
+/* Favour the upper part of the frame: sky and trees rather than sign face. */
+.hero__image {
+  object-position: 50% 35%;
 }
 
 .hero h1 {
