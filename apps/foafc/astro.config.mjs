@@ -1,4 +1,5 @@
 // @ts-check
+import { fileURLToPath } from 'node:url';
 import { defineConfig } from 'astro/config';
 import markdoc from '@astrojs/markdoc';
 import react from '@astrojs/react';
@@ -16,4 +17,17 @@ export default defineConfig({
   output: 'static',
   adapter: vercel(),
   integrations: [react(), markdoc(), keystatic()],
+  vite: {
+    resolve: {
+      alias: [
+        // Astro 7 drags the build-time bundler into the serverless entry via
+        // the integration import chain (@astrojs/react -> @vitejs/plugin-react
+        // -> rolldown). It is imported but never called at runtime, and its
+        // native binding cannot load in the function, which crashes every
+        // request. Stub it out of the output bundles only; Vite's own copy is
+        // unaffected because Vite loads it through Node, not this resolver.
+        { find: /^rolldown$/, replacement: fileURLToPath(new URL('./src/stub-empty.mjs', import.meta.url)) },
+      ],
+    },
+  },
 });
