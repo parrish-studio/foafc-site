@@ -161,13 +161,45 @@ a:hover {
 
 .site-header__brand {
   display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
   color: var(--color-text-inverse);
   text-decoration: none;
 }
 
-.site-header__brand img {
-  width: auto;
-  height: 2.75rem;
+/* Gold icon beside the name, as in the prototype. */
+.site-header__mark {
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+.site-header__name {
+  font-family: var(--font-body);
+  font-size: var(--text-lg);
+  font-weight: 600;
+  line-height: var(--leading-tight);
+}
+
+/* Small uppercase label above a heading. The prototype uses one on most
+   sections ("Find your way", "Good to know"). */
+.eyebrow {
+  margin-bottom: var(--space-2);
+  color: var(--color-action);
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.hero .eyebrow {
+  color: var(--color-action);
+}
+
+.site-footer__title {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: 700;
 }
 
 .site-nav__list {

@@ -33,6 +33,11 @@ docs/                  brief, source material, decisions (ADRs)
 - **Plain CSS with custom properties. No MUI, no Tailwind, no CSS-in-JS.** Stability and easy client reskinning are the point.
 - All color, type, spacing and radius values come from `packages/tokens`. Components never hard-code a hex value.
 - A client reskin should be a token-file swap and nothing else.
+- **Colour source of truth is the prototype**, as of the 2026-10-11 alignment pass. The
+  prototype and the Canva brand docs disagree on two values: amber (`#c19434` vs `#d4922a`)
+  and cream (`#f0ebe1` vs `#f5f0e8`). `packages/tokens` currently uses the prototype's.
+  Both lines are commented in `tokens.css` so the brand-doc values can be restored in one
+  edit if the board prefers them. Forest green `#1b4332` is the same in both.
 
 ## Stack — decided vs. open
 
@@ -61,9 +66,16 @@ Record each decision as an ADR in `docs/decisions/`.
 
 ## Known data issues
 
+- The organisation is **"Friends of a Fierce Chase"** — lowercase "a". The prototype, the
+  logo files and the logo usage guide all agree. (The trail *system* is "A Fierce Chase",
+  capitalised, as in `trails.json`.) Earlier drafts of this file used a capital A.
+
 - Day pass is **$20** (not $10 as in the prototype), and there is a **Family pass** (amount TBD). Season pass $150 — confirm. Present all passes as **suggested donations**, never as purchases (ADR 0004).
 - Wolf Chase Loop km figure in the source looks wrong; see `packages/module-trails/data/trails.json`.
-- Heading typeface: brief says Archivo Black, the Canva prototype hero looks like a serif — confirm.
+- ~~Heading typeface~~ — **resolved 2026-10-11.** The prototype uses **Fraunces** bold
+  (serif) for headings and **Libre Franklin** for body, not Archivo Black / Source Sans 3.
+  Read directly from the published prototype's embedded design data. Both are self-hosted
+  via `@fontsource`.
 
 ## Licensing
 

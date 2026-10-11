@@ -1,7 +1,10 @@
 ---
 import { Image } from 'astro:assets';
 import faviconSrc from '../assets/brand/FOAFC_Color_Icon_Logo.png';
-import logoSrc from '../assets/brand/FOAFC_Cream_Horizontal_Logo.png';
+import logoSrc from '../assets/brand/FOAFC_Gold_Icon_Logo.png';
+// Self-hosted so the site makes no third-party font request.
+import '@fontsource-variable/fraunces';
+import '@fontsource-variable/libre-franklin';
 import '../styles/global.css';
 
 interface Props {
@@ -30,7 +33,7 @@ const year = new Date().getFullYear();
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{title} — Friends of A Fierce Chase</title>
+    <title>{title} — Friends of a Fierce Chase</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
     <link rel="icon" type="image/png" href={faviconSrc.src} />
@@ -43,12 +46,14 @@ const year = new Date().getFullYear();
       <div class="container site-header__inner">
         <a class="site-header__brand" href="/">
           <Image
+            class="site-header__mark"
             src={logoSrc}
-            alt="Friends of A Fierce Chase"
-            width={300}
+            alt=""
+            width={48}
             densities={[1, 2]}
             loading="eager"
           />
+          <span class="site-header__name">Friends of a Fierce Chase</span>
         </a>
         <nav class="site-nav" aria-label="Main">
           <ul class="site-nav__list">
@@ -72,9 +77,10 @@ const year = new Date().getFullYear();
 
     <footer class="site-footer">
       <div class="container site-footer__inner">
-        <p>Friends of A Fierce Chase — Monson, Maine</p>
-        <p>A 501(c)(3) nonprofit. The trails are volunteer-built and volunteer-groomed.</p>
-        <p>© {year} Friends of A Fierce Chase</p>
+        <p class="site-footer__title">Friends of a Fierce Chase</p>
+        <p>Monson, Maine</p>
+        <p>501(c)(3) nonprofit · General information</p>
+        <p>© {year} Friends of a Fierce Chase</p>
       </div>
     </footer>
   </body>

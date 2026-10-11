@@ -18,7 +18,7 @@ const facts = [
 
 <BaseLayout
   title="Home"
-  description="Friends of A Fierce Chase maintains a volunteer-built cross-country ski trail system in Monson, Maine."
+  description="Friends of a Fierce Chase maintains a volunteer-built cross-country ski trail system in Monson, Maine."
 >
   <div class="hero">
     <Image
@@ -32,15 +32,13 @@ const facts = [
       fetchpriority="high"
     />
     <div class="container hero__content">
-      <h1>Cross-country ski trails in Monson, Maine</h1>
+      <p class="eyebrow">Maine trails, shared stewardship</p>
+      <h1>Explore. Protect. Connect.</h1>
       <p class="hero__lede">
-        {system.system.name} is a volunteer-built, volunteer-groomed trail system of {
-          system.system.trailCount
-        } trails covering {system.system.totalMilesLabel}. It is open to the public and supported
-        by donations.
+        A welcoming network of trails and neighbors caring for the wild places around Monson.
       </p>
       <p class="hero__actions">
-        <a class="button" href="/trails/">See the trails</a>
+        <a class="button" href="/trails/">Explore Trail Maps</a>
       </p>
     </div>
   </div>
@@ -58,7 +56,12 @@ const facts = [
     </ul>
 
     <section>
-      <h2>Before you go</h2>
+      <p class="eyebrow">Good to know</p>
+      <h2>Come find your fierce.</h2>
+      <p>
+        Whether you arrive on skis, two wheels, snowshoes, or your own two feet, these trails are
+        here for quiet miles, bold views, and shared care.
+      </p>
       <p>
         {summary.skateSkiingCount} of the {summary.count} trails are open to skate skiing, and the
         system is groomed by volunteers. Check the <a href="/trails/">trail list, etiquette rules

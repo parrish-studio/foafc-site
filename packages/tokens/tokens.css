@@ -14,21 +14,35 @@
 
 :root {
   /* ---------- Primitives: color ---------- */
-  --color-forest-900: #1b4332; /* confirmed — Canva brand docs */
-  --color-amber-500: #d4922a;  /* confirmed — Canva brand docs */
-  --color-cream-50: #f5f0e8;   /* confirmed — Canva brand docs */
+  --color-forest-900: #1b4332; /* Canva brand docs AND the prototype agree */
+  /*
+   * The prototype and the Canva brand docs DISAGREE on these two. The values
+   * below are the prototype's, because the site is being aligned to it. The
+   * brand docs say amber #d4922a and cream #f5f0e8 — revert these two lines if
+   * the brand docs win. Nothing else needs to change either way.
+   */
+  --color-amber-500: #c19434;  /* prototype; brand docs say #d4922a */
+  --color-cream-50: #f0ebe1;   /* prototype; brand docs say #f5f0e8 */
 
-  --color-sage-200: #c9d5c4;   /* PROVISIONAL — status banner / logo background */
-  --color-brown-700: #6b4a2f;  /* PROVISIONAL */
-  --color-slate-600: #4a6378;  /* PROVISIONAL */
-  --color-navy-900: #1d2a3f;   /* PROVISIONAL — logo navy colorway */
+  --color-sage-200: #c5cfc0;   /* confirmed — read from the Canva Code prototype */
+  --color-brown-700: #7a5c3e;  /* confirmed — read from the prototype */
+  --color-slate-600: #4e6e7e;  /* confirmed — read from the prototype */
+  --color-navy-900: #1d2a3f;   /* PROVISIONAL — logo navy colorway, unused in the prototype */
 
-  --color-ink-900: #1c1f1d;    /* PROVISIONAL — body text */
+  --color-ink-900: #2c2c26;    /* confirmed — body text in the prototype */
+  --color-muted-200: #d6d0c4;  /* confirmed — hairlines and muted surfaces in the prototype */
   --color-white: #ffffff;
 
   /* ---------- Primitives: type ---------- */
-  --font-display: "Archivo Black", system-ui, sans-serif; /* confirm vs. prototype serif */
-  --font-body: "Source Sans 3", system-ui, sans-serif;
+  /*
+   * Resolved 2026-10-11 by reading the published Canva Code prototype's embedded
+   * design data: headings are Fraunces bold (the serif the brief flagged but
+   * could not name), body is Libre Franklin. This supersedes the brief's
+   * "Archivo Black + Source Sans 3". Both are self-hosted via @fontsource, so
+   * there is no third-party font request.
+   */
+  --font-display: "Fraunces Variable", Georgia, serif;
+  --font-body: "Libre Franklin Variable", system-ui, sans-serif;
 
   /* ---------- Semantic: color ---------- */
   --color-bg: var(--color-cream-50);
@@ -41,7 +55,7 @@
   --color-action-text: var(--color-forest-900);
   --color-status-bg: var(--color-sage-200);
   --color-focus-ring: var(--color-amber-500);
-  --color-border: var(--color-sage-200);
+  --color-border: var(--color-muted-200);
   --color-text-muted: var(--color-slate-600);
   --color-surface-muted: var(--color-cream-50);
 

@@ -62,9 +62,9 @@ Prototype nav as built: Home · Trails · About · Blog · Events · Admin, plus
 
 ## 5. Design system
 
-- **Type:** Archivo Black (headings) + Source Sans 3 (body). _Note: the Canva prototype's hero headline appears to be a serif — confirm which is current._
+- **Type:** **Fraunces** bold (headings) + **Libre Franklin** (body). _Resolved 2026-10-11 by reading the published prototype's embedded design data; the serif the note below suspected is Fraunces. Supersedes the earlier "Archivo Black + Source Sans 3"._
 - **Brand hex values (from Canva docs):** forest green `#1B4332`, amber/gold `#D4922A`, cream `#F5F0E8`
-- **Additional palette colors discussed:** sage, warm brown, slate blue, navy (no hex values recorded yet; provisional values in `packages/tokens`)
+- **Additional palette colors, read from the prototype 2026-10-11:** sage `#C5CFC0`, warm brown `#7A5C3E`, slate blue `#4E6E7E`, muted `#D6D0C4`, ink `#2C2C26`. Navy is still provisional (the prototype does not use it). Note the prototype's amber `#C19434` and cream `#F0EBE1` differ from the brand docs — see `CLAUDE.md`.
 - **Logo:** T-Rex on skis, circle badge. Variants: primary (badge), icon, horizontal, vertical, wordmark — each in Color, Green, Gold, Navy, Cream, White, Black. Usage rules in `source/logo-usage-guide.md`; asset links in `source/asset-index.md`.
 - **Prototype look:** dark green header, photo hero with green overlay, gold primary buttons, outlined secondary buttons, sage status banner, cream body with a subtle dot texture.
 
@@ -107,6 +107,6 @@ Notes at the end of the board brief (Sept 19 meeting):
 4. Data source for the live trail status and the weather widget
 5. How to pull Facebook events and posts in automatically
 6. Donation processor
-7. One canonical color token set; heading typeface confirmation
+7. ~~Heading typeface~~ — resolved (Fraunces + Libre Franklin). Still open: whether amber and cream follow the prototype or the brand docs
 8. Pricing: Day $20, Family pass amount, Season $150?
 9. Whether the Shop/Bonfire link appears in the new nav
