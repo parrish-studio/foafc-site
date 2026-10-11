@@ -1,6 +1,12 @@
 # HANDOFF.md
 
-Everything a future webmaster needs to take over this site. **Update this file whenever you add a service, account, domain setting or secret.**
+Everything a future webmaster needs to take over this site.
+
+**This is a living document, not a handover-day artifact.** Handover is a long
+way off — the site will be built out and validated in production on the `.org`
+domain for months first. Keep it current as the site is built, so that when
+handover does happen nothing has to be reconstructed from memory. **Update it
+whenever you add a service, account, domain setting or secret.**
 
 Never put passwords, tokens or recovery codes in this file or anywhere in the repo. Record *where* they are kept instead.
 
@@ -130,12 +136,16 @@ or editor sign-in breaks.
 
 ### Open: move hosting to the org
 
-**The site is hosted on the webmaster's personal Vercel account.** This is
-interim. ADR 0004 decided hosting should sit on an account owned by
-friendsofafiercechase@gmail.com, and that still stands — it was deviated from
-only because nobody currently has that Gmail's password.
+**The site is hosted on the webmaster's personal Vercel account.** ADR 0004
+decided hosting should sit on an account owned by
+friendsofafiercechase@gmail.com, and that remains the target.
 
-Why it matters, in order of likelihood:
+This is deliberate and not urgent. The site will be built out and validated in
+production on the `.org` domain for months before any handover, and the
+webmaster is an active board member throughout. Revisit it as part of handover
+planning, not before — but do not lose it, which is why it is written down.
+
+What it costs while it stands:
 
 1. If the webmaster is unavailable, **no one can reach hosting** — no env var
    fix, no rollback, no DNS change. Hobby has no team members, so a second
@@ -147,10 +157,12 @@ Why it matters, in order of likelihood:
    not commercial usage), but **paid client work must not be put on this same
    Hobby account** — that needs a Pro team, kept separate from FOAFC.
 
-To close it:
+To close it, when the time comes:
 
 1. Find who holds the friendsofafiercechase@gmail.com login and record it in
-   the accounts table above.
+   the accounts table above. Worth doing early and independently of hosting —
+   that account owns the Drive, the brand assets and the org's identity, and
+   nobody currently having it is a gap on its own.
 2. Create a Vercel account with that address.
 3. Transfer the project (Vercel → Project Settings → Transfer). Projects move
    between accounts; the deployment URL and git connection carry over.
