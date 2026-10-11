@@ -1,4 +1,5 @@
 ---
+import { GIVING_METHODS } from '../data/giving';
 import { ORG, SUGGESTED_DONATIONS } from '../data/org';
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
@@ -25,7 +26,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     </section>
 
     <section>
-      <h2>Suggested donations</h2>
+      <h2>Choose your trail pass</h2>
       <p>
         The trails are free to use. These are suggested amounts, not fees — give what works for
         you, and come ski either way.
@@ -41,18 +42,43 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           ))
         }
       </ul>
+      <p class="note">Any amount helps, and no amount is expected.</p>
     </section>
 
     <section>
       <h2>How to give</h2>
-      <p>By cheque, made out to {ORG.legalName}:</p>
-      <address class="address">
-        {ORG.mailingAddress.map((line) => <span>{line}</span>)}
-      </address>
-      <p>
-        Online giving is being set up. Until it is, a cheque is the surest way for a donation to
-        reach the trails in full, with nothing lost to processing fees.
-      </p>
+      {
+        GIVING_METHODS.length === 0 ? (
+          <p class="empty-state">
+            Online giving is not set up yet. Please check back, or reach out on our Facebook page.
+          </p>
+        ) : (
+          <ul class="giving">
+            {GIVING_METHODS.map((method) => (
+              <li class="giving__item">
+                <h3 class="giving__label">{method.label}</h3>
+                <p class="giving__description">{method.description}</p>
+                {method.kind === 'mail' ? (
+                  <>
+                    <p>Made out to {method.payTo}:</p>
+                    <address class="address">
+                      {method.address.map((line) => (
+                        <span>{line}</span>
+                      ))}
+                    </address>
+                  </>
+                ) : (
+                  <p>
+                    <a class="button" href={method.href} rel="noopener">
+                      {method.action}
+                    </a>
+                  </p>
+                )}
+              </li>
+            ))}
+          </ul>
+        )
+      }
     </section>
 
     <section>

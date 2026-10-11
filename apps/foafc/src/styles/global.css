@@ -558,3 +558,40 @@ a:hover {
 .draft-notice .badge-draft {
   margin-inline-start: 0;
 }
+
+/* ---------- Giving ---------- */
+
+.giving {
+  display: grid;
+  gap: var(--space-6);
+  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.giving__item {
+  padding: var(--space-6);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background-color: var(--color-surface);
+}
+
+.giving__label {
+  font-size: var(--text-lg);
+}
+
+.giving__description {
+  margin-top: var(--space-2);
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
+
+.giving__item .address {
+  width: auto;
+}
+
+.note {
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
