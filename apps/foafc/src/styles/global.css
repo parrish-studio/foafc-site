@@ -542,3 +542,19 @@ a:hover {
 .card__body {
   height: 100%;
 }
+
+.draft-notice {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-2);
+  padding: var(--space-4) var(--space-6);
+  border: 1px dashed var(--color-accent-warm);
+  border-radius: var(--radius-md);
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
+
+.draft-notice .badge-draft {
+  margin-inline-start: 0;
+}

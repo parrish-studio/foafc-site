@@ -25,6 +25,22 @@ export async function getPublishedPosts(): Promise<BlogPost[]> {
   return posts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 }
 
+/**
+ * Every post that should have a page, drafts included.
+ *
+ * Drafts get a real URL on the live site so board members — who do not run a
+ * dev server — can see a post rendered before publishing it. Those pages are
+ * kept out of the listing and marked `noindex`, so a draft is reachable only
+ * by someone who has the link.
+ *
+ * That is deliberately unlisted, NOT private. Anyone given the URL can read it.
+ * Do not treat a draft as confidential.
+ */
+export async function getRoutablePosts(): Promise<BlogPost[]> {
+  const posts = await getCollection('blog');
+  return posts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+}
+
 /** Formats a post date consistently. UTC, so the day never shifts by timezone. */
 export const formatPostDate = (date: Date): string =>
   new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeZone: 'UTC' }).format(date);

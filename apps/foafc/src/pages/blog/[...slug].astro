@@ -2,13 +2,13 @@
 import type { GetStaticPaths } from 'astro';
 import { Image } from 'astro:assets';
 import { render } from 'astro:content';
-import { formatPostDate, getPublishedPosts } from '../../content/blog';
+import { formatPostDate, getRoutablePosts } from '../../content/blog';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
-// Uses the same published-posts rule as the index, so a draft can never be
-// reachable by URL after being hidden from the listing.
+// Drafts get pages too, so they can be previewed on the live site. They are
+// excluded from the listing and marked noindex below.
 export const getStaticPaths = (async () => {
-  const posts = await getPublishedPosts();
+  const posts = await getRoutablePosts();
   return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
 }) satisfies GetStaticPaths;
 
@@ -16,13 +16,26 @@ const { post } = Astro.props;
 const { Content } = await render(post);
 ---
 
-<BaseLayout title={post.data.title} description={`${post.data.title} — from the Friends of A Fierce Chase blog.`}>
+<BaseLayout
+  title={post.data.title}
+  description={`${post.data.title} — from the Friends of A Fierce Chase blog.`}
+  noindex={post.data.draft}
+>
   <article class="container page stack">
+    {
+      post.data.draft && (
+        <p class="draft-notice">
+          <span class="badge-draft">Draft</span>
+          This post is not published. It is not listed on the blog and is hidden from search
+          engines, but anyone with this link can read it.
+        </p>
+      )
+    }
+
     <div class="page-header">
       <h1>{post.data.title}</h1>
       <p class="page-header__meta">
         <time datetime={post.data.date.toISOString()}>{formatPostDate(post.data.date)}</time>
-        {post.data.draft && <span class="badge-draft">Draft</span>}
       </p>
     </div>
 

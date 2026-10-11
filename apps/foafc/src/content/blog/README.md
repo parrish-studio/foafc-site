@@ -21,14 +21,29 @@ the CMS at `/keystatic`, which writes these files for them.
 | `coverAlt` | no | Describe the photo for people who cannot see it. Set it whenever there is a cover image |
 | `draft` | no | Defaults to `false` |
 
-## Drafts
+## Drafts and previewing
 
-Drafts are visible when running the site locally and **excluded from production
-builds**. A draft has no page and no URL on the live site, so it cannot be
-reached by guessing the address.
+A draft is **unlisted, not hidden**:
 
-This is what lets the site launch before there is real content: the News page
-shows its empty state rather than placeholder posts.
+- It does **not** appear on the blog index.
+- It **does** have a real page at its normal URL, so it can be previewed on the
+  live site. Keystatic shows a Preview link in the editor.
+- It is marked `noindex, nofollow`, so search engines leave it alone.
+- The page itself says, visibly, that it is a draft.
+
+This exists because board members do not run a development server. Without it,
+the people most likely to write a draft would be the only ones unable to see it
+rendered.
+
+**Unlisted is not private.** Anyone with the link can read a draft. Do not put
+anything confidential in one, and do not share a preview link more widely than
+you would share the published post.
+
+Launching with no published posts is fully supported — the blog index shows its
+empty state rather than placeholder content.
+
+When a sitemap is added, it must exclude drafts. There is a TODO for this in
+`src/pages/robots.txt.ts`.
 
 The two posts currently here are drafts written during the build to exercise the
 blog end to end. The fungi post is based on real photos from September 2026 but

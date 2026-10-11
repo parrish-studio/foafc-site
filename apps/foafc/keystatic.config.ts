@@ -20,6 +20,10 @@ export default config({
     blog: collection({
       label: 'Blog',
       path: 'apps/foafc/src/content/blog/*',
+      // Puts a Preview link in the editor. Draft posts get a real page on the
+      // live site so board members can see a post rendered before publishing
+      // it; those pages are unlisted and hidden from search engines.
+      previewUrl: '/blog/{slug}/',
       slugField: 'title',
       format: { contentField: 'body' },
       entryLayout: 'content',
