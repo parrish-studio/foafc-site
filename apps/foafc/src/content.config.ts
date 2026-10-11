@@ -12,6 +12,10 @@ const news = defineCollection({
       date: z.coerce.date(),
       coverImage: image().optional(),
       coverAlt: z.string().optional(),
+      // Drafts are visible while developing and excluded from production
+      // builds, so unfinished or unapproved posts can live in the repo without
+      // reaching the public site. See src/content/news/README.md.
+      draft: z.boolean().default(false),
     }),
 });
 

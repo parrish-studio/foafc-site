@@ -506,6 +506,39 @@ a:hover {
   font-size: var(--text-sm);
 }
 
-.site-footer__social a + a {
-  margin-inline-start: var(--space-3);
+
+
+/* ---------- News: drafts and empty state ---------- */
+
+/* Only ever rendered while developing — drafts are filtered out of production
+   builds — but it must be unmistakable when it does appear. */
+.badge-draft {
+  display: inline-block;
+  margin-inline-start: var(--space-2);
+  padding: 0 var(--space-2);
+  border-radius: var(--radius-pill);
+  background-color: var(--color-accent-warm);
+  color: var(--color-text-inverse);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  vertical-align: middle;
+}
+
+.empty-state {
+  padding: var(--space-8) var(--space-6);
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius-md);
+  color: var(--color-text-muted);
+  text-align: center;
+}
+
+.site-footer__social {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+/* A card without a cover image should not leave a gap where one would be. */
+.card__body {
+  height: 100%;
 }

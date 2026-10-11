@@ -23,7 +23,7 @@ export default config({
       slugField: 'title',
       format: { contentField: 'body' },
       entryLayout: 'content',
-      columns: ['title', 'date'],
+      columns: ['title', 'date', 'draft'],
       schema: {
         title: fields.slug({
           name: {
@@ -46,6 +46,12 @@ export default config({
         coverAlt: fields.text({
           label: 'Cover image alt text',
           description: 'Describe the photo for people who cannot see it. Required if there is a cover image.',
+        }),
+        draft: fields.checkbox({
+          label: 'Draft',
+          description:
+            'Drafts are not published. Untick when the post is ready to go live.',
+          defaultValue: false,
         }),
         body: fields.markdoc({ label: 'Body' }),
       },
