@@ -20,6 +20,7 @@ Never put passwords, tokens or recovery codes in this file or anywhere in the re
 | Domain registrar — friendsofafiercechase.org | Domain | _confirm registrar and login_ | | | _confirm_ | _TBD_ |
 | DNS | Points domain at hosting | _TBD_ | | | | |
 | Vercel (Hobby) | Site hosting and deploys | friendsofafiercechase@gmail.com (_to create_) | Shared org login (Hobby has no team members) | Free; non-commercial use only | — | _TBD — board password store_ |
+| rclone remote `foafc` | Read-only Drive access for pulling brand assets | Webmaster's personal Google account | Jeneve | Free | Shared client ID retires during 2026 | Local `~/.config/rclone/rclone.conf` (not in the repo) |
 | Keystatic (GitHub mode) | Board content editing at `/keystatic` | Keystatic GitHub App installed on parrish-studio (_to set up_) | Jeneve | Free | — | App secrets in hosting env vars |
 | GitHub collaborators | Board editors' accounts with write access to `foafc-site` | Each editor | Jeneve | Free | — | Editors' own logins |
 | Facebook page / app | Events and trail conditions source | _confirm_ | | | | |
@@ -35,6 +36,75 @@ Set in the hosting dashboard, never committed. List names and what they're for h
 | Name | Used by | Purpose |
 |---|---|---|
 | `KEYSTATIC_GITHUB_CLIENT_ID`, `KEYSTATIC_GITHUB_CLIENT_SECRET`, `KEYSTATIC_SECRET`, `PUBLIC_KEYSTATIC_GITHUB_APP_SLUG` | Keystatic | Editor sign-in via the Keystatic GitHub App (names confirmed against @keystatic/core 0.6.9) |
+
+## Deploying
+
+Hosted on **Vercel, Hobby plan** (ADR 0004). Deploys happen on push to `main`;
+branches get preview URLs.
+
+### Vercel project settings
+
+These are the only non-default settings. The repo is a pnpm workspaces monorepo,
+which is why the root directory matters.
+
+| Setting | Value |
+|---|---|
+| Framework preset | Astro |
+| Root Directory | `apps/foafc` |
+| Include files outside root directory | **on** (needed — the app imports `packages/*`) |
+| Build command | *(default)* |
+| Install command | *(default — Vercel runs pnpm at the workspace root)* |
+| Node version | 22.x (also pinned via `engines` in `apps/foafc/package.json`) |
+
+`@astrojs/vercel` writes `apps/foafc/.vercel/output`, which is exactly where
+Vercel looks when the root directory is `apps/foafc`. Nothing else to configure.
+
+### First-time setup, in order
+
+1. Create the Vercel account using **friendsofafiercechase@gmail.com** — not a
+   personal account. Hobby has no team members, so this shared login *is* how
+   admin access is handed over. Put the credentials in the board password store
+   and record where, below.
+2. Import `parrish-studio/foafc-site` and apply the settings above. Deploy.
+   The public site works at this point; only `/keystatic` is incomplete.
+3. Note the assigned `*.vercel.app` URL. Keystatic's GitHub App needs it.
+4. Visit `https://<that-url>/keystatic/setup` and follow the wizard. It creates
+   the Keystatic GitHub App and gives you the four environment variables.
+5. Add those four variables in Vercel → Settings → Environment Variables, then
+   redeploy. `/keystatic` now accepts GitHub sign-in.
+6. Add each board editor as a collaborator on the GitHub repo.
+
+Deploy before creating the GitHub App, not after: the app's callback URL has to
+match the real deployed domain, so the domain must exist first. The same applies
+again at the `.org` cutover — the callback URL must be updated to the new domain
+or editor sign-in breaks.
+
+### Constraints to respect
+
+- Hobby is **non-commercial**. Nothing on the site may sell goods or services
+  directly; passes are presented as suggested donations (ADR 0004). Paid event
+  tickets or on-site merch sales would require Vercel Pro or another host.
+- The repo must stay **public** — Hobby cannot deploy private org-owned repos.
+  So never commit secrets or private board material.
+
+## Pulling brand assets from Drive
+
+The logo and photo assets live in a Drive folder owned by
+friendsofafiercechase@gmail.com and shared with the webmaster. The local machine
+has an `rclone` remote named `foafc`, authorised read-only against the
+webmaster's personal Google account:
+
+```
+rclone backend copyid foafc: <drive-file-id> apps/foafc/src/assets/photos/
+```
+
+`docs/source/asset-index.md` lists the folders and file IDs.
+
+**Expiry to watch:** this remote uses rclone's shared Google client ID, which
+rclone says is being retired during 2026. When it stops working, create a
+personal client ID (https://rclone.org/drive/#making-your-own-client-id, ~10
+minutes) and re-run `rclone config`. Nothing about the site breaks in the
+meantime; only asset fetching is affected.
 
 ## Routine tasks
 
