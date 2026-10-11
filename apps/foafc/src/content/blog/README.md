@@ -1,11 +1,11 @@
-# News posts
+# Blog posts
 
 One Markdoc file per post. Board members do not need to read this — they use
 the CMS at `/keystatic`, which writes these files for them.
 
 ## The quick version
 
-- **Add a post:** `/keystatic` → News → add. Or create a `.mdoc` file here.
+- **Add a post:** `/keystatic` → Blog → add. Or create a `.mdoc` file here.
 - **Edit a post:** edit it in `/keystatic`, or edit the file.
 - **Delete a post:** delete it in `/keystatic`, or delete the file. Nothing else
   references it — no index to update, no list to maintain.
@@ -17,7 +17,7 @@ the CMS at `/keystatic`, which writes these files for them.
 |---|---|---|
 | `title` | yes | Also the page heading |
 | `date` | yes | `YYYY-MM-DD`. Sorts the index, newest first |
-| `coverImage` | no | Path relative to this file, e.g. `../../assets/news/photo.jpg` |
+| `coverImage` | no | Path relative to this file, e.g. `../../assets/blog/photo.jpg` |
 | `coverAlt` | no | Describe the photo for people who cannot see it. Set it whenever there is a cover image |
 | `draft` | no | Defaults to `false` |
 

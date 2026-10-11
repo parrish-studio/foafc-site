@@ -2,28 +2,22 @@
 
 **Status: plan only. Nothing here is built.**
 
-When a News post is published, post its link and cover image to the
+When a blog post is published, post its link and cover image to the
 organisation's social accounts, without anyone having to post twice.
 
-## The tension to resolve first
+## Direction
 
-The standing principle is **Facebook is the source of truth** — the site
-mirrors Facebook, and no flow asks anyone to post twice. This feature pushes
-the other way: the site becomes the origin and Facebook the mirror.
-
-Those are not actually in conflict, but only if the direction is settled per
-content type and written down:
+Settled in `docs/decisions/0005-content-direction.md`: direction is decided per
+content type, and each item has exactly one origin.
 
 | Content | Origin | Mirror |
 |---|---|---|
-| Events, trail conditions | Facebook | Site (planned) |
-| Blog posts | **Site** | Facebook, Instagram |
+| Blog posts | This site | Facebook, possibly Instagram |
+| News feed, events, trail conditions | Meta | This site |
 
-A post written in Keystatic has no reason to be typed into Facebook by hand.
-A trail condition shouted from a phone at the trailhead has no reason to go
-through a CMS. Both directions can exist as long as a given item has exactly
-one origin. ADR 0003 already flagged social cross-publishing as out of scope
-and conflicting; this would supersede that, so it needs its own ADR.
+**This plan covers the push side only — blog posts out to Meta.** The pull side
+is a separate piece of work with opposite failure modes, and the two should not
+share a module.
 
 ## What should trigger it
 
@@ -114,7 +108,7 @@ to go.
 
 1. Open Graph and Twitter card tags on all pages. Useful immediately, no
    dependencies, makes every hand-shared link better.
-2. ADR recording the per-content-type direction decision above.
+2. ~~ADR recording the direction decision~~ — done, ADR 0005 (Proposed).
 3. Start Meta app review, since it may be the long pole.
 4. `module-publishing` core with the diff logic and a fake adapter. Fully
    testable with no credentials.

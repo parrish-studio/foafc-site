@@ -1,5 +1,5 @@
 /**
- * Reading the News collection.
+ * Reading the Blog collection.
  *
  * One place decides what counts as published, so the index, the post pages and
  * anything added later (a feed, a sitemap, a social cross-post) cannot disagree
@@ -8,7 +8,7 @@
 
 import { getCollection, type CollectionEntry } from 'astro:content';
 
-export type NewsPost = CollectionEntry<'news'>;
+export type BlogPost = CollectionEntry<'blog'>;
 
 /**
  * Published posts, newest first.
@@ -18,8 +18,8 @@ export type NewsPost = CollectionEntry<'news'>;
  * public site. If the collection is empty, callers show an empty state —
  * launching with no posts is a supported state, not an error.
  */
-export async function getPublishedPosts(): Promise<NewsPost[]> {
-  const posts = await getCollection('news', ({ data }) =>
+export async function getPublishedPosts(): Promise<BlogPost[]> {
+  const posts = await getCollection('blog', ({ data }) =>
     import.meta.env.PROD ? !data.draft : true,
   );
   return posts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());

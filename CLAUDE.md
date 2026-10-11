@@ -71,7 +71,12 @@ Record each decision as an ADR in `docs/decisions/`.
 
 ## Product principles
 
-- **Facebook is the source of truth** for events and trail conditions. John Chase posts conditions via Facebook Live. The site mirrors Facebook automatically; never design a flow that asks anyone to post twice.
+- **Nobody posts twice.** Direction is decided per content type and each item has
+  exactly one origin (ADR 0005): **blog posts originate here** and are pushed to
+  Meta; **news, events and trail conditions originate on Meta** and are pulled in.
+  John Chase posts conditions via Facebook Live — never design a flow that moves
+  that into a CMS. `News` and `Events` are reserved for Meta-sourced content and
+  must not become Keystatic collections.
 - **Board continuity.** Board members are not technical. Admin tools must be usable without touching code. Keep `HANDOFF.md` current whenever a service, account or secret is added.
 - **Transferability.** This repo will be transferred to a future webmaster. No secrets in the repo; all external accounts owned by the org (friendsofafiercechase@gmail.com) where possible.
 - **Accessibility and SEO are baseline**, not polish: semantic HTML, alt text, page descriptions, keyboard navigation, sufficient contrast.

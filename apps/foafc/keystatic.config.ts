@@ -17,9 +17,9 @@ export default config({
     brand: { name: 'Friends of A Fierce Chase' },
   },
   collections: {
-    news: collection({
-      label: 'News',
-      path: 'apps/foafc/src/content/news/*',
+    blog: collection({
+      label: 'Blog',
+      path: 'apps/foafc/src/content/blog/*',
       slugField: 'title',
       format: { contentField: 'body' },
       entryLayout: 'content',
@@ -38,10 +38,10 @@ export default config({
         }),
         coverImage: fields.image({
           label: 'Cover image',
-          directory: 'apps/foafc/src/assets/news',
-          // Written into the entry file, which sits in src/content/news/,
+          directory: 'apps/foafc/src/assets/blog',
+          // Written into the entry file, which sits in src/content/blog/,
           // so Astro's image() resolves it relative to that file.
-          publicPath: '../../assets/news/',
+          publicPath: '../../assets/blog/',
         }),
         coverAlt: fields.text({
           label: 'Cover image alt text',

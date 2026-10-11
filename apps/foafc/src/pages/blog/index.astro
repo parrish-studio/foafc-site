@@ -1,19 +1,19 @@
 ---
 import { Image } from 'astro:assets';
-import { formatPostDate, getPublishedPosts } from '../../content/news';
+import { formatPostDate, getPublishedPosts } from '../../content/blog';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const posts = await getPublishedPosts();
 ---
 
 <BaseLayout
-  title="News"
-  description="News and updates from Friends of A Fierce Chase in Monson, Maine."
+  title="Blog"
+  description="Posts from the trail crew at Friends of A Fierce Chase in Monson, Maine."
 >
   <div class="container page stack">
     <div class="page-header">
       <p class="eyebrow">From the trails</p>
-      <h1>News, Posts and Events</h1>
+      <h1>Notes from the trails</h1>
       <p class="page-header__lede">Updates from the trails and the board.</p>
     </div>
 
@@ -27,7 +27,7 @@ const posts = await getPublishedPosts();
         <ul class="card-grid">
           {posts.map((post) => (
             <li class="card">
-              <a class="card__link" href={`/news/${post.id}/`}>
+              <a class="card__link" href={`/blog/${post.id}/`}>
                 {post.data.coverImage && (
                   <Image
                     class="card__image"
