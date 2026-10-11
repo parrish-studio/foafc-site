@@ -51,10 +51,27 @@ which is why the root directory matters.
 |---|---|
 | Framework preset | Astro |
 | Root Directory | `apps/foafc` |
-| Include files outside root directory | **on** (needed — the app imports `packages/*`) |
 | Build command | *(default)* |
 | Install command | *(default — Vercel runs pnpm at the workspace root)* |
 | Node version | 22.x (also pinned via `engines` in `apps/foafc/package.json`) |
+
+Root Directory is the only thing to change. Vercel used to need an "Include
+files outside the root directory" toggle for monorepos; that option no longer
+exists, because Vercel now detects pnpm workspaces itself and installs from the
+repository root. Do not go looking for it.
+
+Its detection requires all of the following, which this repo satisfies — keep
+them true or builds start installing the wrong thing:
+
+- `pnpm-workspace.yaml` listing every workspace, and a lockfile at the repo root
+- a unique `name` in every package's `package.json`
+- internal dependencies declared explicitly (`apps/foafc` lists both
+  `@parrish-studio/*` packages as `workspace:*` dependencies)
+- `packageManager` set in the root `package.json`
+
+The same detection drives "skip unaffected projects", which is on by default:
+a push that touches only `packages/*` still rebuilds the site, because those are
+declared dependencies of `apps/foafc`.
 
 `@astrojs/vercel` writes `apps/foafc/.vercel/output`, which is exactly where
 Vercel looks when the root directory is `apps/foafc`. Nothing else to configure.
