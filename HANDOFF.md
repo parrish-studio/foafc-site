@@ -85,7 +85,7 @@ which is why the root directory matters.
 | Root Directory | `apps/foafc` |
 | Build command | *(default)* |
 | Install command | *(default — Vercel runs pnpm at the workspace root)* |
-| Node version | 22.x (also pinned via `engines` in `apps/foafc/package.json`) |
+| Node version | Vercel's default. `engines` in `apps/foafc/package.json` records Astro 7's floor (`>=22.12.0`); the adapter picks the runtime itself and currently emits `nodejs24.x`. |
 
 Root Directory is the only thing to change. Vercel used to need an "Include
 files outside the root directory" toggle for monorepos; that option no longer
