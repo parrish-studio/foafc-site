@@ -5,6 +5,7 @@ import logoSrc from '../assets/brand/FOAFC_Gold_Icon_Logo.png';
 // Self-hosted so the site makes no third-party font request.
 import '@fontsource-variable/fraunces';
 import '@fontsource-variable/libre-franklin';
+import { isProductionHost } from '../site';
 import '../styles/global.css';
 
 interface Props {
@@ -26,6 +27,9 @@ const isCurrent = (href: string) =>
   href === '/' ? currentPath === '/' : currentPath.startsWith(href);
 
 const year = new Date().getFullYear();
+
+// Keep staging deploys out of search results until the DNS cutover.
+const indexable = isProductionHost(Astro.site);
 ---
 
 <!doctype html>
@@ -36,6 +40,7 @@ const year = new Date().getFullYear();
     <title>{title} — Friends of A Fierce Chase</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+    {!indexable && <meta name="robots" content="noindex, nofollow" />}
     <link rel="icon" type="image/png" href={faviconSrc.src} />
     <link rel="apple-touch-icon" href={faviconSrc.src} />
   </head>

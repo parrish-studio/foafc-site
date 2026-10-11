@@ -35,7 +35,23 @@ Set in the hosting dashboard, never committed. List names and what they're for h
 
 | Name | Used by | Purpose |
 |---|---|---|
-| `KEYSTATIC_GITHUB_CLIENT_ID`, `KEYSTATIC_GITHUB_CLIENT_SECRET`, `KEYSTATIC_SECRET`, `PUBLIC_KEYSTATIC_GITHUB_APP_SLUG` | Keystatic | Editor sign-in via the Keystatic GitHub App (names confirmed against @keystatic/core 0.6.9) |
+| `SITE_URL` | Astro build | The origin this build is served from. **Set it to the Vercel URL for as long as the site lives on a temporary domain**, and remove it at the DNS cutover. It drives canonical URLs and whether the site may be indexed — see below. |
+| `KEYSTATIC_GITHUB_CLIENT_ID`, `KEYSTATIC_GITHUB_CLIENT_SECRET`, `KEYSTATIC_SECRET`, `PUBLIC_KEYSTATIC_GITHUB_APP_SLUG` | Keystatic | Editor sign-in via the Keystatic GitHub App (names confirmed against @keystatic/core 0.6.9). Not needed for the first deploy; `/keystatic/setup` generates them. |
+
+### Why `SITE_URL` matters before the cutover
+
+`friendsofafiercechase.org` still serves the Wix site. Without `SITE_URL`, every
+page on the Vercel domain would carry a canonical link pointing at that domain
+— telling search engines the new pages are duplicates of the Wix ones, which
+damages the search presence you want to keep at launch.
+
+With `SITE_URL` set to a non-production origin, the build also emits
+`noindex, nofollow` and a `robots.txt` that disallows everything, so the staging
+site cannot be indexed or compete with the live one.
+
+At the cutover: delete `SITE_URL` (or set it to `https://friendsofafiercechase.org`)
+and redeploy. Canonicals correct themselves, the noindex disappears and
+`robots.txt` opens up. Logic lives in `apps/foafc/src/site.ts`.
 
 ## Deploying
 
