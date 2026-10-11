@@ -33,6 +33,22 @@ Never put passwords, tokens or recovery codes in this file or anywhere in the re
 
 Set in the hosting dashboard, never committed. List names and what they're for here.
 
+**The repo is public** (Vercel Hobby requires it), so the config/secret split is
+not academic — anything committed is world-readable, permanently, including in
+git history.
+
+| | Treat as |
+|---|---|
+| `SITE_URL` | Config. It is printed into every page's canonical tag and into `robots.txt`. Nothing to protect. |
+| `PUBLIC_KEYSTATIC_GITHUB_APP_SLUG` | Config, by design. See the naming rule below. |
+| `KEYSTATIC_GITHUB_CLIENT_ID` | Low sensitivity — appears in OAuth redirect URLs, not a credential alone. |
+| `KEYSTATIC_GITHUB_CLIENT_SECRET` | **Secret.** Authenticates the GitHub App; leaking it lets someone act as the CMS. |
+| `KEYSTATIC_SECRET` | **Secret.** Encrypts editor session cookies. |
+
+**Naming rule:** in Astro, any variable prefixed `PUBLIC_` is inlined into the
+browser bundle. The prefix is not a label describing intent — it is an
+instruction to the bundler. Never give a credential that prefix.
+
 | Name | Used by | Purpose |
 |---|---|---|
 | `SITE_URL` | Astro build | The origin this build is served from. **Set it to the Vercel URL for as long as the site lives on a temporary domain**, and remove it at the DNS cutover. It drives canonical URLs and whether the site may be indexed — see below. |
