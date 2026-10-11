@@ -1,4 +1,5 @@
 ---
+import { SOCIAL } from '../data/org';
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
@@ -25,8 +26,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       */}
       <p>No events are listed yet.</p>
       <p>
-        Events are announced on Facebook first. Once the site is connected to that feed, they
-        will appear here automatically — the board will never have to post twice.
+        Events are announced on Facebook first. Until this page is connected to that feed, see
+        <a href={SOCIAL[0].href} rel="noopener">our Facebook page</a> for what is coming up.
       </p>
     </section>
   </div>

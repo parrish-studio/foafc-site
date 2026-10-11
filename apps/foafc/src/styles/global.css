@@ -505,3 +505,7 @@ a:hover {
   padding: var(--space-2) var(--space-4);
   font-size: var(--text-sm);
 }
+
+.site-footer__social a + a {
+  margin-inline-start: var(--space-3);
+}

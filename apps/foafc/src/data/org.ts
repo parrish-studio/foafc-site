@@ -16,6 +16,15 @@ export const ORG = {
 } as const;
 
 /**
+ * Where the organisation posts. Facebook is the source of truth for events and
+ * trail conditions — the site mirrors it, and no flow should ever ask anyone to
+ * post twice.
+ */
+export const SOCIAL = [
+  { label: 'Facebook', href: 'https://www.facebook.com/friendsofafiercechase' },
+] as const;
+
+/**
  * Suggested donation levels.
  *
  * Framed as suggested donations, never as purchases: the site is hosted on

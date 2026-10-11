@@ -5,6 +5,7 @@ import logoSrc from '../assets/brand/FOAFC_Gold_Icon_Logo.png';
 // Self-hosted so the site makes no third-party font request.
 import '@fontsource-variable/fraunces';
 import '@fontsource-variable/libre-franklin';
+import { SOCIAL } from '../data/org';
 import { isProductionHost } from '../site';
 import '../styles/global.css';
 
@@ -92,6 +93,16 @@ const indexable = isProductionHost(Astro.site);
         <p class="site-footer__title">Friends of A Fierce Chase</p>
         <p>Monson, Maine</p>
         <p>501(c)(3) nonprofit · General information</p>
+        <p class="site-footer__social">
+          Follow along:
+          {
+            SOCIAL.map((link) => (
+              <a href={link.href} rel="me noopener">
+                {link.label}
+              </a>
+            ))
+          }
+        </p>
         <p>© {year} Friends of A Fierce Chase</p>
       </div>
     </footer>
