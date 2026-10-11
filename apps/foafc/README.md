@@ -97,6 +97,25 @@ names are listed in `HANDOFF.md`.
   disjoint, so the app pins `0.152.0` — the version the plugin that actually
   runs the transform needs — and the root `package.json` records the override in
   `pnpm.peerDependencyRules`.
+- **`rolldown` is stubbed out of the output bundles** (alias in
+  `astro.config.mjs`, stub in `src/stub-rolldown.mjs`). `@astrojs/vercel@11.0.13`
+  builds Vercel Edge Middleware with rolldown, and that build-time module
+  imports its shared constants from the adapter's barrel `index.js` — which the
+  runtime entry imports too. So rolldown lands in the serverless bundle, its
+  native binding fails to load there, and because ESM resolves imports eagerly
+  the function throws before handling anything. Every server-rendered route
+  returned `FUNCTION_INVOCATION_FAILED`.
+
+  The stub is safe because the adapter's own build-time call resolves rolldown
+  through Node, not through Vite's resolver — verified by building with
+  `edgeMiddleware: true`, which does emit a working `_middleware.func`. The
+  stub throws rather than no-ops, so a genuine runtime need fails loudly.
+
+  `scripts/verify-build.mjs` runs after every build, imports the generated
+  function, and fails the build if it cannot be loaded — so this class of bug
+  cannot reach production again. It also prints a notice when the adapter stops
+  importing rolldown, meaning the workaround can be retired. Remove the alias,
+  the stub, and that notice together; keep the smoke check.
 - `astro check` resolves `@astrojs/check` from astro's own directory, which
   pnpm's isolated `node_modules` layout hides. The `check` script calls the
   `astro-check` binary directly instead.

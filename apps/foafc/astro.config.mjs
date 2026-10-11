@@ -26,7 +26,13 @@ export default defineConfig({
         // native binding cannot load in the function, which crashes every
         // request. Stub it out of the output bundles only; Vite's own copy is
         // unaffected because Vite loads it through Node, not this resolver.
-        { find: /^rolldown$/, replacement: fileURLToPath(new URL('./src/stub-empty.mjs', import.meta.url)) },
+        // Subpaths are matched too. A subpath import would hit the stub and
+        // fail the BUILD on a missing export, which is a better failure than
+        // the silent runtime crash this works around.
+        {
+          find: /^rolldown(\/.*)?$/,
+          replacement: fileURLToPath(new URL('./src/stub-rolldown.mjs', import.meta.url)),
+        },
       ],
     },
   },
