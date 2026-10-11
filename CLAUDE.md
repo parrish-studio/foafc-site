@@ -66,9 +66,13 @@ Record each decision as an ADR in `docs/decisions/`.
 
 ## Known data issues
 
-- The organisation is **"Friends of a Fierce Chase"** — lowercase "a". The prototype, the
-  logo files and the logo usage guide all agree. (The trail *system* is "A Fierce Chase",
-  capitalised, as in `trails.json`.) Earlier drafts of this file used a capital A.
+- **It is always "A Fierce Chase" — capital A. Never lowercase it.** The "A" is an
+  initial: the trails are named for John and Sue Chase's son, whose first initial is A.
+  So the organisation is "Friends of A Fierce Chase" and the trail system is "A Fierce
+  Chase". It reads like a typo and will keep getting "corrected"; it is not one. Note
+  that the Canva prototype, the logo files and the logo usage guide all render it
+  lowercase — those sources are wrong on this point, so do not use them as authority
+  for the casing.
 
 - Day pass is **$20** (not $10 as in the prototype), and there is a **Family pass** (amount TBD). Season pass $150 — confirm. Present all passes as **suggested donations**, never as purchases (ADR 0004).
 - Wolf Chase Loop km figure in the source looks wrong; see `packages/module-trails/data/trails.json`.
