@@ -16,10 +16,14 @@ interface Props {
 
 const { title, description } = Astro.props;
 
+// Order follows the prototype's nav. Donate is rendered separately as a
+// button, as it is there.
 const navItems = [
   { href: '/', label: 'Home' },
   { href: '/trails/', label: 'Trails' },
+  { href: '/about/', label: 'About' },
   { href: '/news/', label: 'News' },
+  { href: '/events/', label: 'Events' },
 ];
 
 const currentPath = Astro.url.pathname;
@@ -71,6 +75,9 @@ const indexable = isProductionHost(Astro.site);
                 </li>
               ))
             }
+            <li>
+              <a class="button button--small" href="/donate/">Donate</a>
+            </li>
           </ul>
         </nav>
       </div>

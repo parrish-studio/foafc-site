@@ -1,0 +1,67 @@
+---
+import { ORG, SUGGESTED_DONATIONS } from '../data/org';
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Donate"
+  description={`Support ${ORG.shortName}, a volunteer-run 501(c)(3) maintaining cross-country ski trails in Monson, Maine. Donations are tax-deductible.`}
+>
+  <div class="container page stack">
+    <div class="page-header">
+      <p class="eyebrow">Donate / Join</p>
+      <h1>Help Us Keep the Trails Open.</h1>
+      <p class="page-header__lede">
+        Make room for more fresh air, more shared miles, and more moments outside.
+      </p>
+    </div>
+
+    <section>
+      <p>
+        This trail system is supported and maintained entirely by volunteers. It is open to the
+        public because of your donations. As a 501(c)(3) nonprofit, all contributions are
+        tax-deductible.
+      </p>
+    </section>
+
+    <section>
+      <h2>Suggested donations</h2>
+      <p>
+        The trails are free to use. These are suggested amounts, not fees — give what works for
+        you, and come ski either way.
+      </p>
+      <ul class="fact-list">
+        {
+          SUGGESTED_DONATIONS.map((tier) => (
+            <li>
+              <span class="fact-list__label">{tier.label}</span>
+              <span class="fact-list__value">{tier.amount}</span>
+              <span class="fact-list__note">{tier.note}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <section>
+      <h2>How to give</h2>
+      <p>By cheque, made out to {ORG.legalName}:</p>
+      <address class="address">
+        {ORG.mailingAddress.map((line) => <span>{line}</span>)}
+      </address>
+      <p>
+        Online giving is being set up. Until it is, a cheque is the surest way for a donation to
+        reach the trails in full, with nothing lost to processing fees.
+      </p>
+    </section>
+
+    <section>
+      <h2>Tax-deductible</h2>
+      <p>
+        {ORG.legalName} is a {ORG.charityStatus}, effective {ORG.effectiveDate}. Our EIN is {
+          ORG.ein
+        }. Keep your receipt or cancelled cheque for your records.
+      </p>
+    </section>
+  </div>
+</BaseLayout>

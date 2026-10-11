@@ -1,0 +1,33 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Events"
+  description="Races, volunteer days and community events on the Friends of A Fierce Chase trails in Monson, Maine."
+>
+  <div class="container page stack">
+    <div class="page-header">
+      <p class="eyebrow">Gather outside</p>
+      <h1>Events</h1>
+      <p class="page-header__lede">
+        Races, volunteer days and community gatherings on the trails.
+      </p>
+    </div>
+
+    <section>
+      <h2>Upcoming events</h2>
+      {/*
+        Deliberately empty. Facebook is the source of truth for events and the
+        sync is not built yet, so there is nothing to list and nothing worth
+        inventing. This section is where synced events will render; see the
+        note in the README about what this page is waiting on.
+      */}
+      <p>No events are listed yet.</p>
+      <p>
+        Events are announced on Facebook first. Once the site is connected to that feed, they
+        will appear here automatically — the board will never have to post twice.
+      </p>
+    </section>
+  </div>
+</BaseLayout>

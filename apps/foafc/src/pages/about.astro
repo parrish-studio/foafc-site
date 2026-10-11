@@ -1,0 +1,73 @@
+---
+import { parseTrailSystem } from '@parrish-studio/module-trails';
+import trailsData from '@parrish-studio/module-trails/data/trails.json';
+import { BOARD } from '../data/board';
+import { ORG } from '../data/org';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const system = parseTrailSystem(trailsData);
+---
+
+<BaseLayout
+  title="About"
+  description={`The mission, vision and board of ${ORG.shortName}, a volunteer-run cross-country ski trail system in ${system.system.location}.`}
+>
+  <div class="container page stack">
+    <div class="page-header">
+      <p class="eyebrow">Our story</p>
+      <h1>Built for the long way around.</h1>
+      <p class="page-header__lede">
+        {ORG.shortName} is a volunteer-run nonprofit that builds and maintains the {
+          system.system.name
+        } in {system.system.location}.
+      </p>
+    </div>
+
+    <section>
+      <h2>Our mission</h2>
+      <p>
+        Our Mission is to develop and maintain a multi-season trail system with private
+        landowners which is climate-resilient and provides a four-season, non-motorized
+        sporting recreation destination for the community and visitors.
+      </p>
+    </section>
+
+    <section>
+      <h2>Our vision</h2>
+      <p>
+        Our Vision is to provide a quality, safe and accommodating woodland experience that
+        invigorates the body and nourishes the soul through athletic training, competition and
+        environmental education.
+      </p>
+    </section>
+
+    <section>
+      <h2>Meet the board</h2>
+      <p>
+        {ORG.shortName} is governed by a volunteer board. The trails exist because of their work
+        and the private landowners who share their land.
+      </p>
+      <ul class="people">
+        {
+          BOARD.map((member) => (
+            <li class="people__item">
+              <span class="people__name">{member.name}</span>
+              <span class="people__role">{member.role}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <section>
+      <h2>A 501(c)(3) nonprofit</h2>
+      <p>
+        {ORG.legalName} is a {ORG.charityStatus}, effective {ORG.effectiveDate}. Donations are
+        tax-deductible. Our EIN is {ORG.ein}.
+      </p>
+      <p>
+        Want to help? <a href="/donate/">Supporting the trails</a> keeps them groomed and open.
+      </p>
+    </section>
+  </div>
+</BaseLayout>

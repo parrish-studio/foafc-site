@@ -431,3 +431,77 @@ a:hover {
 .prose img {
   border-radius: var(--radius-md);
 }
+
+/* ---------- People (board) ---------- */
+
+.people {
+  display: grid;
+  gap: var(--space-4);
+  grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.people__item {
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background-color: var(--color-surface);
+}
+
+.people__name {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--color-brand);
+}
+
+.people__role {
+  display: block;
+  margin-top: var(--space-1);
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
+
+/* ---------- Donate ---------- */
+
+.fact-list__note {
+  display: block;
+  margin-top: var(--space-1);
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
+
+.address {
+  display: grid;
+  gap: var(--space-1);
+  margin-top: var(--space-4);
+  padding: var(--space-4) var(--space-6);
+  border-radius: var(--radius-md);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  font-style: normal;
+  width: fit-content;
+}
+
+/* ---------- Callout ---------- */
+
+.callout {
+  padding: var(--space-8) var(--space-6);
+  border-radius: var(--radius-md);
+  background-color: var(--color-surface-accent);
+}
+
+.callout > :first-child {
+  margin-top: 0;
+}
+
+.callout__actions {
+  margin-top: var(--space-6);
+}
+
+.button--small {
+  padding: var(--space-2) var(--space-4);
+  font-size: var(--text-sm);
+}
