@@ -16,6 +16,22 @@ export const ORG = {
 } as const;
 
 /**
+ * Roughly where the trails are, for weather lookups.
+ *
+ * These are Monson village, not the trailhead itself — close enough that the
+ * forecast is the same, and the only coordinates anyone has written down.
+ * Elliotsville Road does not geocode. Worth replacing with real trailhead
+ * coordinates if someone can stand there with a phone.
+ */
+export const TRAILHEAD = {
+  latitude: 45.2874,
+  longitude: -69.5016,
+  /** What to call it on the page. */
+  label: 'Monson, Maine',
+  timeZone: 'America/New_York',
+} as const;
+
+/**
  * Where the organisation posts. Facebook is the source of truth for events and
  * trail conditions — the site mirrors it, and no flow should ever ask anyone to
  * post twice.

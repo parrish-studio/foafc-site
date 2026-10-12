@@ -595,3 +595,89 @@ a:hover {
   color: var(--color-text-muted);
   font-size: var(--text-sm);
 }
+
+/* ---------- Weather ---------- */
+
+.weather {
+  padding: var(--space-6);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background-color: var(--color-surface);
+}
+
+.weather__heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-3);
+  font-size: var(--text-xl);
+}
+
+.weather__place {
+  color: var(--color-text-muted);
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 400;
+}
+
+.weather__now {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-3);
+  margin-top: var(--space-4);
+}
+
+.weather__temp {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  font-weight: 700;
+  color: var(--color-brand);
+  line-height: 1;
+}
+
+.weather__conditions {
+  font-size: var(--text-lg);
+}
+
+.weather__detail,
+.weather__hours {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  margin: var(--space-4) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.weather__detail {
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
+
+.weather__hours {
+  gap: var(--space-6);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--color-border);
+}
+
+.weather__hour-label,
+.weather__hour-temp {
+  display: block;
+}
+
+.weather__hour-label {
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
+
+.weather__hour-temp {
+  margin-top: var(--space-1);
+  font-weight: 700;
+}
+
+.weather__source {
+  margin-top: var(--space-4);
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}

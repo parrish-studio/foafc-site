@@ -1,0 +1,111 @@
+---
+import { TRAILHEAD } from '../data/org';
+
+/*
+ * Current conditions at the trails.
+ *
+ * Deliberately NOT a React island. Hydrating React to print a temperature
+ * would cost tens of kilobytes on a page that otherwise ships no JavaScript
+ * at all; this is a few hundred bytes of plain DOM work.
+ *
+ * It renders hidden and reveals itself only once real data arrives, so a
+ * failed fetch, a blocked request or no JavaScript leaves no empty box and no
+ * spinner stuck forever — the page simply does not have a weather section.
+ * Nothing else on the page depends on it.
+ */
+---
+
+<section class="weather" data-weather hidden>
+  <h2 class="weather__heading">
+    Conditions at the trails
+    <span class="weather__place">{TRAILHEAD.label}</span>
+  </h2>
+
+  <p class="weather__now">
+    <span class="weather__temp" data-weather-temp></span>
+    <span class="weather__conditions" data-weather-conditions></span>
+  </p>
+
+  <ul class="weather__detail" data-weather-detail></ul>
+  <ol class="weather__hours" data-weather-hours></ol>
+
+  <p class="weather__source">
+    Forecast from the <a href="https://www.weather.gov/" rel="noopener">US National Weather
+    Service</a>, updated at most every 15 minutes.
+  </p>
+</section>
+
+<script>
+  const root = document.querySelector<HTMLElement>('[data-weather]');
+
+  const text = (selector: string, value: string) => {
+    const node = root?.querySelector<HTMLElement>(selector);
+    if (node) node.textContent = value;
+  };
+
+  interface WeatherHour {
+    label: string;
+    temperature: number;
+  }
+  interface Weather {
+    temperature: number;
+    unit: string;
+    conditions: string;
+    windSpeed: string;
+    windDirection?: string;
+    humidity?: number;
+    precipitation?: number;
+    hours: WeatherHour[];
+  }
+
+  async function load() {
+    if (!root) return;
+    try {
+      const response = await fetch('/api/weather');
+      if (!response.ok) return;
+      const weather: Weather = await response.json();
+
+      text('[data-weather-temp]', `${weather.temperature}°${weather.unit}`);
+      text('[data-weather-conditions]', weather.conditions);
+
+      const details: string[] = [];
+      const wind = [weather.windDirection, weather.windSpeed].filter(Boolean).join(' ');
+      if (wind) details.push(`Wind ${wind}`);
+      if (typeof weather.humidity === 'number') details.push(`Humidity ${weather.humidity}%`);
+      if (typeof weather.precipitation === 'number') {
+        details.push(`Precipitation ${weather.precipitation}%`);
+      }
+      const detailList = root.querySelector('[data-weather-detail]');
+      if (detailList) {
+        detailList.innerHTML = '';
+        for (const detail of details) {
+          const item = document.createElement('li');
+          item.textContent = detail;
+          detailList.append(item);
+        }
+      }
+
+      const hourList = root.querySelector('[data-weather-hours]');
+      if (hourList) {
+        hourList.innerHTML = '';
+        for (const hour of weather.hours) {
+          const item = document.createElement('li');
+          const when = document.createElement('span');
+          when.className = 'weather__hour-label';
+          when.textContent = hour.label;
+          const temp = document.createElement('span');
+          temp.className = 'weather__hour-temp';
+          temp.textContent = `${hour.temperature}°`;
+          item.append(when, temp);
+          hourList.append(item);
+        }
+      }
+
+      root.hidden = false;
+    } catch {
+      // Leave the section hidden. Weather is not worth a visible error.
+    }
+  }
+
+  load();
+</script>

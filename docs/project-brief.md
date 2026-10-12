@@ -104,7 +104,7 @@ Notes at the end of the board brief (Sept 19 meeting):
 1. ~~Next.js vs Astro~~ — **Astro** (ADR 0002)
 2. ~~Headless CMS~~ — **Keystatic, GitHub mode** (ADR 0003). Content Studio's social cross-publishing still open.
 3. ~~Hosting~~ — **Vercel Hobby** (ADR 0004)
-4. Data source for the live trail status and the weather widget
+4. ~~Weather widget data source~~ — **National Weather Service** (ADR 0006). Live trail status is still open; per ADR 0005 it comes from Meta, not from a weather API.
 5. How to pull Facebook events and posts in automatically
 6. Donation processor
 7. ~~Heading typeface~~ — resolved (Fraunces + Libre Franklin). Still open: whether amber and cream follow the prototype or the brand docs

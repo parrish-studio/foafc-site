@@ -3,6 +3,7 @@ import { Image } from 'astro:assets';
 import { parseTrailSystem, summarizeTrails } from '@parrish-studio/module-trails';
 import trailsData from '@parrish-studio/module-trails/data/trails.json';
 import heroImage from '../assets/photos/trailhead-winter.jpg';
+import WeatherWidget from '../components/WeatherWidget.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 const system = parseTrailSystem(trailsData);
@@ -54,6 +55,8 @@ const facts = [
         ))
       }
     </ul>
+
+    <WeatherWidget />
 
     <section class="callout">
       <p class="eyebrow">Keep the path clear</p>
