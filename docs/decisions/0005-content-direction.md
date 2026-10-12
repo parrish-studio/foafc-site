@@ -27,7 +27,19 @@ when it is really a property of each kind of content.
 | Blog posts | **This site** (Keystatic) | Facebook, possibly Instagram | Push on publish (not built — `docs/plans/social-cross-post.md`) |
 | News feed | **Meta** | This site | Pull (not built) |
 | Events | **Meta** | This site | Pull (not built) |
-| Trail conditions | **Meta** | This site | Pull (not built) |
+| Trail conditions | **Under review** — see below | | Not built |
+
+**Trail conditions are being reconsidered** (2026-10-12). This ADR placed them
+on the Meta side with the other live content. The alternative is the blog's
+shape: John enters a status in the admin, the site is the origin, and posting
+to socials is a side effect. Pulling structured facts — open/closed, miles
+groomed — out of a Facebook Live post is brittle, and it makes the site's most
+important fact depend on its most fragile mechanism.
+
+It is not decided, because it depends on whether John would actually use an
+admin form instead of his phone at the trailhead. See
+`docs/plans/trail-status.md`. If it changes, amend this ADR rather than
+contradicting it.
 
 Consequences for naming, which is why this is being recorded before launch
 rather than after:
