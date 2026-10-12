@@ -4,26 +4,47 @@ The Donate page is built and live. Methods are data in
 `apps/foafc/src/data/giving.ts`, so adding one is adding an entry — the page
 does not change.
 
-Only **cheque** is configured. The June 2026 audit records that the
-organisation already uses PayPal and Venmo, but no handles or donate links have
-been provided, and a wrong payment destination is the one mistake on this page
-that could send someone's money to a stranger. Nothing goes in until the real
-destination is confirmed by someone who can log into the account.
+**PayPal, Venmo and cheque are live.** Both online destinations were verified
+before publishing, because a wrong one sends a donor's money to a stranger:
 
-## What I need, per option
+- `venmo.com/u/FOAFC` resolves to "Friends of A Fierce Chase Cross Country Ski
+  Trails" and is a Venmo charity profile.
+- The PayPal link came from the organisation's own exported configuration.
 
-Bring back any one of these and it can be wired the same day.
+Verify the same way before changing either.
 
-| Option | What to bring | Build effort |
-|---|---|---|
-| **PayPal** | The donate-button URL from the PayPal nonprofit dashboard (`paypal.com/donate/?hosted_button_id=…`) | One entry |
-| **Venmo** | The charity profile URL, not a personal `@handle` | One entry |
-| **Stripe** | A Payment Link URL, created in the Stripe dashboard | One entry |
-| **Zeffy** | The hosted campaign page URL | One entry |
-| **Givebutter** | The hosted campaign page URL | One entry |
+## Open: PayPal is a checkout link, not a Donate button
 
-All five are the same shape — a `kind: 'link'` entry. The work is in choosing
-and opening the account, not in the site.
+The configured PayPal link is a **No-Code Checkout** link
+(`paypal.com/ncp/payment/…`). It works, and it takes a custom amount, but it is
+PayPal's commerce product. Its own wording is "Fill in how much you want to
+**pay**".
+
+PayPal also offers a **nonprofit Donate button** for confirmed 501(c)(3)s
+(`paypal.com/donate/?hosted_button_id=…`). Two reasons it is probably the better
+fit:
+
+1. **It reads as a donation.** The site is careful to frame everything as a
+   suggested donation rather than a sale, both because that is true and because
+   ADR 0004 requires it. A checkout flow saying "pay" undercuts that at the last
+   step, which is the worst place to lose it.
+2. **Rates.** PayPal publishes reduced transaction rates for confirmed
+   charities. Whether this account is enrolled is worth checking — on a season
+   of donations the difference is real money.
+
+Switching is a one-line change here once the button exists. Nothing else moves.
+
+## Adding another option later
+
+All of these are the same shape — a `kind: 'link'` entry pointing at the
+provider's hosted page. The work is choosing and opening the account, not the
+site.
+
+| Option | What to bring |
+|---|---|
+| **Stripe** | A Payment Link URL from the Stripe dashboard |
+| **Zeffy** | The hosted campaign page URL |
+| **Givebutter** | The hosted campaign page URL |
 
 ## What changes the build
 
@@ -73,7 +94,8 @@ These are board decisions, already in the board questions list:
 - **The Family pass amount.** The board set one in September 2026; the amount
   was never recorded. It is omitted from the page rather than guessed.
 - **Season pass — is $150 current?** It is published and people will act on it.
-- **Which processor.**
+- **Is the PayPal account on the nonprofit rate**, and should the checkout link
+  be swapped for a Donate button? See above.
 
 ## Not in scope
 

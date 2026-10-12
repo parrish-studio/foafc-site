@@ -51,26 +51,44 @@ export interface GivingByMail extends GivingMethodBase {
 export type GivingMethod = GivingLink | GivingByMail;
 
 /**
- * Configured methods, in the order they should appear.
+ * Configured methods, in the order they should appear. Online first, cheque
+ * last — slowest to arrive, but nothing is lost to fees.
  *
- * Only cheque is live. The June 2026 audit records that the organisation
- * already uses PayPal and Venmo, but neither the account handles nor the donate
- * links have been provided, and guessing a payment destination is the one
- * mistake here that could send someone's money to a stranger. Add them when the
- * real URLs are in hand.
+ * Both destinations were verified before being published here, because a wrong
+ * one sends a donor's money to a stranger:
+ *   - venmo.com/u/FOAFC resolves to "Friends of A Fierce Chase Cross Country
+ *     Ski Trails" and is a Venmo charity profile.
+ *   - The PayPal link is from the organisation's own exported configuration.
+ *
+ * Verify the same way before ever changing one.
  */
 export const GIVING_METHODS: readonly GivingMethod[] = [
+  {
+    kind: 'link',
+    id: 'paypal',
+    label: 'PayPal',
+    description: 'Card or PayPal balance. You choose the amount.',
+    action: 'Give with PayPal',
+    // PayPal "No-Code Checkout" link, custom amount. See docs/plans/giving.md:
+    // PayPal also offers a dedicated nonprofit Donate button, which reads as a
+    // donation rather than a payment and may carry reduced 501(c)(3) rates.
+    // Worth checking whether this account is enrolled.
+    href: 'https://www.paypal.com/ncp/payment/Q2GV9XXL9CLPL',
+  },
+  {
+    kind: 'link',
+    id: 'venmo',
+    label: 'Venmo',
+    description: 'Our charity profile, @FOAFC, if Venmo is already on your phone.',
+    action: 'Give with Venmo',
+    href: 'https://venmo.com/u/FOAFC',
+  },
   {
     kind: 'mail',
     id: 'cheque',
     label: 'By cheque',
-    description: 'Nothing is lost to processing fees, so the full amount reaches the trails.',
+    description: 'Slowest to arrive, but nothing is lost to processing fees.',
     payTo: 'Friends of A Fierce Chase Cross Country Ski Trails',
     address: ['C/O John Chase', '246 Elliotsville Road', 'Monson, ME 04464'],
   },
-  // Add when the real destinations are confirmed — see docs/plans/giving.md:
-  // { kind: 'link', id: 'paypal', label: 'PayPal', action: 'Give with PayPal',
-  //   href: 'https://...', description: '...' },
-  // { kind: 'link', id: 'venmo', label: 'Venmo', action: 'Give with Venmo',
-  //   href: 'https://...', description: '...' },
 ];
