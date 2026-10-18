@@ -167,10 +167,25 @@ a:hover {
   text-decoration: none;
 }
 
-/* The circular badge beside the name, as in the prototype. */
+/*
+ * The badge beside the name.
+ *
+ * The prototype composes this rather than using a single asset: the image is
+ * the plain gold dinosaur (every "Icon" logo file is a bare figure on
+ * transparency), and the sage disc and gold ring around it are presentation.
+ * The "Primary" logo files are a different thing — a badge with FRIENDS OF A
+ * FIERCE CHASE set around the rim — which would repeat the name next to it.
+ */
 .site-header__mark {
   width: 3.5rem;
   height: 3.5rem;
+  padding: 0.4rem;
+  border: 2px solid var(--color-action);
+  border-radius: var(--radius-pill);
+  background-color: var(--color-surface-accent);
+  /* The disc is a fixed size; let the figure sit inside it. */
+  box-sizing: border-box;
+  object-fit: contain;
 }
 
 .site-header__words {
