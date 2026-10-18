@@ -70,6 +70,8 @@
   --color-text: var(--color-ink-900);
   --color-text-muted: var(--color-slate-600);
   --color-text-inverse: var(--color-cream-50);
+  /* Secondary text on a dark surface — a strapline under a heading. */
+  --color-text-inverse-muted: var(--color-sage-200);
 
   /* Brand and interaction */
   --color-brand: var(--color-forest-900);

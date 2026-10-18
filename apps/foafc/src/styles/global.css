@@ -167,10 +167,14 @@ a:hover {
   text-decoration: none;
 }
 
-/* Gold icon beside the name, as in the prototype. */
+/* The circular badge beside the name, as in the prototype. */
 .site-header__mark {
-  width: 2.5rem;
-  height: 2.5rem;
+  width: 3.5rem;
+  height: 3.5rem;
+}
+
+.site-header__words {
+  display: grid;
 }
 
 .site-header__name {
@@ -178,6 +182,14 @@ a:hover {
   font-size: var(--text-base);
   font-weight: 700;
   line-height: var(--leading-tight);
+}
+
+.site-header__place {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-weight: 400;
+  line-height: var(--leading-tight);
+  color: var(--color-text-inverse-muted);
 }
 
 /*
@@ -218,11 +230,16 @@ a:hover {
   text-decoration: none;
 }
 
+/*
+ * The prototype marks the current and hovered link by turning it gold, not by
+ * underlining it. Colour alone would be a problem for anyone who cannot
+ * distinguish it, so the current page is also marked with aria-current, which
+ * assistive software announces.
+ */
 .site-nav a:hover,
+.site-nav a:focus-visible,
 .site-nav a[aria-current='page'] {
-  text-decoration: underline;
-  text-decoration-thickness: 2px;
-  text-underline-offset: 4px;
+  color: var(--color-action);
 }
 
 /* ---------- Footer ---------- */
@@ -501,9 +518,15 @@ a:hover {
   margin-top: var(--space-6);
 }
 
+/*
+ * The header's Donate pill. Same 16px body size as the nav links beside it —
+ * it reads as emphasis, not as a different kind of text — with the weight and
+ * padding doing the work instead.
+ */
 .button--small {
-  padding: var(--space-2) var(--space-4);
-  font-size: var(--text-sm);
+  padding: var(--space-2) var(--space-6);
+  font-size: var(--text-base);
+  font-weight: 700;
 }
 
 

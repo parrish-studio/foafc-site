@@ -1,11 +1,11 @@
 ---
 import { Image } from 'astro:assets';
 import faviconSrc from '../assets/brand/FOAFC_Color_Icon_Logo.png';
-import logoSrc from '../assets/brand/FOAFC_Gold_Icon_Logo.png';
+import logoSrc from '../assets/brand/FOAFC_Color_Primary_Logo.png';
 // Self-hosted so the site makes no third-party font request.
 import '@fontsource-variable/fraunces';
 import '@fontsource-variable/libre-franklin';
-import { SOCIAL } from '../data/org';
+import { SOCIAL, TRAILHEAD } from '../data/org';
 import { isProductionHost } from '../site';
 import '../styles/global.css';
 
@@ -62,11 +62,14 @@ const indexable = isProductionHost(Astro.site) && !noindex;
             class="site-header__mark"
             src={logoSrc}
             alt=""
-            width={48}
+            width={56}
             densities={[1, 2]}
             loading="eager"
           />
-          <span class="site-header__name">Friends of A Fierce Chase</span>
+          <span class="site-header__words">
+            <span class="site-header__name">Friends of A Fierce Chase</span>
+            <span class="site-header__place">{TRAILHEAD.label}</span>
+          </span>
         </a>
         <nav class="site-nav" aria-label="Main">
           <ul class="site-nav__list">
