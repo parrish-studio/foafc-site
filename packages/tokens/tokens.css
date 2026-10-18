@@ -23,6 +23,14 @@
   /* ---------- Primitives: color ---------- */
   --color-forest-900: #1b4332; /* Canva brand docs AND the prototype agree */
   /*
+   * A shade deeper than forest-900, for text sitting ON the action colour.
+   * The prototype pairs forest-900 with gold, which is 3.98:1 — under the 4.5
+   * AA needs for 16px bold. This clears it at 4.51:1 and is near
+   * indistinguishable. Accessibility is a baseline here, so it wins over an
+   * exact match (see CLAUDE.md).
+   */
+  --color-forest-950: #163a2b;
+  /*
    * The published Canva Code prototype is the canonical source for brand design
    * (colour, type, spacing). Values here are read from its embedded design data.
    * An earlier note in the repo recorded amber as #d4922a and cream as #f5f0e8
@@ -76,7 +84,7 @@
   /* Brand and interaction */
   --color-brand: var(--color-forest-900);
   --color-action: var(--color-amber-500);
-  --color-action-text: var(--color-forest-900);
+  --color-action-text: var(--color-forest-950);
   --color-accent-warm: var(--color-brown-700);
 
   /* Lines and focus */

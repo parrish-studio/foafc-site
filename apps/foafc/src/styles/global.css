@@ -240,7 +240,12 @@ a:hover {
   list-style: none;
 }
 
-.site-nav a {
+/*
+ * `:not(.button)` matters: `.site-nav a` is more specific than `.button`, so
+ * without it this rule wins and the Donate pill renders cream on gold — 2.3:1,
+ * unreadable. The nav styles nav links; it does not style buttons.
+ */
+.site-nav a:not(.button) {
   color: var(--color-text-inverse);
   text-decoration: none;
 }
