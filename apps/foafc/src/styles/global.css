@@ -179,7 +179,7 @@ a:hover {
 .site-header__mark {
   width: 3.5rem;
   height: 3.5rem;
-  padding: 0.4rem;
+  padding: 0.22rem;
   border: 2px solid var(--color-action);
   border-radius: var(--radius-pill);
   background-color: var(--color-surface-accent);
@@ -251,9 +251,9 @@ a:hover {
  * distinguish it, so the current page is also marked with aria-current, which
  * assistive software announces.
  */
-.site-nav a:hover,
-.site-nav a:focus-visible,
-.site-nav a[aria-current='page'] {
+.site-nav a:not(.button):hover,
+.site-nav a:not(.button):focus-visible,
+.site-nav a:not(.button)[aria-current='page'] {
   color: var(--color-action);
 }
 
@@ -347,8 +347,17 @@ a:hover {
   text-decoration: none;
 }
 
+/*
+ * A filled button keeps its text colour on hover — on the gold pill that text
+ * is the same forest green as the header behind it, and recolouring it would
+ * mean recolouring it to something that is not in the palette. The surface
+ * darkens instead.
+ *
+ * brightness() rather than a second colour token so this holds for any future
+ * action colour: nothing here has to be kept in sync with the token file.
+ */
 .button:hover {
-  text-decoration: underline;
+  filter: brightness(0.92);
 }
 
 .hero__actions {
