@@ -2,7 +2,7 @@
 import { Image } from 'astro:assets';
 import { parseTrailSystem, summarizeTrails } from '@parrish-studio/module-trails';
 import trailsData from '@parrish-studio/module-trails/data/trails.json';
-import heroImage from '../assets/photos/trailhead-winter.jpg';
+import heroImage from '../assets/photos/pulk-sled-winter.jpg';
 import WeatherWidget from '../components/WeatherWidget.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
@@ -26,8 +26,8 @@ const facts = [
       class="hero__image"
       src={heroImage}
       alt=""
-      width={1286}
-      widths={[640, 960, 1286]}
+      width={968}
+      widths={[640, 968]}
       sizes="100vw"
       loading="eager"
       fetchpriority="high"

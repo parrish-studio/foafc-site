@@ -298,6 +298,15 @@ a:hover {
   background-color: var(--color-brand);
   color: var(--color-text-inverse);
   padding-block: var(--space-16);
+  /*
+   * Tall enough for the photograph to survive the crop. The hero spans the full
+   * width, so a short band through a 4:3 picture keeps neither the skier nor
+   * the sled. min-height rather than a fixed height so the text still governs
+   * when it wraps on a narrow screen.
+   */
+  min-height: 28rem;
+  display: flex;
+  align-items: center;
 }
 
 .hero__image {
@@ -310,11 +319,14 @@ a:hover {
 }
 
 /*
- * Forest-green overlay, as in the Canva prototype. 0.78 is the working floor:
- * heavy enough that the trailhead sign's own lettering stays texture rather than
- * competing with the headline, light enough that the photo still reads. Cream
- * text keeps ~4.9:1 contrast even where the photo underneath is pure white
- * (snow), so do not raise the transparency further without rechecking that.
+ * Forest-green overlay, as in the Canva prototype.
+ *
+ * 0.78 is the floor, set by contrast rather than taste: the hero lede is 19px
+ * regular, so it needs 4.5:1, and the photo beneath is a snow scene. Measured
+ * against pure white — the worst case the snow can present — 0.78 gives
+ * 4.87:1 and 0.74 gives 4.32:1, which fails. Do not lighten it without
+ * rechecking, or the lede becomes unreadable over the brightest part of the
+ * picture.
  */
 .hero::after {
   content: '';
@@ -325,9 +337,17 @@ a:hover {
   opacity: 0.78;
 }
 
-/* Favour the upper part of the frame: sky and trees rather than sign face. */
+/*
+ * 42% is the one value that holds both figures: higher cuts the sled out of
+ * the bottom, lower takes the skier's head off. Re-check this if the hero
+ * height changes.
+ */
 .hero__image {
-  object-position: 50% 35%;
+  object-position: 50% 42%;
+}
+
+.hero__content {
+  width: 100%;
 }
 
 .hero h1 {
