@@ -1,0 +1,27 @@
+---
+import { SOCIAL } from '../data/org';
+
+/*
+ * The trail status banner.
+ *
+ * The prototype shows "All trails open — 6 miles groomed" here. That is live
+ * data and there is no source for it yet — where it comes from is still being
+ * decided (ADR 0005, docs/plans/trail-status.md).
+ *
+ * So the banner holds its place and says only what is true: conditions are on
+ * Facebook. A hard-coded "All trails open" would be the one failure mode that
+ * actually matters here — a stale claim that the trails are open in winter is
+ * worse than no claim at all.
+ *
+ * When the source is decided this becomes the real status, and it must carry
+ * its own timestamp and expire.
+ */
+---
+
+<p class="trail-status">
+  <span class="trail-status__label">Trail conditions</span>
+  <span>
+    Posted on <a href={SOCIAL[0].href} rel="noopener">our Facebook page</a> — check there before
+    heading out.
+  </span>
+</p>

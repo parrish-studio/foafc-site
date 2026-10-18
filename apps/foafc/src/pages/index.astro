@@ -1,20 +1,15 @@
 ---
 import { Image } from 'astro:assets';
-import { parseTrailSystem, summarizeTrails } from '@parrish-studio/module-trails';
-import trailsData from '@parrish-studio/module-trails/data/trails.json';
-import heroImage from '../assets/photos/pulk-sled-winter.jpg';
+import TrailStatus from '../components/TrailStatus.astro';
 import WeatherWidget from '../components/WeatherWidget.astro';
+import heroImage from '../assets/photos/pulk-sled-winter.jpg';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
-const system = parseTrailSystem(trailsData);
-const summary = summarizeTrails(system.trails);
-
-const facts = [
-  { label: 'Trails', value: `${system.system.trailCount} named trails` },
-  { label: 'Groomed', value: system.system.totalMilesLabel },
-  { label: 'Where', value: system.system.location },
-  { label: 'Dogs', value: 'Welcome, under verbal control' },
-];
+/*
+ * Section order follows the prototype: hero, trail status, welcome, weather,
+ * donate prompt. The prototype also has a trailhead map widget; the board
+ * brief puts the embedded map on the Trails page, so it is not here yet.
+ */
 ---
 
 <BaseLayout
@@ -40,21 +35,22 @@ const facts = [
       </p>
       <p class="hero__actions">
         <a class="button" href="/trails/">Explore Trail Maps</a>
+        <a class="button button--secondary" href="/donate/">Donate</a>
       </p>
     </div>
   </div>
 
   <div class="container page stack">
-    <ul class="fact-list">
-      {
-        facts.map((fact) => (
-          <li>
-            <span class="fact-list__label">{fact.label}</span>
-            <span class="fact-list__value">{fact.value}</span>
-          </li>
-        ))
-      }
-    </ul>
+    <TrailStatus />
+
+    <section>
+      <p class="eyebrow">Good to know</p>
+      <h2>Come find your fierce.</h2>
+      <p>
+        Whether you arrive on skis, two wheels, snowshoes, or your own two feet, these trails are
+        here for quiet miles, bold views, and shared care.
+      </p>
+    </section>
 
     <WeatherWidget />
 
@@ -67,20 +63,6 @@ const facts = [
       </p>
       <p class="callout__actions">
         <a class="button" href="/donate/">Support the trails</a>
-      </p>
-    </section>
-
-    <section>
-      <p class="eyebrow">Good to know</p>
-      <h2>Come find your fierce.</h2>
-      <p>
-        Whether you arrive on skis, two wheels, snowshoes, or your own two feet, these trails are
-        here for quiet miles, bold views, and shared care.
-      </p>
-      <p>
-        {summary.skateSkiingCount} of the {summary.count} trails are open to skate skiing, and the
-        system is groomed by volunteers. Check the <a href="/trails/">trail list, etiquette rules
-        and safety notice</a> before your first visit.
       </p>
     </section>
   </div>

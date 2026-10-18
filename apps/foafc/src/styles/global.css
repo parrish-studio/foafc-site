@@ -753,3 +753,45 @@ a:hover {
   color: var(--color-text-muted);
   font-size: var(--text-sm);
 }
+
+/* ---------- Hero actions ---------- */
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+}
+
+/*
+ * Outlined secondary button, as the prototype pairs with the gold primary.
+ * Cream on the hero's green overlay, which is already contrast-checked for
+ * text at that opacity.
+ */
+.button--secondary {
+  background-color: transparent;
+  color: var(--color-text-inverse);
+  border: 2px solid currentColor;
+}
+
+.button--secondary:hover {
+  filter: none;
+  background-color: var(--color-text-inverse);
+  color: var(--color-brand);
+}
+
+/* ---------- Trail status banner ---------- */
+
+.trail-status {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-6);
+  border-radius: var(--radius-md);
+  background-color: var(--color-surface-accent);
+}
+
+.trail-status__label {
+  font-weight: 700;
+  color: var(--color-brand);
+}
