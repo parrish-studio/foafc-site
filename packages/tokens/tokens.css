@@ -46,6 +46,16 @@
   --color-navy-900: #1d2a3f;   /* PROVISIONAL — logo navy colorway, unused in the prototype */
 
   --color-ink-900: #2c2c26;    /* confirmed — body text in the prototype */
+
+  /*
+   * Nordic trail-difficulty markers. These are an international standard
+   * (green circle / blue square / black diamond), not brand colours — a reskin
+   * should leave them alone, because changing them would misinform skiers.
+   * Greens and blue sampled from the prototype.
+   */
+  --color-rating-easy: #2e6850;
+  --color-rating-more: #105ea6;
+  --color-rating-most: #15151a;
   --color-muted-200: #d6d0c4;  /* confirmed — hairlines and muted surfaces in the prototype */
   --color-white: #ffffff;
 
@@ -86,6 +96,11 @@
   --color-action: var(--color-amber-500);
   --color-action-text: var(--color-forest-950);
   --color-accent-warm: var(--color-brown-700);
+
+  /* Difficulty ratings. Always paired with a shape and a word, never colour alone. */
+  --color-difficulty-easy: var(--color-rating-easy);
+  --color-difficulty-more-difficult: var(--color-rating-more);
+  --color-difficulty-most-difficult: var(--color-rating-most);
 
   /* Lines and focus */
   --color-border: var(--color-muted-200);

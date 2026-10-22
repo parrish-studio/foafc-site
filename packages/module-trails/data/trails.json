@@ -8,18 +8,128 @@
     "mapPdf": "https://drive.google.com/file/d/1HVhf2A5u4X-j94OjkRdz5dtiu355XTP_/view"
   },
   "trails": [
-    { "id": "meandering-moose-loop", "name": "Meandering Moose Loop", "miles": 1.91, "km": 3.05, "difficulty": "more-difficult", "skateSkiing": true, "oneWay": false, "notes": "Longest trail" },
-    { "id": "craigs-orchard-loop", "name": "Craig's Orchard Loop", "miles": 1.16, "km": 1.87, "difficulty": "easy", "skateSkiing": false, "oneWay": false },
-    { "id": "craigs-trail-loop", "name": "Craig's Trail Loop", "miles": 0.96, "km": 1.55, "difficulty": "easy", "skateSkiing": false, "oneWay": false },
-    { "id": "fierce-fisher-loop", "name": "Fierce Fisher Loop", "miles": 0.92, "km": 1.48, "difficulty": "more-difficult", "skateSkiing": true, "oneWay": false },
-    { "id": "wolf-chase-loop", "name": "Wolf Chase Loop", "miles": 0.69, "km": 1.48, "difficulty": "more-difficult", "skateSkiing": true, "oneWay": false, "dataCheck": "Source km duplicates Fierce Fisher; 0.69 mi is about 1.11 km. Confirm." },
-    { "id": "accipiter-alley-loop", "name": "Accipiter Alley Loop", "miles": 0.66, "km": 1.06, "difficulty": "easy", "skateSkiing": true, "oneWay": false },
-    { "id": "t-rex-loop", "name": "T-Rex Loop", "miles": 0.46, "km": 0.76, "difficulty": "most-difficult", "skateSkiing": true, "oneWay": false },
-    { "id": "bobcat-blaze-trail", "name": "Bobcat Blaze Trail", "miles": 0.38, "km": 0.61, "difficulty": "more-difficult", "skateSkiing": true, "oneWay": false },
-    { "id": "raven-tag-trail", "name": "Raven Tag Trail", "miles": 0.37, "km": 0.59, "difficulty": "more-difficult", "skateSkiing": true, "oneWay": false },
-    { "id": "snake-trail", "name": "Snake Trail", "miles": 0.30, "km": 0.48, "difficulty": "most-difficult", "skateSkiing": false, "oneWay": true },
-    { "id": "coyote-connector", "name": "Coyote Connector", "miles": 0.28, "km": 0.44, "difficulty": "easy", "skateSkiing": true, "oneWay": false },
-    { "id": "arthurs-loop", "name": "Arthur's Loop", "miles": 0.23, "km": 0.36, "difficulty": "easy", "skateSkiing": false, "oneWay": false }
+    {
+      "id": "meandering-moose-loop",
+      "name": "Meandering Moose Loop",
+      "description": "Longest loop, deep into quiet woods.",
+      "miles": 1.91,
+      "km": 3.05,
+      "difficulty": "more-difficult",
+      "skateSkiing": true,
+      "oneWay": false,
+      "notes": "Longest trail"
+    },
+    {
+      "id": "craigs-orchard-loop",
+      "name": "Craig's Orchard Loop",
+      "description": "Open views past an old orchard. Classic only.",
+      "miles": 1.16,
+      "km": 1.87,
+      "difficulty": "easy",
+      "skateSkiing": false,
+      "oneWay": false
+    },
+    {
+      "id": "craigs-trail-loop",
+      "name": "Craig's Trail Loop",
+      "description": "Intermediate eastern loop. Classic only.",
+      "miles": 0.96,
+      "km": 1.55,
+      "difficulty": "easy",
+      "skateSkiing": false,
+      "oneWay": false
+    },
+    {
+      "id": "fierce-fisher-loop",
+      "name": "Fierce Fisher Loop",
+      "description": "Namesake loop through mixed forest.",
+      "miles": 0.92,
+      "km": 1.48,
+      "difficulty": "more-difficult",
+      "skateSkiing": true,
+      "oneWay": false
+    },
+    {
+      "id": "wolf-chase-loop",
+      "name": "Wolf Chase Loop",
+      "description": "Gentle rolling loop, great for beginners.",
+      "miles": 0.69,
+      "km": 1.48,
+      "difficulty": "more-difficult",
+      "skateSkiing": true,
+      "oneWay": false,
+      "dataCheck": "Source km duplicates Fierce Fisher; 0.69 mi is about 1.11 km. Confirm."
+    },
+    {
+      "id": "accipiter-alley-loop",
+      "name": "Accipiter Alley Loop",
+      "description": "Quick warm-up loop through the forest.",
+      "miles": 0.66,
+      "km": 1.06,
+      "difficulty": "easy",
+      "skateSkiing": true,
+      "oneWay": false
+    },
+    {
+      "id": "t-rex-loop",
+      "name": "T-Rex Loop",
+      "description": "Short but punchy with tight turns.",
+      "miles": 0.46,
+      "km": 0.76,
+      "difficulty": "most-difficult",
+      "skateSkiing": true,
+      "oneWay": false
+    },
+    {
+      "id": "bobcat-blaze-trail",
+      "name": "Bobcat Blaze Trail",
+      "description": "Short connector through the heart.",
+      "miles": 0.38,
+      "km": 0.61,
+      "difficulty": "more-difficult",
+      "skateSkiing": true,
+      "oneWay": false
+    },
+    {
+      "id": "raven-tag-trail",
+      "name": "Raven Tag Trail",
+      "description": "Quick spur linking the western loops.",
+      "miles": 0.37,
+      "km": 0.59,
+      "difficulty": "more-difficult",
+      "skateSkiing": true,
+      "oneWay": false
+    },
+    {
+      "id": "snake-trail",
+      "name": "Snake Trail",
+      "description": "One-way only. The toughest run.",
+      "miles": 0.3,
+      "km": 0.48,
+      "difficulty": "most-difficult",
+      "skateSkiing": false,
+      "oneWay": true
+    },
+    {
+      "id": "coyote-connector",
+      "name": "Coyote Connector",
+      "description": "Links the western and eastern networks.",
+      "miles": 0.28,
+      "km": 0.44,
+      "difficulty": "easy",
+      "skateSkiing": true,
+      "oneWay": false
+    },
+    {
+      "id": "arthurs-loop",
+      "name": "Arthur's Loop",
+      "description": "Peaceful little circuit. Classic only.",
+      "miles": 0.23,
+      "km": 0.36,
+      "difficulty": "easy",
+      "skateSkiing": false,
+      "oneWay": false
+    }
   ],
   "rules": [
     "No walking on groomed winter trails except with skis and snowshoes",
@@ -28,5 +138,5 @@
     "Dogs are welcome under verbal control; clean up their waste",
     "Yield to grooming equipment"
   ],
-  "safetyNotice": "Know your limits: be aware of changing conditions, natural obstacles, and your own skill level. Stay in control — adjust your speed to the conditions. You are recreating at your own risk — be safe!"
+  "safetyNotice": "Know your limits: be aware of changing conditions, natural obstacles, and your own skill level. Stay in control \u2014 adjust your speed to the conditions. You are recreating at your own risk \u2014 be safe!"
 }

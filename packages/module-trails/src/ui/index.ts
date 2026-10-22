@@ -1,4 +1,5 @@
 export { DifficultyBadge, type DifficultyBadgeProps } from './DifficultyBadge';
+export { TrailGrid, type TrailGridProps } from './TrailGrid';
 export { TrailList, type TrailListProps } from './TrailList';
 export { TrailRules, type TrailRulesProps } from './TrailRules';
 export { TrailSafetyNotice, type TrailSafetyNoticeProps } from './TrailSafetyNotice';

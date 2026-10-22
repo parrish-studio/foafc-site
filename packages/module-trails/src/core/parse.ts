@@ -86,6 +86,7 @@ function parseTrail(value: unknown, path: string): Trail {
   return {
     id: asString(raw.id, `${path}.id`),
     name: asString(raw.name, `${path}.name`),
+    description: asOptionalString(raw.description, `${path}.description`),
     miles: asNumber(raw.miles, `${path}.miles`),
     km: asNumber(raw.km, `${path}.km`),
     difficulty: asDifficulty(raw.difficulty, `${path}.difficulty`),

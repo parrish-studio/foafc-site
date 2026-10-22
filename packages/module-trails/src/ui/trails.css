@@ -132,3 +132,89 @@
 .ps-trail-safety__text {
   margin-bottom: 0;
 }
+
+/* ---------- Trail cards ---------- */
+
+/*
+ * Mobile first: one column, widening as there is room. Cards rather than a
+ * table so a phone never needs horizontal scrolling to read a trail.
+ */
+.ps-trail-grid {
+  display: grid;
+  gap: var(--space-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media (min-width: 38rem) {
+  .ps-trail-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 62rem) {
+  .ps-trail-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.ps-trail-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background-color: var(--color-surface);
+}
+
+.ps-trail-card__name {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  line-height: var(--leading-tight);
+  color: var(--color-brand);
+}
+
+.ps-trail-card__description {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
+
+.ps-trail-card__facts {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  margin: auto 0 0;
+}
+
+.ps-trail-pill,
+.ps-trail-card__facts .ps-trail-difficulty__label {
+  display: inline-block;
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-pill);
+  background-color: var(--color-surface-accent);
+  color: var(--color-brand);
+  font-size: var(--text-sm);
+  white-space: nowrap;
+}
+
+/* The marker carries the rating colour; shape and words carry it too. */
+.ps-trail-card > .ps-trail-difficulty .ps-trail-difficulty__glyph {
+  font-size: var(--text-lg);
+}
+
+.ps-trail-difficulty--easy .ps-trail-difficulty__glyph {
+  color: var(--color-difficulty-easy);
+}
+
+.ps-trail-difficulty--more-difficult .ps-trail-difficulty__glyph {
+  color: var(--color-difficulty-more-difficult);
+}
+
+.ps-trail-difficulty--most-difficult .ps-trail-difficulty__glyph {
+  color: var(--color-difficulty-most-difficult);
+}

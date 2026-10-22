@@ -7,7 +7,7 @@ import {
   summarizeTrails,
 } from '@parrish-studio/module-trails';
 import trailsData from '@parrish-studio/module-trails/data/trails.json';
-import { TrailList, TrailRules, TrailSafetyNotice } from '@parrish-studio/module-trails/ui';
+import { TrailGrid, TrailRules, TrailSafetyNotice } from '@parrish-studio/module-trails/ui';
 import '@parrish-studio/module-trails/ui/trails.css';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
@@ -62,7 +62,7 @@ const summary = summarizeTrails(trails);
       )
     }
 
-    <TrailList trails={trails} caption="Every trail, longest first." />
+    <TrailGrid trails={trails} caption="Every trail, longest first" />
 
     <TrailRules rules={system.rules} />
 

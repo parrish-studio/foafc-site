@@ -11,6 +11,8 @@ export interface Trail {
   /** Stable slug, used as a key and for deep links. */
   id: string;
   name: string;
+  /** One line on what the trail is like. Shown on the card. */
+  description?: string;
   /** Length in miles. */
   miles: number;
   /** Length in kilometres. */
