@@ -1019,3 +1019,52 @@ a:hover {
 .purpose__card > * + * {
   margin-top: var(--space-4);
 }
+
+/* ---------- Trailhead map ---------- */
+
+.trailhead {
+  padding: var(--space-6);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background-color: var(--color-surface);
+}
+
+.trailhead__header > * + * {
+  margin-top: var(--space-1);
+}
+
+.trailhead__note {
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
+
+.trailhead__map {
+  display: block;
+  width: 100%;
+  /* Taller than wide on a phone, wider than tall once there is room. */
+  aspect-ratio: 4 / 3;
+  margin-top: var(--space-4);
+  border: 0;
+  border-radius: var(--radius-md);
+  background-color: var(--color-surface-muted);
+}
+
+@media (min-width: 44rem) {
+  .trailhead__map {
+    aspect-ratio: 21 / 9;
+  }
+}
+
+.trailhead__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-4);
+  margin-top: var(--space-4);
+}
+
+.trailhead__caveat {
+  margin-top: var(--space-3);
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}

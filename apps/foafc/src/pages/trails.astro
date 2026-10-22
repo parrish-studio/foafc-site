@@ -12,6 +12,7 @@ import {
 import trailsData from '@parrish-studio/module-trails/data/trails.json';
 import { TrailGrid, TrailRules, TrailSafetyNotice } from '@parrish-studio/module-trails/ui';
 import '@parrish-studio/module-trails/ui/trails.css';
+import TrailheadMap from '../components/TrailheadMap.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 // Seed data lives in the module for now; it moves to this app once the CMS owns
@@ -65,6 +66,8 @@ const classicOnly = trails.filter((trail) => !trail.skateSkiing);
         </p>
       )
     }
+
+    <TrailheadMap />
 
     <TrailGrid trails={trails} caption="Every trail, longest first" />
 

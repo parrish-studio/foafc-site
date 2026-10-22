@@ -1,0 +1,50 @@
+---
+import { ORG, TRAILHEAD } from '../data/org';
+
+/*
+ * Trailhead map.
+ *
+ * Uses Google's keyless embed (`maps?q=…&output=embed`) rather than the Embed
+ * API, for the same reason the weather uses the National Weather Service:
+ * there is no key to store, expire, or hand over. Nothing here breaks when the
+ * webmaster changes.
+ *
+ * `loading="lazy"` matters beyond performance. The iframe is third-party, so
+ * it sets Google cookies the moment it loads; lazy loading means that only
+ * happens for someone who scrolls to the map, not every visitor to the page.
+ *
+ * The directions and search links are Google's documented URL API, so they
+ * keep working even if the embed is ever removed.
+ */
+
+const query = encodeURIComponent(TRAILHEAD.query);
+const embedSrc = `https://www.google.com/maps?q=${query}&output=embed`;
+const directionsHref = `https://www.google.com/maps/dir/?api=1&destination=${query}`;
+const largerHref = `https://www.google.com/maps/search/?api=1&query=${query}`;
+---
+
+<section class="trailhead">
+  <div class="trailhead__header">
+    <h2>Trailhead and parking</h2>
+    <p class="trailhead__note">{ORG.legalName} · {TRAILHEAD.label}</p>
+  </div>
+
+  <iframe
+    class="trailhead__map"
+    src={embedSrc}
+    title={`Map showing the approach to the trails, ${TRAILHEAD.query}`}
+    loading="lazy"
+    referrerpolicy="no-referrer-when-downgrade"
+    allowfullscreen
+  ></iframe>
+
+  <p class="trailhead__actions">
+    <a class="button" href={directionsHref} rel="noopener">Directions</a>
+    <a href={largerHref} rel="noopener">View larger map</a>
+  </p>
+
+  <p class="trailhead__caveat">
+    The pin shows the access road. Parking is off Elliottsville Rd near Mathews Rd — watch for
+    the trailhead sign.
+  </p>
+</section>

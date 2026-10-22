@@ -16,18 +16,26 @@ export const ORG = {
 } as const;
 
 /**
- * Roughly where the trails are, for weather lookups.
+ * The trailhead, for the map and for weather.
  *
- * These are Monson village, not the trailhead itself — close enough that the
- * forecast is the same, and the only coordinates anyone has written down.
- * Elliotsville Road does not geocode. Worth replacing with real trailhead
- * coordinates if someone can stand there with a phone.
+ * This is Elliottsville Road, the access road named in the trail information —
+ * "off Elliottsville Rd near Mathews Rd". It is the closest point anyone has
+ * written down, and it is a real verified location rather than a guess.
+ *
+ * It is NOT the exact trailhead. Elliottsville Rd and Mathews Rd are 1.5 km
+ * apart, so the pin could be a few hundred metres out, and the trail system is
+ * not in OpenStreetMap or Google Maps as a place. Replace `query` with a real
+ * Google Maps place, or these coordinates with ones taken at the trailhead,
+ * when someone can stand there with a phone. The map and the weather both
+ * follow this one value.
  */
 export const TRAILHEAD = {
-  latitude: 45.2874,
-  longitude: -69.5016,
+  latitude: 45.3232,
+  longitude: -69.4936,
   /** What to call it on the page. */
   label: 'Monson, Maine',
+  /** What Google Maps is asked to find. */
+  query: 'Elliottsville Road, Monson, ME 04464',
   timeZone: 'America/New_York',
 } as const;
 
