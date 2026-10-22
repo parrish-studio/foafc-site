@@ -96,19 +96,38 @@ const indexable = isProductionHost(Astro.site) && !noindex;
 
     <footer class="site-footer">
       <div class="container site-footer__inner">
-        <p class="site-footer__title">Friends of A Fierce Chase</p>
-        <p>Monson, Maine</p>
-        <p>501(c)(3) nonprofit · General information</p>
-        <p class="site-footer__social">
-          <span>Follow along:</span>
-          {
-            SOCIAL.map((link) => (
-              <a href={link.href} rel="me noopener">
-                {link.label}
-              </a>
-            ))
-          }
-        </p>
+        <div class="site-footer__block">
+          <p class="site-footer__title">Friends of A Fierce Chase</p>
+          <p>{TRAILHEAD.label}</p>
+          <p>501(c)(3) nonprofit · General information</p>
+        </div>
+
+        <div class="site-footer__block">
+          <p class="site-footer__heading">Follow along</p>
+          <ul class="site-footer__links">
+            {
+              SOCIAL.map((link) => (
+                <li>
+                  <a href={link.href} rel="me noopener">
+                    {link.label}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+
+        <div class="site-footer__block">
+          <p class="site-footer__heading">Support the trails</p>
+          <ul class="site-footer__links">
+            <li><a href="/donate/">Donate</a></li>
+            <li><a href="/trails/">Trail maps</a></li>
+            <li><a href="/about/">About us</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="container site-footer__legal">
         <p>© {year} Friends of A Fierce Chase</p>
       </div>
     </footer>
