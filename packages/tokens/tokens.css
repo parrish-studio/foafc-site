@@ -89,6 +89,8 @@
 
   /* Lines and focus */
   --color-border: var(--color-muted-200);
+  /* The faint dot pattern the page background carries. */
+  --color-texture-dot: var(--color-muted-200);
   --color-focus-ring: var(--color-amber-500);
 
   /* ---------- Semantic: type scale ---------- */

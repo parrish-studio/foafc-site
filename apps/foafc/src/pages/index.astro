@@ -6,10 +6,28 @@ import heroImage from '../assets/photos/pulk-sled-winter.jpg';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 /*
- * Section order follows the prototype: hero, trail status, welcome, weather,
- * donate prompt. The prototype also has a trailhead map widget; the board
- * brief puts the embedded map on the Trails page, so it is not here yet.
+ * Section order follows the prototype — see docs/source/prototype-structure.md.
+ * Hero, full-bleed status strip, welcome beside weather, three teasers,
+ * full-bleed donate band.
  */
+
+const teasers = [
+  {
+    href: '/trails/',
+    title: 'Trail Maps',
+    copy: 'Find your route, what each trail suits, and how to reach the trailhead.',
+  },
+  {
+    href: '/blog/',
+    title: 'Latest post',
+    copy: 'Notes from the trail crew and whatever the woods are doing this month.',
+  },
+  {
+    href: '/events/',
+    title: 'Upcoming events',
+    copy: 'Races, volunteer days and community gatherings on the trails.',
+  },
+];
 ---
 
 <BaseLayout
@@ -34,36 +52,51 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         A welcoming network of trails and neighbors. Ski, snowshoe, hike, fat bike.
       </p>
       <p class="hero__actions">
-        <a class="button" href="/trails/">Explore Trail Maps</a>
-        <a class="button button--secondary" href="/donate/">Donate</a>
+        <a class="button" href="/donate/">Donate</a>
+        <a class="button button--secondary" href="/trails/">Explore Trail Maps</a>
       </p>
     </div>
   </div>
 
+  <TrailStatus />
+
   <div class="container page stack">
-    <TrailStatus />
+    <div class="home-intro">
+      <section>
+        <p class="eyebrow">Good to know</p>
+        <h2>Come find your fierce.</h2>
+        <p>
+          Whether you arrive on skis, two wheels, snowshoes, or your own two feet, these trails
+          are here for quiet miles, bold views, and shared care.
+        </p>
+      </section>
 
-    <section>
-      <p class="eyebrow">Good to know</p>
-      <h2>Come find your fierce.</h2>
-      <p>
-        Whether you arrive on skis, two wheels, snowshoes, or your own two feet, these trails are
-        here for quiet miles, bold views, and shared care.
-      </p>
-    </section>
+      <WeatherWidget />
+    </div>
 
-    <WeatherWidget />
+    <ul class="teasers">
+      {
+        teasers.map((teaser) => (
+          <li class="teaser">
+            <h2 class="teaser__title">
+              <a href={teaser.href}>{teaser.title}</a>
+            </h2>
+            <p class="teaser__copy">{teaser.copy}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
 
-    <section class="callout">
+  <section class="donate-band">
+    <div class="container donate-band__inner">
       <p class="eyebrow">Keep the path clear</p>
       <h2>Every mile is a community effort.</h2>
       <p>
         Your support helps keep trail machines moving, bridges steady, and the next season within
         reach.
       </p>
-      <p class="callout__actions">
-        <a class="button" href="/donate/">Support the trails</a>
-      </p>
-    </section>
-  </div>
+      <p><a class="button" href="/donate/">Support the trails</a></p>
+    </div>
+  </section>
 </BaseLayout>

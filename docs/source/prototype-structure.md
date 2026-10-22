@@ -17,6 +17,16 @@ do not reach the content — screenshots do.
 Remember: **design is canonical, copy is not** (`CLAUDE.md`). Several pages
 below are visibly placeholder.
 
+**There is no mobile reference.** The prototype renders blank at 375px and at
+768px — it is a fixed-canvas Canva mock, not a responsive site. So it cannot
+answer how anything should behave on a phone, and the responsive design is
+ours to make. Build mobile-first from the structure below; do not wait for a
+prototype that will never show it.
+
+Where the desktop arrangement is two or more columns, the honest mobile
+equivalent is a single column in the same reading order, since that order is
+already meaningful (welcome before weather, trails before etiquette).
+
 ---
 
 ## Global

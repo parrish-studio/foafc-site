@@ -47,6 +47,9 @@ html {
 
 body {
   background-color: var(--color-bg);
+  /* The prototype's cream is textured, not flat: a faint dot grid. */
+  background-image: radial-gradient(var(--color-texture-dot) 1px, transparent 1px);
+  background-size: 1.5rem 1.5rem;
   color: var(--color-text);
   font-family: var(--font-body);
   font-size: var(--text-base);
@@ -212,12 +215,19 @@ a:hover {
  * prototype: body face, 16px bold, sentence case — not uppercase — and warm
  * brown on light surfaces, gold on dark ones.
  */
+/*
+ * Uppercase and letter-spaced. The stored strings are sentence case and the
+ * design uppercases them in CSS, so read the rendered prototype rather than
+ * its content dictionary for this one.
+ */
 .eyebrow {
   margin-bottom: var(--space-2);
   color: var(--color-accent-warm);
   font-family: var(--font-body);
   font-size: var(--text-base);
   font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
 }
 
 .hero .eyebrow {
@@ -781,17 +791,118 @@ a:hover {
 
 /* ---------- Trail status banner ---------- */
 
+/* Full-bleed sage strip directly under the hero, as in the prototype. */
 .trail-status {
+  background-color: var(--color-surface-accent);
+}
+
+.trail-status__inner {
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
   gap: var(--space-3);
-  padding: var(--space-4) var(--space-6);
-  border-radius: var(--radius-md);
-  background-color: var(--color-surface-accent);
+  padding-block: var(--space-4);
 }
 
 .trail-status__label {
   font-weight: 700;
   color: var(--color-brand);
+}
+
+/* ---------- Home: welcome beside weather ---------- */
+
+/*
+ * Mobile first throughout: one column, in reading order, which is already the
+ * meaningful order. Columns appear only where there is room for them. The
+ * prototype has no mobile view to copy — it renders blank below 1280 — so the
+ * breakpoints are ours, chosen from where the content stops fitting.
+ */
+.home-intro {
+  display: grid;
+  gap: var(--space-8);
+}
+
+@media (min-width: 56rem) {
+  .home-intro {
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+  }
+}
+
+/* ---------- Home: teaser cards ---------- */
+
+.teasers {
+  display: grid;
+  gap: var(--space-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media (min-width: 44rem) {
+  .teasers {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.teaser {
+  padding: var(--space-6);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background-color: var(--color-surface);
+}
+
+.teaser__title {
+  font-size: var(--text-lg);
+}
+
+.teaser__title a {
+  text-decoration: none;
+}
+
+.teaser__title a:hover {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+}
+
+/* Make the whole card clickable without nesting interactive elements. */
+.teaser__title a::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+}
+
+.teaser {
+  position: relative;
+}
+
+.teaser__copy {
+  margin-top: var(--space-2);
+  color: var(--color-text-muted);
+}
+
+/* ---------- Home: donate band ---------- */
+
+/* Full-bleed and centred, unlike the left-aligned sage box it replaces. */
+.donate-band {
+  background-color: var(--color-surface-inverse);
+  color: var(--color-text-inverse);
+  padding-block: var(--space-16);
+}
+
+.donate-band__inner {
+  max-width: 44rem;
+  text-align: center;
+}
+
+.donate-band h2 {
+  color: var(--color-text-inverse);
+}
+
+.donate-band .eyebrow {
+  color: var(--color-action);
+}
+
+.donate-band > * + * {
+  margin-top: var(--space-4);
 }
