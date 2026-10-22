@@ -5,7 +5,12 @@
     "location": "Monson, Maine",
     "trailCount": 12,
     "totalMilesLabel": "8.3+ miles",
-    "mapPdf": "https://drive.google.com/file/d/1HVhf2A5u4X-j94OjkRdz5dtiu355XTP_/view"
+    "mapPdf": "https://drive.google.com/file/d/1HVhf2A5u4X-j94OjkRdz5dtiu355XTP_/view",
+    "access": "Off Elliotsville Rd near Mathews Rd",
+    "funders": [
+      "Northern Forest Center",
+      "Maine Community Foundation"
+    ]
   },
   "trails": [
     {
@@ -135,8 +140,21 @@
     "No walking on groomed winter trails except with skis and snowshoes",
     "Snowshoers and fat bike riders stay to the side of groomed parallel ski tracks",
     "Do not skate ski on groomed parallel ski tracks",
-    "Dogs are welcome under verbal control; clean up their waste",
-    "Yield to grooming equipment"
+    "Dogs are welcome under verbal control; owners must clean up waste."
   ],
-  "safetyNotice": "Know your limits: be aware of changing conditions, natural obstacles, and your own skill level. Stay in control \u2014 adjust your speed to the conditions. You are recreating at your own risk \u2014 be safe!"
+  "landmarks": [
+    "Otter Slide Bridge",
+    "Eagle Pass Bridge",
+    "Moose Meadow Bridge",
+    "Trail Head parking area off Elliotsville Rd",
+    "Outhouse",
+    "Horse Crossing"
+  ],
+  "safety": [
+    "Know your limits and watch changing conditions, natural obstacles, and your skill level.",
+    "Stay in control and adjust speed to conditions.",
+    "Recreate at your own risk.",
+    "Check posted trail conditions and obey signs, warnings, and closures.",
+    "Yield to grooming equipment."
+  ]
 }

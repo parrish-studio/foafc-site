@@ -906,3 +906,55 @@ a:hover {
 .donate-band > * + * {
   margin-top: var(--space-4);
 }
+
+/* ---------- Trail information cards ---------- */
+
+.trail-info {
+  display: grid;
+  gap: var(--space-6);
+}
+
+@media (min-width: 50rem) {
+  .trail-info {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.trail-info__card {
+  padding: var(--space-6);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background-color: var(--color-surface);
+}
+
+.definitions {
+  margin: var(--space-4) 0 0;
+}
+
+.definitions dt {
+  font-weight: 700;
+  color: var(--color-brand);
+}
+
+.definitions dd {
+  margin: 0 0 var(--space-4);
+}
+
+.definitions dd:last-child {
+  margin-bottom: 0;
+}
+
+.difficulty-key {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.difficulty-key li {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+}

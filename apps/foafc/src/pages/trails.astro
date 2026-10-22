@@ -1,5 +1,8 @@
 ---
 import {
+  TRAIL_DIFFICULTIES,
+  difficultyGlyph,
+  difficultyLabel,
   formatKm,
   formatMiles,
   parseTrailSystem,
@@ -16,6 +19,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 const system = parseTrailSystem(trailsData);
 const trails = sortTrailsByLength(system.trails);
 const summary = summarizeTrails(trails);
+const classicOnly = trails.filter((trail) => !trail.skateSkiing);
 ---
 
 <BaseLayout
@@ -66,6 +70,65 @@ const summary = summarizeTrails(trails);
 
     <TrailRules rules={system.rules} />
 
-    <TrailSafetyNotice notice={system.safetyNotice} heading="Know before you go" />
+    <TrailSafetyNotice safety={system.safety} heading="Know before you go" />
+
+    <div class="trail-info">
+      <section class="trail-info__card">
+        <h2>Trail information</h2>
+        <dl class="definitions">
+          <dt>Location</dt>
+          <dd>{system.system.location}</dd>
+          {
+            system.system.access && (
+              <>
+                <dt>Access</dt>
+                <dd>{system.system.access}</dd>
+              </>
+            )
+          }
+          {
+            system.system.funders && system.system.funders.length > 0 && (
+              <>
+                <dt>Funded by</dt>
+                <dd>{system.system.funders.join(' and ')}</dd>
+              </>
+            )
+          }
+        </dl>
+      </section>
+
+      <section class="trail-info__card">
+        <h2>Trail details</h2>
+        <dl class="definitions">
+          <dt>No skate skiing</dt>
+          <dd>{classicOnly.map((trail) => trail.name).join(', ')}</dd>
+          <dt>Difficulty key</dt>
+          <dd>
+            <ul class="difficulty-key">
+              {
+                TRAIL_DIFFICULTIES.map((difficulty) => (
+                  <li>
+                    <span class={`ps-trail-difficulty ps-trail-difficulty--${difficulty}`}>
+                      <span class="ps-trail-difficulty__glyph" aria-hidden="true">
+                        {difficultyGlyph(difficulty)}
+                      </span>
+                    </span>
+                    {difficultyLabel(difficulty)}
+                  </li>
+                ))
+              }
+            </ul>
+          </dd>
+          {
+            system.landmarks && system.landmarks.length > 0 && (
+              <>
+                <dt>Landmarks</dt>
+                <dd>{system.landmarks.join(', ')}</dd>
+              </>
+            )
+          }
+        </dl>
+      </section>
+    </div>
   </div>
 </BaseLayout>

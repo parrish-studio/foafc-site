@@ -105,6 +105,8 @@ function parseMeta(value: unknown, path: string): TrailSystemMeta {
     trailCount: asNumber(raw.trailCount, `${path}.trailCount`),
     totalMilesLabel: asString(raw.totalMilesLabel, `${path}.totalMilesLabel`),
     mapPdf: asOptionalString(raw.mapPdf, `${path}.mapPdf`),
+    access: asOptionalString(raw.access, `${path}.access`),
+    funders: raw.funders === undefined ? undefined : asStringArray(raw.funders, `${path}.funders`),
   };
 }
 
@@ -135,6 +137,10 @@ export function parseTrailSystem(value: unknown, path = 'trailSystem'): TrailSys
     system: parseMeta(raw.system, `${path}.system`),
     trails: parsed,
     rules: asStringArray(raw.rules, `${path}.rules`),
-    safetyNotice: asString(raw.safetyNotice, `${path}.safetyNotice`),
+    safety: asStringArray(raw.safety, `${path}.safety`),
+    landmarks:
+      raw.landmarks === undefined
+        ? undefined
+        : asStringArray(raw.landmarks, `${path}.landmarks`),
   };
 }

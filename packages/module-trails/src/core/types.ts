@@ -40,6 +40,10 @@ export interface TrailSystemMeta {
   totalMilesLabel: string;
   /** Link to a downloadable map, if there is one. */
   mapPdf?: string;
+  /** How to reach the trailhead, e.g. "Off Elliotsville Rd near Mathews Rd". */
+  access?: string;
+  /** Organisations that funded the trail system. */
+  funders?: string[];
 }
 
 export interface TrailSystem {
@@ -49,7 +53,10 @@ export interface TrailSystem {
   trails: Trail[];
   /** Etiquette rules, in the order they should be shown. */
   rules: string[];
-  safetyNotice: string;
+  /** Safety guidance, one point per line. */
+  safety: string[];
+  /** Named features on the system — bridges, parking, crossings. */
+  landmarks?: string[];
 }
 
 export interface TrailSummary {
