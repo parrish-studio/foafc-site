@@ -434,7 +434,12 @@ a:hover {
 .fact-list {
   display: grid;
   gap: var(--space-4);
-  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  /*
+   * 9rem, not 14: these hold a short number and a label, so two fit across a
+   * phone. At 14rem they stacked one per row and pushed the trails themselves
+   * well below the fold on the page where people most want them.
+   */
+  grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
   margin: 0;
   padding: 0;
   list-style: none;

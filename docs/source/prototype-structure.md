@@ -150,24 +150,57 @@ run."
 
 ---
 
-## Deltas against what is built (as of 2026-10-22)
+## Deltas against what is built
 
-Highest value first.
+Updated 2026-10-22 after the first alignment pass.
 
-- Eyebrows should be **uppercase and letter-spaced**. They were, then I removed
-  it after reading the sentence-case stored strings. Restore.
-- Hero buttons are **Donate then Explore Trail Maps**, not the reverse.
-- Home is missing the **three teaser cards** and the **weather sits beside the
-  welcome text**, not under it.
-- The **donate band is full-bleed dark green and centred**, not a sage box.
-- The **status strip is full-bleed**, not inside the container.
-- The **footer has three columns** including an email signup, not a stacked list.
-- Trails is missing **per-trail descriptions**, the **map card**, the
-  **information/details sidebars** and **coloured difficulty markers**.
-- About is missing the **mission/vision cards**, the **timeline** and the
-  **Projects & Impact tiles**.
-- Blog is missing the **featured post treatment** and the **signup card**.
-- Events is missing the **calendar** and the **event card grid**.
-- The cream background has a **dot texture** we do not have.
-- Nav has an **Admin** link; ours goes to `/keystatic` and is deliberately
-  absent from public nav. Leave it out.
+### Done
+
+- Eyebrows uppercase and letter-spaced.
+- Hero buttons in the prototype's order, Donate first.
+- Full-bleed sage status strip under the hero.
+- Welcome text and weather card side by side.
+- Row of three teaser cards.
+- Full-bleed centred donate band.
+- Dot texture on the cream background.
+- Trails as cards, not a table, with per-trail descriptions and coloured
+  Nordic difficulty markers.
+- Trail information and Trail details cards: access, funders, classic-only
+  list, difficulty key, landmarks.
+- Safety as a list rather than a paragraph.
+- Footer in columns.
+- Mission and vision as a side-by-side pair on About.
+- Everything mobile-first. Verified at 375px on all five pages: no horizontal
+  overflow anywhere.
+
+### Still outstanding
+
+Structure we have not built:
+
+- **Trails**: the trailhead map card — embedded map, Directions, View larger
+  map, Center map. Needs a decision on embedding a third-party map, which
+  carries the same tracking question as the giving iframes.
+- **Blog**: the featured-post treatment, and the two-column layout with the
+  mailing-list card beside the post list.
+- **Events**: the month calendar and the event-card grid. Both wait on the
+  Facebook sync — there is nothing to put in them.
+- **Footer**: the "Trail notes by email" column. Needs a mailing list provider
+  and a public contact address, both board questions. An input that discards
+  what someone types is worse than no input.
+
+Content the prototype has only as placeholder, so nothing was copied:
+
+- **About**: the trail history timeline, and the Projects & Impact tiles.
+  Structure is real, content is "2012 · Placeholder". Board questions.
+- Its board member names are fictional; ours are real. Keep ours.
+
+Deliberately not matched:
+
+- The prototype's difficulty ratings for Fierce Fisher, Wolf Chase and Bobcat
+  Blaze, which it marks Easy where the trail system source document says more
+  difficult. Trail data is not the prototype's to define.
+- Its "All trails open — 6 miles groomed" banner text, which is live data with
+  no source yet.
+- Its lowercase "a" in the organisation's name.
+- The Admin link in the nav; ours lives at /keystatic and stays out of public
+  navigation.
