@@ -97,6 +97,13 @@ names are listed in `HANDOFF.md`.
   disjoint, so the app pins `0.152.0` — the version the plugin that actually
   runs the transform needs — and the root `package.json` records the override in
   `pnpm.peerDependencyRules`.
+- **Use `corepack pnpm`, not bare `pnpm`, if the version check fails.** The repo
+  pins pnpm via `packageManager`, and a `pnpm` left on `PATH` by an old nvm Node
+  will be the wrong version — it fails with `ERR_PNPM_BAD_PM_VERSION` and no
+  build runs. `corepack pnpm` always resolves the pinned version. Do not
+  "fix" it by setting `package-manager-strict=false`: that check is what caught
+  the mismatch in the first place.
+
 - **`rolldown` is stubbed out of the output bundles** (alias in
   `astro.config.mjs`, stub in `src/stub-rolldown.mjs`). `@astrojs/vercel@11.0.13`
   builds Vercel Edge Middleware with rolldown, and that build-time module
