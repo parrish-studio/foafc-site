@@ -1068,3 +1068,85 @@ a:hover {
   color: var(--color-text-muted);
   font-size: var(--text-sm);
 }
+
+/* ---------- About: portraits, timeline, projects ---------- */
+
+/*
+ * The portrait is the mark, not a photograph — nobody has supplied photos. It
+ * is decorative, so it carries an empty alt: the name sits right beside it and
+ * announcing "logo" ten times would only add noise.
+ */
+.people__portrait {
+  width: 3rem;
+  height: 3rem;
+  margin-bottom: var(--space-2);
+  padding: 0.3rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  background-color: var(--color-surface-muted);
+  box-sizing: border-box;
+  object-fit: contain;
+}
+
+.people__bio {
+  display: block;
+  margin-top: var(--space-2);
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
+
+.timeline {
+  margin: var(--space-4) 0 0;
+  padding: 0 0 0 var(--space-6);
+  list-style: none;
+  border-left: 2px solid var(--color-border);
+}
+
+.timeline__item {
+  position: relative;
+  padding-bottom: var(--space-6);
+}
+
+.timeline__item:last-child {
+  padding-bottom: 0;
+}
+
+/* The marker sits on the rule, so it has to reach back over the padding. */
+.timeline__item::before {
+  content: '';
+  position: absolute;
+  left: calc(var(--space-6) * -1 - 7px);
+  top: 0.45em;
+  width: 12px;
+  height: 12px;
+  border-radius: var(--radius-pill);
+  background-color: var(--color-action);
+}
+
+.timeline__year {
+  display: block;
+  font-weight: 700;
+  color: var(--color-brand);
+}
+
+.timeline__entry {
+  display: block;
+  margin-top: var(--space-1);
+}
+
+.projects {
+  display: grid;
+  gap: var(--space-3);
+  grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+  margin: var(--space-4) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.projects__item {
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+  background-color: var(--color-surface-accent);
+  color: var(--color-brand);
+  font-weight: 700;
+}

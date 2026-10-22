@@ -1,7 +1,9 @@
 ---
 import { parseTrailSystem } from '@parrish-studio/module-trails';
 import trailsData from '@parrish-studio/module-trails/data/trails.json';
-import { BOARD } from '../data/board';
+import { Image } from 'astro:assets';
+import boardPortraitPlaceholder from '../assets/brand/FOAFC_Green_Icon_Logo.png';
+import { BOARD, PROJECTS, TRAIL_HISTORY } from '../data/board';
 import { ORG } from '../data/org';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
@@ -53,13 +55,46 @@ const system = parseTrailSystem(trailsData);
         {
           BOARD.map((member) => (
             <li class="people__item">
+              <Image
+                class="people__portrait"
+                src={boardPortraitPlaceholder}
+                alt=""
+                width={96}
+                densities={[1, 2]}
+                loading="lazy"
+              />
               <span class="people__name">{member.name}</span>
               <span class="people__role">{member.role}</span>
+              <span class="people__bio">{member.bio}</span>
             </li>
           ))
         }
       </ul>
     </section>
+
+    <div class="home-intro">
+      <section>
+        <h2>Trail history</h2>
+        <ol class="timeline">
+          {
+            TRAIL_HISTORY.map((moment) => (
+              <li class="timeline__item">
+                <span class="timeline__year">{moment.year}</span>
+                <span class="timeline__entry">{moment.entry}</span>
+              </li>
+            ))
+          }
+        </ol>
+      </section>
+
+      <section>
+        <h2>Projects &amp; impact</h2>
+        <p>Where volunteer time and donations go.</p>
+        <ul class="projects">
+          {PROJECTS.map((project) => <li class="projects__item">{project}</li>)}
+        </ul>
+      </section>
+    </div>
 
     <section>
       <h2>A 501(c)(3) nonprofit</h2>
