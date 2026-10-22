@@ -3,7 +3,12 @@ import { Image } from 'astro:assets';
 import { formatPostDate, getPublishedPosts } from '../../content/blog';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
+/*
+ * Layout follows the prototype: the newest post gets a wide featured card,
+ * the rest run as a list beside a sidebar.
+ */
 const posts = await getPublishedPosts();
+const [featured, ...rest] = posts;
 ---
 
 <BaseLayout
@@ -18,41 +23,77 @@ const posts = await getPublishedPosts();
     </div>
 
     {
-      posts.length === 0 ? (
+      !featured ? (
         <p class="empty-state">
           No posts yet. News from the trails will appear here — check
           <a href="/events/">Events</a> or our Facebook page in the meantime.
         </p>
       ) : (
-        <ul class="card-grid">
-          {posts.map((post) => (
-            <li class="card">
-              <a class="card__link" href={`/blog/${post.id}/`}>
-                {post.data.coverImage && (
-                  <Image
-                    class="card__image"
-                    src={post.data.coverImage}
-                    alt={post.data.coverAlt ?? ''}
-                    width={640}
-                    height={360}
-                    widths={[320, 640, 960]}
-                    sizes="(min-width: 48rem) 20rem, 100vw"
-                    loading="lazy"
-                  />
-                )}
-                <div class="card__body">
-                  <h2 class="card__title">{post.data.title}</h2>
-                  {post.data.draft && <span class="badge-draft">Draft</span>}
-                  <p class="card__meta">
-                    <time datetime={post.data.date.toISOString()}>
-                      {formatPostDate(post.data.date)}
-                    </time>
-                  </p>
-                </div>
-              </a>
-            </li>
-          ))}
-        </ul>
+        <>
+          <article class:list={['featured', featured.data.coverImage && 'featured--with-image']}>
+            {featured.data.coverImage && (
+              <Image
+                class="featured__image"
+                src={featured.data.coverImage}
+                alt={featured.data.coverAlt ?? ''}
+                width={960}
+                widths={[480, 960]}
+                sizes="(min-width: 56rem) 28rem, 100vw"
+                loading="eager"
+              />
+            )}
+            <div class="featured__body">
+              <p class="card__meta">
+                <time datetime={featured.data.date.toISOString()}>
+                  {formatPostDate(featured.data.date)}
+                </time>
+                {featured.data.draft && <span class="badge-draft">Draft</span>}
+              </p>
+              <h2 class="featured__title">
+                <a href={`/blog/${featured.id}/`}>{featured.data.title}</a>
+              </h2>
+              {featured.data.summary && <p>{featured.data.summary}</p>}
+              <p>
+                <a class="button" href={`/blog/${featured.id}/`}>
+                  Read post
+                </a>
+              </p>
+            </div>
+          </article>
+
+          {rest.length > 0 && (
+            <div class="blog-layout">
+              <section>
+                <h2>More from the trails</h2>
+                <ul class="post-list">
+                  {rest.map((post) => (
+                    <li class="post-list__item">
+                      <p class="card__meta">
+                        <time datetime={post.data.date.toISOString()}>
+                          {formatPostDate(post.data.date)}
+                        </time>
+                        {post.data.draft && <span class="badge-draft">Draft</span>}
+                      </p>
+                      <h3 class="post-list__title">
+                        <a href={`/blog/${post.id}/`}>{post.data.title}</a>
+                      </h3>
+                      {post.data.summary && <p>{post.data.summary}</p>}
+                    </li>
+                  ))}
+                </ul>
+              </section>
+
+              <aside class="blog-aside">
+                <h2>Keep up with the trails</h2>
+                <p>
+                  Posts land here when there is something worth saying. For day-to-day
+                  conditions and events, Facebook is the faster channel.
+                </p>
+                <p><a class="button" href="/events/">See what's coming up</a></p>
+              </aside>
+            </div>
+          )}
+        </>
       )
     }
   </div>

@@ -51,6 +51,11 @@ export default config({
           label: 'Cover image alt text',
           description: 'Describe the photo for people who cannot see it. Required if there is a cover image.',
         }),
+        summary: fields.text({
+          label: 'Summary',
+          description: 'One line shown on the blog index. Optional.',
+          multiline: true,
+        }),
         draft: fields.checkbox({
           label: 'Draft',
           description:

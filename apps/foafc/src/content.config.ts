@@ -17,6 +17,8 @@ const blog = defineCollection({
       date: z.coerce.date(),
       coverImage: image().optional(),
       coverAlt: z.string().optional(),
+      /** One line shown on the blog index. Falls back to nothing. */
+      summary: z.string().optional(),
       // Drafts are visible while developing and excluded from production
       // builds, so unfinished or unapproved posts can live in the repo without
       // reaching the public site. See src/content/blog/README.md.

@@ -1150,3 +1150,95 @@ a:hover {
   color: var(--color-brand);
   font-weight: 700;
 }
+
+/* ---------- Blog: featured post and list ---------- */
+
+.featured {
+  display: grid;
+  gap: var(--space-6);
+  padding: var(--space-6);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background-color: var(--color-surface);
+}
+
+/*
+ * Only split into two columns when there is an image to put in the second one.
+ * A cover image is optional, and a lone text column half the card wide reads
+ * as a layout bug.
+ */
+@media (min-width: 56rem) {
+  .featured--with-image {
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+  }
+}
+
+.featured__image {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+}
+
+.featured__body > * + * {
+  margin-top: var(--space-4);
+}
+
+.featured__title {
+  font-size: var(--text-xl);
+}
+
+.featured__title a,
+.post-list__title a {
+  text-decoration: none;
+}
+
+.featured__title a:hover,
+.post-list__title a:hover {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+}
+
+.blog-layout {
+  display: grid;
+  gap: var(--space-8);
+}
+
+@media (min-width: 56rem) {
+  .blog-layout {
+    grid-template-columns: 2fr 1fr;
+    align-items: start;
+  }
+}
+
+.post-list {
+  margin: var(--space-4) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.post-list__item {
+  padding: var(--space-6) 0;
+  border-top: 1px solid var(--color-border);
+}
+
+.post-list__item:first-child {
+  border-top: 0;
+  padding-top: var(--space-2);
+}
+
+.post-list__title {
+  margin-top: var(--space-1);
+  font-size: var(--text-lg);
+}
+
+.blog-aside {
+  padding: var(--space-6);
+  border-radius: var(--radius-md);
+  background-color: var(--color-surface-accent);
+}
+
+.blog-aside > * + * {
+  margin-top: var(--space-4);
+}
