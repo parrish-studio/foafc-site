@@ -984,3 +984,33 @@ a:hover {
   align-items: baseline;
   gap: var(--space-2);
 }
+
+/* ---------- About: mission and vision ---------- */
+
+/* Side by side as a pair, the way the prototype sets them. */
+.purpose {
+  display: grid;
+  gap: var(--space-6);
+}
+
+@media (min-width: 50rem) {
+  .purpose {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.purpose__card {
+  padding: var(--space-6);
+  border-radius: var(--radius-md);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+}
+
+.purpose__card--mission {
+  background-color: var(--color-surface-accent);
+  border-color: transparent;
+}
+
+.purpose__card > * + * {
+  margin-top: var(--space-4);
+}
