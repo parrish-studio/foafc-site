@@ -24,11 +24,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         inventing. This section is where synced events will render; see the
         note in the README about what this page is waiting on.
       */}
-      <p>No events are listed yet.</p>
-      <p>
-        Events are announced on Facebook first. Until this page is connected to that feed, see
-        <a href={SOCIAL[0].href} rel="noopener">our Facebook page</a> for what is coming up.
-      </p>
+      <div class="empty-state">
+        <p>No events are listed yet.</p>
+        <p>
+          Events are announced on Facebook first. Until this page is connected to that
+          feed, see <a href={SOCIAL[0].href} rel="noopener">our Facebook page</a> for
+          what is coming up.
+        </p>
+      </div>
     </section>
   </div>
 </BaseLayout>

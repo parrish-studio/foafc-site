@@ -651,6 +651,10 @@ a:hover {
   text-align: center;
 }
 
+.empty-state > * + * {
+  margin-top: var(--space-4);
+}
+
 /* A card without a cover image should not leave a gap where one would be. */
 .card__body {
   height: 100%;
@@ -873,6 +877,17 @@ a:hover {
 @media (min-width: 44rem) {
   .teasers {
     grid-template-columns: repeat(3, 1fr);
+  }
+
+  /* Four across would be too narrow here; two rows of two reads better. */
+  .teasers--four {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 64rem) {
+  .teasers--four {
+    grid-template-columns: repeat(4, 1fr);
   }
 }
 

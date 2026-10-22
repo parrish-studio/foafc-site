@@ -1,0 +1,64 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+/*
+ * Static output emits this as 404.html, which Vercel serves for any unmatched
+ * path. It matters more than it looks: Facebook posts going back years link to
+ * Wix URLs, and after the DNS cutover every one of those lands here. So the
+ * page's job is to send people on, not to apologise.
+ */
+const destinations = [
+  {
+    href: '/trails/',
+    title: 'Trail maps',
+    copy: 'Every trail with its distance and difficulty, and how to find the trailhead.',
+  },
+  {
+    href: '/blog/',
+    title: 'Notes from the trails',
+    copy: 'Posts from the trail crew and the board.',
+  },
+  {
+    href: '/events/',
+    title: 'Events',
+    copy: 'Races, volunteer days and community gatherings.',
+  },
+  {
+    href: '/donate/',
+    title: 'Donate',
+    copy: 'Grooming, bridges and signs are paid for by the people who ski here.',
+  },
+];
+---
+
+<BaseLayout
+  title="Page not found"
+  description="That page does not exist. Find the trail maps, events and the rest of the site from here."
+  noindex
+>
+  <div class="container page stack">
+    <div class="page-header">
+      <p class="eyebrow">404</p>
+      <h1>That page is not on the map.</h1>
+      <p class="page-header__lede">
+        The link may be from the old site, or the page may have moved. Here is where
+        everything lives now.
+      </p>
+    </div>
+
+    <ul class="teasers teasers--four">
+      {
+        destinations.map((destination) => (
+          <li class="teaser">
+            <h2 class="teaser__title">
+              <a href={destination.href}>{destination.title}</a>
+            </h2>
+            <p class="teaser__copy">{destination.copy}</p>
+          </li>
+        ))
+      }
+    </ul>
+
+    <p><a class="button" href="/">Back to the home page</a></p>
+  </div>
+</BaseLayout>
