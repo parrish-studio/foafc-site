@@ -43,11 +43,18 @@ docs/                  brief, source material, decisions (ADRs)
 - **Copy, site organisation and content are NOT final.** The prototype's wording is a
   draft; treat page structure, section order and text as open until the board signs off.
   Do not treat prototype copy as a specification the way you would its design values.
-- How to read the prototype: it is published at the URL in `docs/project-brief.md`, and
-  its exported HTML embeds the entire design as JSON — every string, colour, font and
-  font size. `curl` the page and parse the embedded data. Do not strip `<script>` tags
-  when extracting text; that is where the content lives. No Canva export is needed, and
-  the Canva connector's `read-design` returns empty for Code designs.
+- How to read the prototype — **two sources, and you need both**:
+  - **Values**: `curl` the published URL in `docs/project-brief.md`. Its HTML embeds a
+    content dictionary as JSON — every string, colour, font and font size. Do not strip
+    `<script>` tags; that is where it lives. No Canva export is needed, and the Canva
+    connector's `read-design` returns empty for Code designs.
+  - **Structure**: that dictionary has **no layout, no section order and no page
+    grouping**, so it cannot tell you how a page is built. Open the prototype in the
+    agent browser instead and look. It loads fine — an early refusal in this project was
+    a site-permission prompt, not a block. The body is a cross-origin iframe, so
+    `getComputedStyle` and the accessibility tree do not reach it; screenshots do.
+  - **`docs/source/prototype-structure.md` already records what every page contains.**
+    Read that before re-deriving anything.
 - Values recorded in these docs before 2026-10-11 as "confirmed from Canva brand docs"
   (amber `#d4922a`, cream `#f5f0e8`, Archivo Black, Source Sans 3) came from a session
   that does not appear to have actually read the prototype. They are superseded.
