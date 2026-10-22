@@ -1,6 +1,8 @@
 ---
+import type { ImageMetadata } from 'astro';
 import { Image } from 'astro:assets';
 import faviconSrc from '../assets/brand/FOAFC_Color_Icon_Logo.png';
+import defaultShareImage from '../assets/photos/pulk-sled-winter.jpg';
 import logoSrc from '../assets/brand/FOAFC_Gold_Icon_Logo.png';
 // Self-hosted so the site makes no third-party font request.
 import '@fontsource-variable/fraunces';
@@ -15,9 +17,19 @@ interface Props {
   description: string;
   /** Force this page out of search results even on the production domain. */
   noindex?: boolean;
+  /** Image for link previews. Defaults to the hero photograph. */
+  shareImage?: ImageMetadata;
+  /** Describes the share image; required whenever one is passed. */
+  shareImageAlt?: string;
 }
 
-const { title, description, noindex = false } = Astro.props;
+const {
+  title,
+  description,
+  noindex = false,
+  shareImage = defaultShareImage,
+  shareImageAlt = 'A skier pulling a child in a sled along a snowy trail',
+} = Astro.props;
 
 // Order follows the prototype's nav. Donate is rendered separately as a
 // button, as it is there.
@@ -38,6 +50,11 @@ const year = new Date().getFullYear();
 // Keep staging deploys out of search results until the DNS cutover, and let a
 // page opt out permanently (draft posts do).
 const indexable = isProductionHost(Astro.site) && !noindex;
+
+const pageTitle = `${title} — Friends of A Fierce Chase`;
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+// Scrapers need an absolute URL; a site-root-relative path is not enough.
+const shareImageUrl = new URL(shareImage.src, Astro.site).href;
 ---
 
 <!doctype html>
@@ -45,10 +62,29 @@ const indexable = isProductionHost(Astro.site) && !noindex;
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{title} — Friends of A Fierce Chase</title>
+    <title>{pageTitle}</title>
     <meta name="description" content={description} />
-    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+    <link rel="canonical" href={canonical} />
     {!indexable && <meta name="robots" content="noindex, nofollow" />}
+
+    {/*
+      Link previews. Without these, anything shared to Facebook — where this
+      organisation does most of its talking — falls back to whatever the
+      scraper guesses, which is usually the nav and no picture.
+    */}
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Friends of A Fierce Chase" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={shareImageUrl} />
+    <meta property="og:image:alt" content={shareImageAlt} />
+    <meta property="og:locale" content="en_US" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={shareImageUrl} />
+    <meta name="twitter:image:alt" content={shareImageAlt} />
     <link rel="icon" type="image/png" href={faviconSrc.src} />
     <link rel="apple-touch-icon" href={faviconSrc.src} />
   </head>
