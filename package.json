@@ -10,7 +10,8 @@
     "dev": "pnpm --filter @foafc/site dev",
     "build": "pnpm --filter @foafc/site build",
     "preview": "pnpm --filter @foafc/site preview",
-    "check": "pnpm -r check"
+    "check": "pnpm -r check && pnpm verify",
+    "verify": "node scripts/verify.mjs"
   },
   "pnpm": {
     "peerDependencyRules": {

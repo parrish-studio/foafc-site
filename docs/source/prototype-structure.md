@@ -58,7 +58,7 @@ appears on Events (RSVP).
 2. **Trail status strip** — full-bleed sage band, check icon,
    "All trails open — 6 miles groomed". Spans the viewport, not the container.
 3. **Two columns** — left: eyebrow `GOOD TO KNOW`, "Come find your fierce." and
-   its paragraph. Right: the **weather card** (`FOAFC WEATHER`, Elliotsville ME,
+   its paragraph. Right: the **weather card** (`FOAFC WEATHER`, Elliottsville ME,
    conditions, large temperature, `Forecast · date`, three rounded pills for
    precipitation / humidity / wind, then a five-hour strip with icons).
 4. **Three cards** — Trail Maps · Latest Post · Upcoming Event. Each an icon, a
@@ -92,13 +92,13 @@ appears on Events (RSVP).
 
 **Trail information**
 - Location: Monson, Maine
-- Access: Off Elliotsville Rd near Mathews Rd
+- Access: Off Elliottsville Rd near Mathews Rd
 - Funded by: Northern Forest Center and Maine Community Foundation
 
 **Trail details**
 - No-skate-ski: Craig's Trail Loop, Arthur's Loop, Craig's Orchard Loop, Snake Trail
 - Difficulty key: Green circle = Easy · Blue square = More difficult · Black diamond = Most difficult
-- Landmarks: Otter Slide Bridge, Eagle Pass Bridge, Moose Meadow Bridge, Trail Head parking area off Elliotsville Rd, Outhouse, Horse Crossing
+- Landmarks: Otter Slide Bridge, Eagle Pass Bridge, Moose Meadow Bridge, Trail Head parking area off Elliottsville Rd, Outhouse, Horse Crossing
 
 **Per-trail descriptions** (one line each), e.g. "Quick warm-up loop through the
 forest", "Namesake loop through mixed forest", "Gentle rolling loop, great for

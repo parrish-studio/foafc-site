@@ -89,6 +89,7 @@ export const GIVING_METHODS: readonly GivingMethod[] = [
     label: 'By cheque',
     description: 'Slowest to arrive, but nothing is lost to processing fees.',
     payTo: 'Friends of A Fierce Chase Cross Country Ski Trails',
+    // One-t spelling deliberate; see the note in data/org.ts.
     address: ['C/O John Chase', '246 Elliotsville Road', 'Monson, ME 04464'],
   },
 ];

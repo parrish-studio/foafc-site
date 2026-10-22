@@ -40,7 +40,7 @@ export interface TrailSystemMeta {
   totalMilesLabel: string;
   /** Link to a downloadable map, if there is one. */
   mapPdf?: string;
-  /** How to reach the trailhead, e.g. "Off Elliotsville Rd near Mathews Rd". */
+  /** How to reach the trailhead, e.g. "Off Elliottsville Rd near Mathews Rd". */
   access?: string;
   /** Organisations that funded the trail system. */
   funders?: string[];

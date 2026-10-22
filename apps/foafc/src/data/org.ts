@@ -12,6 +12,13 @@ export const ORG = {
   ein: '99-1538734',
   charityStatus: '501(c)(3) public charity — IRC Section 509(a)(2)',
   effectiveDate: 'March 20, 2024',
+  /*
+   * "Elliotsville" with one t, as the organisation's own records spell it.
+   * The road is "Elliottsville" everywhere else on the site, which is how
+   * Google Maps and OpenStreetMap name it. A mailing address should match
+   * the paperwork rather than the map, so the two differ on purpose — but
+   * which one the registration actually carries is a board question.
+   */
   mailingAddress: ['C/O John Chase', '246 Elliotsville Road', 'Monson, ME 04464'],
 } as const;
 

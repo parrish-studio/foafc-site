@@ -113,4 +113,10 @@ Code is MIT (`LICENSE`). FOAFC content and branding are excluded and belong to t
 ## Conventions
 
 - Package manager: pnpm. Node LTS.
+- `pnpm check` runs types, Astro diagnostics and `pnpm verify`. `verify`
+  (`scripts/verify.mjs`) enforces the rules a type checker cannot see: the
+  capital A, the package boundaries, no hard-coded colours outside
+  `packages/tokens`, no secrets in committable files, trail data that parses,
+  and rendered text with no spaces swallowed by an Astro expression. Each of
+  those has caught a real bug here. Add to it rather than re-running greps.
 - Commit messages: short imperative subject; explain *why* in the body when not obvious.

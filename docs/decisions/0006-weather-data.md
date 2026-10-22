@@ -65,7 +65,7 @@ spinner stuck forever or empty box.
   where before it only served Keystatic. The post-build check that the function
   can be imported matters more now.
 - Coordinates in `src/data/org.ts` are Monson village, not the trailhead.
-  Elliotsville Road does not geocode. Close enough that the forecast is the
+  Elliottsville Road does not geocode. Close enough that the forecast is the
   same; worth replacing if someone can stand at the trailhead with a phone.
 - **Trail status is still open.** It is not weather — ADR 0005 puts it on the
   Meta side, pulled from Facebook, and it needs its own solution.
