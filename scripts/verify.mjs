@@ -195,27 +195,78 @@ function eachLine(relative, fn) {
 // in the built HTML instead: a word running straight into a capital, a digit
 // or punctuation-then-letter.
 // ---------------------------------------------------------------------------
-{
-  const dist = path.join(root, 'apps/foafc/dist/client');
-  if (!existsSync(dist)) {
-    notes.push('rendered text: skipped — no build found, run `pnpm build` first');
-  } else {
-    // Words that legitimately run letters together. Keep this short: every
-    // entry here is a check that no longer runs.
-    const allowed = [/PayPal/g, /GitHub/g, /YouTube/g, /OpenStreetMap/g, /JavaScript/g];
-    const suspicious = /[a-z]{2,}(?:[A-Z][a-z]|\d|[:;,.][A-Za-z])/g;
+const dist = path.join(root, 'apps/foafc/dist/client');
+const builtPages = existsSync(dist)
+  ? (await import('node:fs')).globSync('**/*.html', { cwd: dist })
+  : null;
 
-    const { globSync } = await import('node:fs');
-    for (const file of globSync('**/*.html', { cwd: dist })) {
-      let text = readFileSync(path.join(dist, file), 'utf8')
-        .replace(/<(script|style)\b[\s\S]*?<\/\1>/gi, ' ')
-        .replace(/<[^>]+>/g, ' ')
-        .replace(/&[a-z]+;|&#\d+;/gi, ' ');
-      for (const word of allowed) text = text.replace(word, ' ');
+if (builtPages === null) {
+  notes.push('built pages: skipped — no build found, run `pnpm build` first');
+} else {
+  // Words that legitimately run letters together. Keep this short: every
+  // entry here is a check that no longer runs.
+  const allowed = [/PayPal/g, /GitHub/g, /YouTube/g, /OpenStreetMap/g, /JavaScript/g];
+  const suspicious = /[a-z]{2,}(?:[A-Z][a-z]|\d|[:;,.][A-Za-z])/g;
 
-      for (const match of text.matchAll(suspicious)) {
-        fail('rendered-text', `apps/foafc/dist/client/${file}`, null,
-          `"${match[0]}" — missing space, probably swallowed by an Astro expression`);
+  for (const file of builtPages) {
+    const where = `apps/foafc/dist/client/${file}`;
+    const html = readFileSync(path.join(dist, file), 'utf8');
+    const body = html.slice(html.indexOf('<body'));
+
+    let text = html
+      .replace(/<(script|style)\b[\s\S]*?<\/\1>/gi, ' ')
+      .replace(/<[^>]+>/g, ' ')
+      .replace(/&[a-z]+;|&#\d+;/gi, ' ');
+    for (const word of allowed) text = text.replace(word, ' ');
+
+    for (const match of text.matchAll(suspicious)) {
+      fail('rendered-text', where, null,
+        `"${match[0]}" — missing space, probably swallowed by an Astro expression`);
+    }
+
+    // -----------------------------------------------------------------------
+    // 7. Accessibility basics (CLAUDE.md: baseline, not polish).
+    //
+    // Only the parts a machine can be certain about. A missing alt or an
+    // unnamed link is a defect by definition; whether an alt is any *good* is
+    // not something to check here.
+    // -----------------------------------------------------------------------
+    const headings = [...body.matchAll(/<h([1-6])\b[^>]*>([\s\S]*?)<\/h\1>/gi)]
+      .map((m) => ({ level: Number(m[1]), text: m[2].replace(/<[^>]+>/g, ' ').trim() }));
+
+    const h1s = headings.filter((h) => h.level === 1);
+    if (h1s.length !== 1) {
+      fail('a11y', where, null,
+        `${h1s.length} <h1> elements — a page needs exactly one`);
+    }
+
+    headings.reduce((previous, heading) => {
+      if (previous && heading.level > previous + 1) {
+        fail('a11y', where, null,
+          `heading jumps h${previous} to h${heading.level} ("${heading.text.slice(0, 40)}") — ` +
+          'screen reader users navigate by this outline');
+      }
+      return heading.level;
+    }, 0);
+
+    for (const match of body.matchAll(/<img\b[^>]*>/gi)) {
+      // Astro minifies alt="" to a bare `alt`, which is the same thing.
+      if (!/\balt\b/.test(match[0])) {
+        fail('a11y', where, null, `<img> with no alt: ${match[0].slice(0, 70)}…`);
+      }
+    }
+
+    for (const match of body.matchAll(/<iframe\b[^>]*>/gi)) {
+      if (!/\btitle=/.test(match[0])) {
+        fail('a11y', where, null, '<iframe> with no title attribute');
+      }
+    }
+
+    for (const match of body.matchAll(/<a\b([^>]*)>([\s\S]*?)<\/a>/gi)) {
+      const label = match[2].replace(/<[^>]+>/g, ' ').trim();
+      const hasAlt = /\balt="[^"]+"/.test(match[2]);
+      if (!label && !hasAlt && !/aria-label=/.test(match[1])) {
+        fail('a11y', where, null, `link with no accessible name: ${match[0].slice(0, 70)}…`);
       }
     }
   }

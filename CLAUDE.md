@@ -117,6 +117,8 @@ Code is MIT (`LICENSE`). FOAFC content and branding are excluded and belong to t
   (`scripts/verify.mjs`) enforces the rules a type checker cannot see: the
   capital A, the package boundaries, no hard-coded colours outside
   `packages/tokens`, no secrets in committable files, trail data that parses,
-  and rendered text with no spaces swallowed by an Astro expression. Each of
-  those has caught a real bug here. Add to it rather than re-running greps.
+  rendered text with no spaces swallowed by an Astro expression, and the
+  accessibility basics a machine can be certain about (one `h1` per page, no
+  skipped heading levels, every image with an alt, every link and iframe with
+  a name). Add to it rather than re-running greps.
 - Commit messages: short imperative subject; explain *why* in the body when not obvious.
