@@ -15,8 +15,16 @@ From the repo root:
 pnpm install
 pnpm dev       # http://localhost:4321
 pnpm build
-pnpm check     # type-checks every workspace package
+pnpm check     # types, Astro diagnostics, then pnpm verify
+pnpm verify    # repo invariants — see scripts/verify.mjs at the root
 ```
+
+`pnpm verify` is the one to reach for after an edit that no type checker would
+catch: the capital A in "A Fierce Chase", the package boundary rules, colours
+hard-coded outside `packages/tokens`, secrets in anything a `git add .` could
+sweep into a public repo, trail data that fails its own parser, and whitespace
+Astro has swallowed between a line of text and an expression. It needs a build
+on disk for that last one and says so when there isn't one.
 
 Astro 7's `astro dev` daemonises. Use `pnpm --filter @foafc/site exec astro dev
 status|logs|stop` to manage the running server.
@@ -25,9 +33,11 @@ status|logs|stop` to manage the running server.
 
 - **Output is static** (`output: 'static'`). The Vercel adapter is present only
   so Keystatic's admin and auth routes can be server-rendered; they opt out of
-  prerendering themselves. Verify after a build: `.vercel/output/static/` should
-  hold `index.html` and `trails/index.html`, and `config.json` should route only
-  `/keystatic/*` and `/api/keystatic/*` to the function.
+  prerendering themselves, as does `/api/weather` (ADR 0006). Verify after a
+  build: `.vercel/output/static/` should hold `index.html` and a directory per
+  page, and `config.json` should route only `/keystatic/*`, `/api/keystatic/*`,
+  `/api/weather` and Astro's own `/_image` and `/_server-islands` to the
+  function. Anything else arriving there means a page lost its prerender.
 - **Tokens** come in through `src/styles/global.css`, which `@import`s
   `@parrish-studio/tokens/tokens.css` before anything else. Never hard-code a
   colour, type, spacing or radius value.
@@ -42,12 +52,17 @@ Two kinds, handled differently:
 - **Static brand and photography** live in `src/assets/` and are imported in a
   page or layout, so Astro fingerprints and optimises them at build. These
   change rarely; editing one is a code change.
-  - `src/assets/brand/` — `FOAFC_Cream_Horizontal_Logo.png` (site header, cream
-    on the forest-green bar) and `FOAFC_Color_Icon_Logo.png` (favicon). Variants
-    and the rules for choosing one are in `docs/source/logo-usage-guide.md`.
-  - `src/assets/photos/` — `trailhead-winter.jpg`, the home hero.
-- **News cover images** are uploaded by board members through Keystatic, which
-  commits them to `src/assets/news/`. Nobody needs to touch the repo.
+  - `src/assets/brand/` — `FOAFC_Gold_Icon_Logo.png` (the header mark: the
+    dinosaur alone, set in a CSS circle, because the full badge repeats the
+    organisation's name right beside the name), `FOAFC_Color_Icon_Logo.png`
+    (favicon) and `FOAFC_Green_Icon_Logo.png` (board portrait placeholder).
+    `FOAFC_Cream_Horizontal_Logo.png` is kept but unused. Variants and the
+    rules for choosing one are in `docs/source/logo-usage-guide.md`.
+  - `src/assets/photos/` — `pulk-sled-winter.jpg`, the home hero and the
+    default link-preview image: Sue Chase pulling baby Aquiles on a sled, the
+    picture the trails are named out of.
+- **Blog cover images** are uploaded by board members through Keystatic, which
+  commits them to `src/assets/blog/`. Nobody needs to touch the repo.
 
 Always use `<Image>` from `astro:assets`, never a bare `<img>`: it emits WebP,
 a responsive `srcset`, and explicit `width`/`height` so nothing shifts on load.
@@ -72,11 +87,12 @@ through a chat tool that returns base64 — it is slow and can truncate silently
 
 ### Known gap
 
-There is no high-resolution landscape photo suitable for a full-bleed hero. The
-best available is 1286x965, so the hero overlay is deliberately heavy (0.88) to
-hide softness and to stop the sign's own lettering competing with the headline.
-Replacing it with a wide, high-resolution trail photo is the single biggest
-visual upgrade available, and is only a one-line import change.
+No photo in the Drive is big enough for a full-bleed hero. `pulk-sled-winter.jpg`
+is 968x716 and is used anyway, because it is the right picture — the family has
+approved it. The overlay sits at 0.78 and `object-position` at 42%; both are
+tuned to that exact frame and both have comments saying so. A wider,
+higher-resolution scan of the same photograph is the single biggest visual
+upgrade available and is a one-line import change.
 
 ## Keystatic
 
@@ -127,8 +143,30 @@ names are listed in `HANDOFF.md`.
   pnpm's isolated `node_modules` layout hides. The `check` script calls the
   `astro-check` binary directly instead.
 
+## Pages
+
+| Route | Source | Notes |
+|---|---|---|
+| `/` | `src/pages/index.astro` | Hero, trail-status strip, welcome beside the weather card, three teasers, donate band |
+| `/trails/` | `src/pages/trails.astro` | Trail cards from `@parrish-studio/module-trails`, trailhead map, etiquette and safety |
+| `/about/` | `src/pages/about.astro` | Mission and vision, the board, trail history, projects |
+| `/blog/` | `src/pages/blog/index.astro` | Featured post, list, aside |
+| `/blog/<slug>/` | `src/pages/blog/[...slug].astro` | One post |
+| `/events/` | `src/pages/events.astro` | Empty by design — Meta is the source and the sync is not built |
+| `/donate/` | `src/pages/donate.astro` | PayPal, Venmo, cheque; passes as suggested donations (ADR 0004) |
+| `/404` | `src/pages/404.astro` | Emitted as `404.html`; the adapter routes unmatched paths to it |
+| `/api/weather` | `src/pages/api/weather.ts` | Server-rendered, cached; NWS (ADR 0006) |
+| `/keystatic` | the integration | Server-rendered editor |
+
 ## Not built yet
 
-Nav covers only the pages that exist (Home, Trails). About, Blog/News, Events
-and Donate pages, the live trail-status banner, the weather widget and the
-Facebook sync are all still open — see `docs/project-brief.md`.
+- **Events**, beyond the empty state: it waits on the Facebook sync
+  (`docs/plans/social-cross-post.md`).
+- **The live trail-status banner.** The strip under the hero is currently fixed
+  text; `docs/plans/trail-status.md` has the thinking.
+- **The footer mailing-list signup** the prototype shows. It needs a provider
+  and a public contact address, both board questions. An input that discards
+  what someone types is worse than no input.
+
+See `docs/project-brief.md` and `docs/source/prototype-structure.md`, which
+tracks the delta between the prototype and what is built.

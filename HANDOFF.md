@@ -35,6 +35,20 @@ Never put passwords, tokens or recovery codes in this file or anywhere in the re
 | PayPal / Venmo | Donations | _confirm_ | | Fees per transaction | — | |
 | Google Search Console / Business Profile | SEO | _TBD_ | | Free | — | |
 
+## External services with no account
+
+Two things the site depends on need no sign-up, no key and no payment, which
+is exactly why they are easy to forget until they break.
+
+| Service | Used for | What breaks, and what to do |
+|---|---|---|
+| **National Weather Service** `api.weather.gov` (ADR 0006) | The weather card on the home page | US government, keyless, no rate limit published but it does ask for an identifying User-Agent, which `src/lib/weather.ts` sends. If it fails the card hides itself rather than showing stale numbers — the rest of the page is unaffected. A paid provider would be the fallback, but there is no reason to expect to need one. |
+| **Google Maps embed** on the Trails page | Showing the trailhead | Keyless `maps?q=…&output=embed`, which Google has never formally documented. If it stops working, the page still carries the address and a "Directions" link, and the embed would need replacing with the Maps Embed API (free tier, but requires an API key and therefore an account and a billing profile). |
+
+Neither sends anything identifying about a visitor from our side, but the Maps
+iframe is Google's and sets Google's cookies. If the board ever wants a cookie
+notice, that iframe is the reason it would be needed.
+
 ## Environment variables
 
 Set in the hosting dashboard, never committed. List names and what they're for here.
@@ -199,7 +213,56 @@ meantime; only asset fetching is affected.
 
 ## Routine tasks
 
-_To be written once the CMS is chosen: posting news, adding an event, updating trail status, swapping the trail map._
+### Writing a blog post
+
+Blog posts originate here and are the only content type that does (ADR 0005).
+Everything else — events, news, trail conditions — comes from Facebook.
+
+1. Go to `https://<the site>/keystatic` and sign in with GitHub.
+2. **Blog → Create**. Fill in the title, the date, and a one-line **summary**;
+   the summary is what shows on the blog index, so write it for someone
+   deciding whether to click.
+3. A **cover image** is optional. With one, the post gets the wide featured
+   treatment at the top of the blog index when it is the newest. Always fill in
+   the image description — it is what a screen reader reads out, and what shows
+   if the image fails to load.
+4. Leave **draft** ticked while you are still working. See below for exactly
+   what that does — it is not quite what "draft" usually means.
+5. Save. Keystatic commits to `main` and the site redeploys itself in about a
+   minute.
+
+### Editing or deleting a post
+
+Same place: **Blog**, pick the post, edit and save, or use **Delete**. Both are
+ordinary commits, so nothing is ever truly lost — a deleted post can be
+recovered from the repository's history by whoever maintains the site.
+
+### What "draft" actually does
+
+A draft **is published to the live site at its real URL**. It is kept off the
+blog index, out of the sitemap and out of search engines, so nobody will come
+across it — but anyone who has the link can read it.
+
+That is on purpose. Board members do not run a development server, and the only
+honest way to let someone review a post as it will really look is to render it
+somewhere they can open. The trade is that a draft is **unlisted, not private**.
+Do not put anything in a draft that would be a problem for a stranger to read.
+
+To publish: open the post, untick **draft**, save. The post joins the blog
+index and the sitemap, and the newest one takes the featured slot at the top.
+
+### Launching with no posts at all
+
+The blog is designed for this. With nothing published, `/blog/` shows a short
+note pointing at Events and Facebook rather than an empty page. Nothing needs
+disabling and the nav link can stay.
+
+### Not yet routine
+
+Adding an event, updating trail status and swapping the trail map all still
+require a developer. Events and trail status are waiting on the Facebook sync
+(`docs/plans/`); the trail map is a Drive link that the board can change at the
+Drive end without touching the site.
 
 ## Transferring ownership
 
