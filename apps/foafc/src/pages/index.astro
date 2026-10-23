@@ -4,6 +4,7 @@ import TrailStatus from '../components/TrailStatus.astro';
 import WeatherWidget from '../components/WeatherWidget.astro';
 import heroImage from '../assets/photos/pulk-sled-winter.jpg';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { getPublishedPosts } from '../content/blog';
 
 /*
  * Section order follows the prototype — see docs/source/prototype-structure.md.
@@ -11,17 +12,36 @@ import BaseLayout from '../layouts/BaseLayout.astro';
  * full-bleed donate band.
  */
 
+/*
+ * The middle teaser is the newest post, as the prototype's "Latest Post" card
+ * implies. It links to the post itself rather than to the index, which is the
+ * whole point of putting it on the home page.
+ *
+ * Before the first post is published there is nothing to name, so it falls
+ * back to describing the blog. Launching with an empty blog is supported, and
+ * a card reading "Latest post: none" would be a worse version of saying
+ * nothing.
+ */
+const [latestPost] = await getPublishedPosts();
+
 const teasers = [
   {
     href: '/trails/',
     title: 'Trail Maps',
     copy: 'Find your route, what each trail suits, and how to reach the trailhead.',
   },
-  {
-    href: '/blog/',
-    title: 'Latest post',
-    copy: 'Notes from the trail crew and whatever the woods are doing this month.',
-  },
+  latestPost
+    ? {
+        href: `/blog/${latestPost.id}/`,
+        title: latestPost.data.title,
+        copy: latestPost.data.summary ?? 'The newest post from the trails.',
+        eyebrow: 'Latest post',
+      }
+    : {
+        href: '/blog/',
+        title: 'Latest post',
+        copy: 'Notes from the trail crew and whatever the woods are doing this month.',
+      },
   {
     href: '/events/',
     title: 'Upcoming events',
@@ -78,6 +98,7 @@ const teasers = [
       {
         teasers.map((teaser) => (
           <li class="teaser">
+            {teaser.eyebrow && <p class="eyebrow">{teaser.eyebrow}</p>}
             <h2 class="teaser__title">
               <a href={teaser.href}>{teaser.title}</a>
             </h2>
