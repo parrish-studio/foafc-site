@@ -152,7 +152,7 @@ run."
 
 ## Deltas against what is built
 
-Updated 2026-10-22 after the first alignment pass.
+Updated 2026-10-23.
 
 ### Done
 
@@ -170,29 +170,39 @@ Updated 2026-10-22 after the first alignment pass.
 - Safety as a list rather than a paragraph.
 - Footer in columns.
 - Mission and vision as a side-by-side pair on About.
-- Everything mobile-first. Verified at 375px on all five pages: no horizontal
+- The About board, trail history timeline and Projects & Impact tiles, with
+  our own placeholder content rather than the prototype's.
+- The trailhead map card on Trails — Google's keyless embed, with Directions
+  and View larger map. No "Center map" button: that was a mock control in a
+  static prototype, and the real embed has its own.
+- The blog featured post and the two-column list. The aside in that second
+  column points at Events and Facebook rather than carrying the prototype's
+  mailing-list signup, which has nowhere to send an address yet.
+- A 404 page, which the prototype has no equivalent of and which the site
+  needs more than most: years of Facebook posts link to Wix URLs.
+- Everything mobile-first. Verified at 375px on every page: no horizontal
   overflow anywhere.
 
 ### Still outstanding
 
 Structure we have not built:
 
-- **Trails**: the trailhead map card — embedded map, Directions, View larger
-  map, Center map. Needs a decision on embedding a third-party map, which
-  carries the same tracking question as the giving iframes.
-- **Blog**: the featured-post treatment, and the two-column layout with the
-  mailing-list card beside the post list.
 - **Events**: the month calendar and the event-card grid. Both wait on the
-  Facebook sync — there is nothing to put in them.
-- **Footer**: the "Trail notes by email" column. Needs a mailing list provider
-  and a public contact address, both board questions. An input that discards
-  what someone types is worse than no input.
+  Facebook sync — there is nothing to put in them, and a calendar with no
+  events in it is worse than an honest empty state.
+- **Footer**: the "Trail notes by email" column, and the blog aside's
+  equivalent. Needs a mailing list provider and a public contact address,
+  both board questions. An input that discards what someone types is worse
+  than no input.
+- **Home**: the trail-status strip is real but its text is fixed. Live status
+  needs a source; `docs/plans/trail-status.md` has the thinking.
 
-Content the prototype has only as placeholder, so nothing was copied:
+Content that is still placeholder and needs the board:
 
-- **About**: the trail history timeline, and the Projects & Impact tiles.
-  Structure is real, content is "2012 · Placeholder". Board questions.
-- Its board member names are fictional; ours are real. Keep ours.
+- **About**: the trail history years and entries, the Projects & Impact copy,
+  and every board member's bio and photograph. The prototype is no help —
+  its timeline entries are literally "2012 · Placeholder" and its board names
+  are fictional. The structure is built and waiting on words.
 
 Deliberately not matched:
 
