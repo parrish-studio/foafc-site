@@ -31,7 +31,7 @@ Never put passwords, tokens or recovery codes in this file or anywhere in the re
 | GitHub collaborators | Board editors' accounts with write access to `foafc-site` | Each editor | Jeneve | Free | — | Editors' own logins |
 | Facebook page / app | Events and trail conditions source | _confirm_ | | | | |
 | Google account friendsofafiercechase@gmail.com | Drive assets, org identity | Org | **Credentials holder unknown — the webmaster does not have them** | Free | — | _UNKNOWN — must be found; blocks org-owned hosting_ |
-| Bonfire | Merch store | _confirm_ | | Free (print on demand) | — | |
+| Bonfire | Merch, print on demand | _confirm_ | | Free | — | Verified nonprofit org page: `bonfire.com/org/friends-of-a-fierce-chase-cross-country-ski-trails-991538734`. $269 raised lifetime. The one campaign, `bonfire.com/friends-of-fierce-chase-merch`, **ended 15 Jan 2026** (10 of a 20 goal, $146) and is not buyable. See "Merch" below. |
 | PayPal / Venmo | Donations | _confirm_ | | Fees per transaction | — | |
 | Google Search Console / Business Profile | SEO | _TBD_ | | Free | — | |
 
@@ -189,6 +189,39 @@ To close it, when the time comes:
 - Hobby is **non-commercial**. Nothing on the site may sell goods or services
   directly; passes are presented as suggested donations (ADR 0004). Paid event
   tickets or on-site merch sales would require Vercel Pro or another host.
+
+  Checked against Vercel's live fair use guidelines (updated 2026-09-14), which
+  are more specific than ADR 0004 recorded:
+
+  - **"Asking for Donations does not fall under commercial usage."** In those
+    words, in the page's own note. The Donate page is unambiguously fine.
+  - **"Advertising the sale of a product or service"** is an enumerated example
+    of commercial usage — alongside processing payment, affiliate linking and
+    advertisements. It does not matter that a merch checkout would happen on
+    Bonfire's domain; a Shop page on this site advertises a sale, which is the
+    thing named.
+
+  The penalty is not a warning about one page. Vercel pauses the deployment,
+  so the whole site goes down.
+
+### Merch
+
+**Nothing can be hooked up today**, for two independent reasons.
+
+1. There is nothing live to link to. The Bonfire campaign ended in January and
+   the org page sells nothing — it invites visitors to start a fundraiser.
+   Bonfire distinguishes a **campaign** (time-boxed, ends, dies) from an
+   **on-demand merch store** (stays open). A website needs the second; FOAFC
+   has had the first. Relaunching as a store is a board action on Bonfire's
+   side and is the prerequisite for everything else here.
+2. Even with a live store, a Shop page breaks Hobby's terms, per above.
+
+So merch is gated on a hosting decision, not a design one. Vercel Pro is $20
+per member per month, against $269 of merch raised in the organisation's
+lifetime. If the board wants merch on the site, moving to a host without a
+non-commercial clause — Cloudflare Pages and Netlify both qualify on their
+free tiers — is the proportionate answer, and it means revisiting ADR 0004 and
+re-pointing the Keystatic GitHub App callback URL.
 - The repo must stay **public** — Hobby cannot deploy private org-owned repos.
   So never commit secrets or private board material.
 
