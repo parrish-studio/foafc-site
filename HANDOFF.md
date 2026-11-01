@@ -340,6 +340,40 @@ The blog is designed for this. With nothing published, `/blog/` shows a short
 note pointing at Events and Facebook rather than an empty page. Nothing needs
 disabling and the nav link can stay.
 
+### Keeping dependencies current
+
+Three things run on their own. None of them needs anybody to remember.
+
+| What | When | What it does |
+|---|---|---|
+| **CI** (`.github/workflows/ci.yml`) | Every push to `main`, every PR | Install, `pnpm check`, `pnpm build`, `pnpm verify`. |
+| **Audit** (`.github/workflows/audit.yml`) | Mondays, 13:00 UTC | `pnpm audit`, failing on high and critical. |
+| **Dependabot** (`.github/dependabot.yml`) | Weekly | Opens one grouped PR for minor and patch updates; majors get their own. |
+
+**CI matters more here than on a normal repo.** Board members edit through
+Keystatic, which commits straight to `main` through the GitHub API, and Vercel
+deploys that immediately. No git hook can run for those commits. CI is the only
+thing that will notice a content edit that breaks the build — it cannot stop
+the deploy, but it turns a silent breakage into a red tick and an email.
+
+**What to do with a Dependabot PR:** if CI is green, merge it. That is the
+whole procedure for the grouped minor-and-patch one. A major deserves a look at
+the changelog first, which is why they are not grouped.
+
+**Why the audit is not part of CI.** Its advisory database changes without us.
+Wired into the build, a board member's content edit could fail because someone
+published an advisory overnight for a build-time package three levels down that
+nobody here can patch. That teaches people to ignore a red tick, which is worse
+than not checking at all. So it is weekly and separate, and GitHub emails the
+repo owner when it fails.
+
+**Why it fails only on high and critical.** As of 2026-11-01 there are four
+moderate and two low findings outstanding — `glob`, `minimatch` and `fast-uri`
+— and every one is held by a parent package's version range, so no change here
+can clear them. They need an upstream release. Gating on moderate would mean a
+job that is red forever and therefore ignored. Raise the threshold the day
+those clear.
+
 ### Not yet routine
 
 Adding an event, updating trail status and swapping the trail map all still

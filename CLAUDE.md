@@ -121,4 +121,9 @@ Code is MIT (`LICENSE`). FOAFC content and branding are excluded and belong to t
   accessibility basics a machine can be certain about (one `h1` per page, no
   skipped heading levels, every image with an alt, every link and iframe with
   a name). Add to it rather than re-running greps.
+- CI runs `check`, `build` and `verify` on every push and PR; a weekly workflow
+  runs `pnpm audit` (failing on high and critical only, for reasons recorded in
+  `HANDOFF.md`); Dependabot opens one grouped PR a week. Keystatic commits
+  straight to `main` via the GitHub API, so CI is the only check that sees a
+  board member's content edit — no git hook can.
 - Commit messages: short imperative subject; explain *why* in the body when not obvious.

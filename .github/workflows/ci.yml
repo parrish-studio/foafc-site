@@ -1,0 +1,51 @@
+name: CI
+
+# Runs on every push to main and every pull request.
+#
+# This matters more here than on a normal repo: board members edit content
+# through Keystatic, which commits straight to `main` via the GitHub API. No
+# git hook can run for those commits, and Vercel deploys them immediately. CI
+# is the only thing that will notice a content edit that breaks the build.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+# A new push makes an in-flight run on the same branch pointless.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: pnpm/action-setup@v4
+        # No version here on purpose: the action reads `packageManager` from
+        # package.json, so the pin lives in exactly one place.
+
+      - uses: actions/setup-node@v5
+        with:
+          # Same file the local shell uses, and the same major the Vercel
+          # function runs. @astrojs/vercel bakes the build machine's Node
+          # major into the deployment, so this is not merely tidiness.
+          node-version-file: .nvmrc
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      # Types, Astro diagnostics, and the repo invariants in scripts/verify.mjs.
+      - run: pnpm check
+
+      # Also runs scripts/verify-build.mjs, which imports the generated
+      # serverless entry and fails if it cannot be loaded.
+      - run: pnpm build
+
+      # verify's rendered-text and accessibility checks need a build on disk,
+      # and the `check` above ran before one existed. Re-run them now.
+      - name: Verify the built pages
+        run: pnpm verify

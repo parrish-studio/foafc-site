@@ -1,0 +1,49 @@
+name: Audit
+
+# Dependency vulnerabilities, on a schedule rather than on every commit.
+#
+# Deliberately NOT part of CI. An audit depends on an advisory database that
+# changes without us, so wiring it into the build means a board member's
+# content edit can fail because someone published an advisory overnight for a
+# transitive build-time package nobody here can patch. That teaches people to
+# ignore a red tick, which is worse than not checking.
+#
+# So: weekly, on its own, and GitHub emails the repo owner when it fails.
+
+on:
+  schedule:
+    # Mondays at 13:00 UTC — a weekday morning in Maine, so a failure is seen
+    # rather than buried under a weekend.
+    - cron: '0 13 * * 1'
+  workflow_dispatch:
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      # Fails on high and critical only.
+      #
+      # The moderate and low findings outstanding today — glob, minimatch and
+      # fast-uri — are all pinned by a parent's version range, so no lockfile
+      # change can clear them; they need an upstream release. Gating on
+      # moderate would mean a job that is red forever and therefore ignored.
+      #
+      # Raise this to `moderate` the day those clear. The full list is always
+      # one `pnpm audit` away, and the step below prints it either way.
+      - name: Audit (fails on high and critical)
+        run: pnpm audit --audit-level high
+
+      - name: Full report, including what we cannot fix yet
+        if: always()
+        run: pnpm audit || true

@@ -18,6 +18,9 @@
       "allowedVersions": {
         "@astrojs/react>oxc-transform-react": "0.152.0"
       }
+    },
+    "overrides": {
+      "zod@<4.6.6": "^4.6.6"
     }
   }
 }

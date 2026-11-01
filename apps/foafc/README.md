@@ -146,7 +146,14 @@ names are listed in `HANDOFF.md`.
   the stub, and that notice together; keep the smoke check.
 - `astro check` resolves `@astrojs/check` from astro's own directory, which
   pnpm's isolated `node_modules` layout hides. The `check` script calls the
-  `astro-check` binary directly instead.
+  `astro-check` binary directly instead — **with `astro sync` in front of it**,
+  which is not optional. `astro check` would normally sync first; calling the
+  binary directly skips that, so the generated collection types in `.astro/`
+  are missing on a fresh clone and every `astro:content` value degrades to
+  `any`. Five `noImplicitAny` errors, on a checkout with no `.astro/`.
+
+  It passed locally for weeks purely because `.astro/` survives from earlier
+  builds. A clean-checkout rehearsal of the CI steps is what caught it.
 
 ## Pages
 

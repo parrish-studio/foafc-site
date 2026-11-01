@@ -1,0 +1,46 @@
+version: 2
+
+# Keeping dependencies current, as opposed to merely knowing they are stale.
+#
+# The audit workflow tells you something is wrong. This is what actually fixes
+# it, and it reaches the transitive packages a lockfile refresh cannot move on
+# its own — most of what `pnpm audit` reports here lives three levels down
+# inside Astro and Keystatic.
+#
+# Tuned hard for low noise. This repo is maintained by one person and will be
+# handed to a volunteer; a pull request every other day would be abandoned
+# within a month, and an abandoned bot is worse than none, because its red
+# tick stops meaning anything.
+
+updates:
+  - package-ecosystem: npm
+    # The workspace root. Dependabot reads pnpm-workspace.yaml from here and
+    # covers apps/foafc and packages/* in one go.
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: '13:00'
+    open-pull-requests-limit: 3
+    groups:
+      # One PR a week for all the routine movement, rather than nine.
+      routine:
+        patterns: ['*']
+        update-types: [minor, patch]
+      # Majors stay separate and individual: they are the ones that need a
+      # human to read a changelog.
+      majors:
+        patterns: ['*']
+        update-types: [major]
+    commit-message:
+      prefix: deps
+    labels: [dependencies]
+
+  # The workflows above pin action majors. Without this they quietly rot.
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
+    commit-message:
+      prefix: ci
+    labels: [dependencies]
