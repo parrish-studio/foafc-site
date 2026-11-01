@@ -113,6 +113,11 @@ names are listed in `HANDOFF.md`.
   disjoint, so the app pins `0.152.0` — the version the plugin that actually
   runs the transform needs — and the root `package.json` records the override in
   `pnpm.peerDependencyRules`.
+- **Node is pinned to `24.x`** in this package's `engines`, and `.nvmrc` says
+  `24`. That is not cosmetic: `@astrojs/vercel` reads `process.version` at
+  build time and writes that major into the function config, so the Node you
+  build with is the Node the deployment runs. `HANDOFF.md` has the full
+  reasoning. Run `nvm use` before building.
 - **Use `corepack pnpm`, not bare `pnpm`, if the version check fails.** The repo
   pins pnpm via `packageManager`, and a `pnpm` left on `PATH` by an old nvm Node
   will be the wrong version — it fails with `ERR_PNPM_BAD_PM_VERSION` and no

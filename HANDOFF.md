@@ -105,7 +105,7 @@ which is why the root directory matters.
 | Root Directory | `apps/foafc` |
 | Build command | *(default)* |
 | Install command | *(default — Vercel runs pnpm at the workspace root)* |
-| Node version | Vercel's default. `engines` in `apps/foafc/package.json` records Astro 7's floor (`>=22.12.0`); the adapter picks the runtime itself and currently emits `nodejs24.x`. |
+| Node version | **Pinned to `24.x`** via `engines` in `apps/foafc/package.json`, which overrides the dashboard setting. See "Why the Node major is pinned" below — do not loosen it to a range. |
 
 Root Directory is the only thing to change. Vercel used to need an "Include
 files outside the root directory" toggle for monorepos; that option no longer
@@ -147,6 +147,50 @@ Deploy before creating the GitHub App, not after: the app's callback URL has to
 match the real deployed domain, so the domain must exist first. The same applies
 again at the `.org` cutover — the callback URL must be updated to the new domain
 or editor sign-in breaks.
+
+### Why the Node major is pinned
+
+`apps/foafc/package.json` says `"node": "24.x"`, not a range. Three facts make
+that necessary rather than fussy:
+
+1. **The adapter bakes the build machine's Node major into the deployment.**
+   `@astrojs/vercel` calls `getRuntime(process)`, reads `process.version`, and
+   writes `nodejs<major>.x` into the function config. Build on 22 and the
+   function runs 22. Its support table stops at 24, so a build on Node 26 logs
+   "not supported… will use Node.js 24" and silently emits `nodejs24.x`.
+2. **Vercel maps an open range to the newest major.** Its docs show
+   `>=22.0.0` resolving to the latest 26.x. The old `>=22.12.0` therefore meant
+   "build on whatever Vercel's newest is", which today is 26.
+3. So the old config gave **a build on 26 and a function on 24**, chosen by
+   nobody, and liable to change again whenever Vercel moves its default. Node
+   26 also changes `fetch` behaviour (Vercel documents an HTTP/1.1 opt-out),
+   which is the kind of thing that breaks `/api/weather` quietly.
+
+Pinning makes the build and the runtime the same version and stops the drift.
+Move to `26.x` only once `@astrojs/vercel` lists 26 in `SUPPORTED_NODE_VERSIONS`
+— otherwise the mismatch comes straight back.
+
+The root `package.json` keeps `>=22.12.0`, which is Astro 7's real floor and
+only governs local tooling. `.nvmrc` says `24`, so `nvm use` with no argument
+lands on the right one.
+
+### Node security patches
+
+**Not ours to apply.** Vercel's docs: "Only major versions are available.
+Vercel automatically rolls out minor and patch updates when needed, such as to
+fix a security issue." Nothing in this repo pins a Node patch version and
+nothing can — `24.x` always resolves to Vercel's current 24.
+
+So when a Node advisory lands (the October 2026 batch, ten CVEs including the
+Brotli decoder RCE, is the example), the action here is **nothing**, beyond
+checking that the site's exposure is what you think it is. For this site that
+means remembering it is static HTML plus one function, and that the function's
+only outbound hosts — `api.weather.gov` and `api.github.com` — are hard-coded
+constants, so the class of CVE that needs an attacker-influenced hostname does
+not reach us.
+
+Local builds are a different matter: keep the machine's Node current, which is
+what `.nvmrc` and the version guard in `scripts/verify.mjs` are for.
 
 ### Open: move hosting to the org
 
