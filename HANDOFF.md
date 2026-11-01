@@ -31,7 +31,7 @@ Never put passwords, tokens or recovery codes in this file or anywhere in the re
 | GitHub collaborators | Board editors' accounts with write access to `foafc-site` | Each editor | Jeneve | Free | — | Editors' own logins |
 | Facebook page / app | Events and trail conditions source | _confirm_ | | | | |
 | Google account friendsofafiercechase@gmail.com | Drive assets, org identity | Org | **Credentials holder unknown — the webmaster does not have them** | Free | — | _UNKNOWN — must be found; blocks org-owned hosting_ |
-| Bonfire | Merch, print on demand | _confirm_ | | Free | — | Verified nonprofit org page: `bonfire.com/org/friends-of-a-fierce-chase-cross-country-ski-trails-991538734`. $269 raised lifetime. The one campaign, `bonfire.com/friends-of-fierce-chase-merch`, **ended 15 Jan 2026** (10 of a 20 goal, $146) and is not buyable. See "Merch" below. |
+| Bonfire | Merch, print on demand | **Login holder unknown — needed to relaunch the store (ADR 0007)** | | Free | — | Verified nonprofit org page: `bonfire.com/org/friends-of-a-fierce-chase-cross-country-ski-trails-991538734`. $269 raised lifetime. The one campaign, `bonfire.com/friends-of-fierce-chase-merch`, **ended 15 Jan 2026** (10 of a 20 goal, $146) and is not buyable. See "Merch" below. |
 | PayPal / Venmo | Donations | _confirm_ | | Fees per transaction | — | |
 | Google Search Console / Business Profile | SEO | _TBD_ | | Free | — | |
 
@@ -196,32 +196,38 @@ To close it, when the time comes:
   - **"Asking for Donations does not fall under commercial usage."** In those
     words, in the page's own note. The Donate page is unambiguously fine.
   - **"Advertising the sale of a product or service"** is an enumerated example
-    of commercial usage — alongside processing payment, affiliate linking and
-    advertisements. It does not matter that a merch checkout would happen on
-    Bonfire's domain; a Shop page on this site advertises a sale, which is the
-    thing named.
+    of commercial usage.
 
-  The penalty is not a warning about one page. Vercel pauses the deployment,
-  so the whole site goes down.
+  Where that line falls matters, and ADR 0007 works it through. A `/shop/` page
+  with product photography and prices is advertising a sale, whoever takes the
+  payment. A link to the organisation's own Bonfire page is not obviously that
+  — the footer already links to Facebook, a commercial company. The merch
+  decision is a link, and stays on the safe side of the line.
+
+  The penalty is a paused deployment — the whole site, not one page — so stay
+  conservative where it costs nothing.
 
 ### Merch
 
-**Nothing can be hooked up today**, for two independent reasons.
+Decided in **ADR 0007**: one link out to a Bonfire store, branded on Bonfire's
+side. No shop page, no prices on this domain.
 
-1. There is nothing live to link to. The Bonfire campaign ended in January and
-   the org page sells nothing — it invites visitors to start a fundraiser.
-   Bonfire distinguishes a **campaign** (time-boxed, ends, dies) from an
-   **on-demand merch store** (stays open). A website needs the second; FOAFC
-   has had the first. Relaunching as a store is a board action on Bonfire's
-   side and is the prerequisite for everything else here.
-2. Even with a live store, a Shop page breaks Hobby's terms, per above.
+**Blocked on Bonfire, not on us.** The campaign ended 15 January 2026 and the
+org page sells nothing, so there is no live destination. Bonfire distinguishes
+a **campaign** (time-boxed, ends, and the link dies with it) from an
+**on-demand merch store** (stays open). Relaunching as a store is a board
+action, and it is the prerequisite for the link.
 
-So merch is gated on a hosting decision, not a design one. Vercel Pro is $20
-per member per month, against $269 of merch raised in the organisation's
-lifetime. If the board wants merch on the site, moving to a host without a
-non-commercial clause — Cloudflare Pages and Netlify both qualify on their
-free tiers — is the proportionate answer, and it means revisiting ADR 0004 and
-re-pointing the Keystatic GitHub App callback URL.
+**Two things are needed to do it**, both open:
+
+1. **The Bonfire admin login.** Nobody has recorded who holds it. Same class of
+   problem as the friendsofafiercechase@gmail.com password, and worth finding
+   at the same time.
+2. **A board decision to relaunch as a store rather than another campaign.**
+
+Merch proceeds are **not** donations, and the site must never imply they are:
+on the one campaign with numbers, a $27.99 tee returned about $14.60 to FOAFC
+and the buyer got a shirt for the rest. ADR 0007 has the reasoning.
 - The repo must stay **public** — Hobby cannot deploy private org-owned repos.
   So never commit secrets or private board material.
 

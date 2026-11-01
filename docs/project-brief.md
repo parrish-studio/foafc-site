@@ -109,4 +109,4 @@ Notes at the end of the board brief (Sept 19 meeting):
 6. Donation processor
 7. ~~Heading typeface~~ — resolved (Fraunces + Libre Franklin). Still open: whether amber and cream follow the prototype or the brand docs
 8. Pricing: Day $20, Family pass amount, Season $150?
-9. Whether the Shop/Bonfire link appears in the new nav
+9. ~~Whether the Shop/Bonfire link appears in the new nav~~ — **resolved 2026-11-01, ADR 0007.** A single link out to a Bonfire store, branded on Bonfire's side. Blocked on the board relaunching the ended campaign as an on-demand store, and on finding who holds the Bonfire login.

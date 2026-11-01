@@ -17,6 +17,24 @@ import path from 'node:path';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
+/*
+ * Fail with a sentence rather than a stack trace when the wrong Node is on
+ * PATH. There are fourteen of them in this machine's nvm directory and a new
+ * shell can land on v14, where this script dies inside node:fs with a
+ * TypeError that says nothing about the real problem. Same trap as the stale
+ * pnpm shim documented in apps/foafc/README.md.
+ */
+const REQUIRED_NODE_MAJOR = 22;
+const nodeMajor = Number(process.versions.node.split('.')[0]);
+if (nodeMajor < REQUIRED_NODE_MAJOR) {
+  console.error(
+    `verify: needs Node ${REQUIRED_NODE_MAJOR} or newer, found ${process.versions.node} ` +
+      `(${process.execPath}).\n` +
+      '  nvm use --lts, or run it through corepack, then try again.',
+  );
+  process.exit(1);
+}
+
 const failures = [];
 const notes = [];
 
