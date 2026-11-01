@@ -105,6 +105,7 @@ which is why the root directory matters.
 | Root Directory | `apps/foafc` |
 | Build command | *(default)* |
 | Install command | *(default — Vercel runs pnpm at the workspace root)* |
+| pnpm version | Vercel reads `packageManager` but resolves it loosely: a build log reading `from package.json#packageManager pnpm@9.12.0` finished `using pnpm v9.15.9`. So the exact pin holds locally and in CI, not on Vercel — it gets the newest 9.x. Harmless so far, but do not assume the deployed build used the pinned patch. |
 | Node version | **Pinned to `24.x`** via `engines` in `apps/foafc/package.json`, which overrides the dashboard setting. See "Why the Node major is pinned" below — do not loosen it to a range. |
 
 Root Directory is the only thing to change. Vercel used to need an "Include
@@ -359,6 +360,18 @@ the deploy, but it turns a silent breakage into a red tick and an email.
 **What to do with a Dependabot PR:** if CI is green, merge it. That is the
 whole procedure for the grouped minor-and-patch one. A major deserves a look at
 the changelog first, which is why they are not grouped.
+
+**Read the CI tick, not the Vercel one.** They check different things and they
+disagree. Vercel runs `pnpm build`, which does not type-check. CI runs
+`pnpm check` as well. The first major Dependabot opened — TypeScript 7 — came
+up **green on Vercel and red on CI**, because TS 7's native compiler drops the
+programmatic API `astro check` is built on. Vercel would have deployed it
+happily. Anything that looks green on Vercel alone has only been proven to
+build, not to be correct.
+
+One already-known hold: **TypeScript majors are ignored** in
+`.github/dependabot.yml` until Astro supports the native compiler
+(withastro/roadmap#1321). Minor and patch still come through.
 
 **Why the audit is not part of CI.** Its advisory database changes without us.
 Wired into the build, a board member's content edit could fail because someone
