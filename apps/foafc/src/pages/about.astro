@@ -3,7 +3,7 @@ import { parseTrailSystem } from '@parrish-studio/module-trails';
 import trailsData from '@parrish-studio/module-trails/data/trails.json';
 import { Image } from 'astro:assets';
 import boardPortraitPlaceholder from '../assets/brand/FOAFC_Green_Icon_Logo.png';
-import { BOARD, PROJECTS, TRAIL_HISTORY } from '../data/board';
+import { BOARD, PLACEHOLDER_BIO, PROJECTS, TRAIL_HISTORY } from '../data/board';
 import { ORG } from '../data/org';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
@@ -56,16 +56,25 @@ const system = parseTrailSystem(trailsData);
           BOARD.map((member) => (
             <li class="people__item">
               <Image
-                class="people__portrait"
-                src={boardPortraitPlaceholder}
+                class={
+                  member.photo ? 'people__portrait people__portrait--photo' : 'people__portrait'
+                }
+                src={member.photo ?? boardPortraitPlaceholder}
+                style={member.photoPosition && `object-position: ${member.photoPosition}`}
                 alt=""
-                width={96}
+                width={144}
                 densities={[1, 2]}
                 loading="lazy"
               />
               <span class="people__name">{member.name}</span>
               <span class="people__role">{member.role}</span>
-              <span class="people__bio">{member.bio}</span>
+              <span
+                class={
+                  member.bio === PLACEHOLDER_BIO ? 'people__bio people__bio--pending' : 'people__bio'
+                }
+              >
+                {member.bio}
+              </span>
             </li>
           ))
         }

@@ -551,12 +551,29 @@ a:hover {
   display: grid;
   gap: var(--space-4);
   grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+  /*
+   * Without this, every card in a row stretches to the tallest one, so a
+   * member with a full bio leaves a tall empty box beside a member without
+   * one. Bios will be uneven for as long as people are still sending them in,
+   * which is indefinitely, so let each card be its own height.
+   */
+  align-items: start;
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
 .people__item {
+  /*
+   * Mobile-first: portrait beside the text. A card still waiting on a bio is
+   * then two lines tall instead of a near-empty full-width box, which is the
+   * difference between a glance and a long scroll when eight of ten are
+   * waiting. Reverts to stacked once there are columns to stack into.
+   */
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: var(--space-3);
+  align-items: start;
   padding: var(--space-4);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
@@ -1092,15 +1109,29 @@ a:hover {
  * announcing "logo" ten times would only add noise.
  */
 .people__portrait {
-  width: 3rem;
-  height: 3rem;
-  margin-bottom: var(--space-2);
+  /* 3rem is fine for the logo mark and far too small for a face. */
+  width: 4.5rem;
+  height: 4.5rem;
+  grid-column: 1;
+  grid-row: 1 / span 3;
   padding: 0.3rem;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-pill);
   background-color: var(--color-surface-muted);
   box-sizing: border-box;
+  /* Suits the logo mark, which needs breathing room inside the circle. */
   object-fit: contain;
+}
+
+/* A real portrait fills the circle instead of sitting inside it. */
+.people__portrait--photo {
+  padding: 0;
+  object-fit: cover;
+  /*
+   * A sane default for a head-and-shoulders photo. Any portrait that frames
+   * differently overrides it with `photoPosition` in data/board.ts.
+   */
+  object-position: center 40%;
 }
 
 .people__bio {
@@ -1108,6 +1139,26 @@ a:hover {
   margin-top: var(--space-2);
   color: var(--color-text-muted);
   font-size: var(--text-sm);
+}
+
+/*
+ * The waiting-for-a-bio state. Italic is enough to make the eye skip it, which
+ * matters when it repeats down most of the grid; it keeps the muted colour
+ * rather than fading further, so it still passes contrast.
+ */
+.people__bio--pending {
+  font-style: italic;
+}
+
+/* Wide enough for a multi-column grid: give each card the stacked layout. */
+@media (min-width: 44rem) {
+  .people__item {
+    display: block;
+  }
+
+  .people__portrait {
+    margin-bottom: var(--space-2);
+  }
 }
 
 .timeline {
