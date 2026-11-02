@@ -30,7 +30,7 @@ Never put passwords, tokens or recovery codes in this file or anywhere in the re
 | Keystatic (GitHub mode) | Board content editing at `/keystatic` | Keystatic GitHub App installed on parrish-studio (_to set up_) | Jeneve | Free | — | App secrets in hosting env vars |
 | GitHub collaborators | Board editors' accounts with write access to `foafc-site` | Each editor | Jeneve | Free | — | Editors' own logins |
 | Facebook page / app | Events and trail conditions source | _confirm_ | | | | |
-| Google account friendsofafiercechase@gmail.com | Drive assets, org identity | Org | **Credentials holder unknown — the webmaster does not have them** | Free | — | _UNKNOWN — must be found; blocks org-owned hosting_ |
+| Google account friendsofafiercechase@gmail.com | Drive assets, org identity, published contact address | Org | **John Chase** (confirmed 2026-11-01) | Free | — | Held by John. The webmaster does not have it and does not need it — see "Open: the contact address" below. |
 | Bonfire | Merch, print on demand | **Login holder unknown — needed to relaunch the store (ADR 0007)** | | Free | — | Verified nonprofit org page: `bonfire.com/org/friends-of-a-fierce-chase-cross-country-ski-trails-991538734`. $269 raised lifetime. The one campaign, `bonfire.com/friends-of-fierce-chase-merch`, **ended 15 Jan 2026** (10 of a 20 goal, $146) and is not buyable. See "Merch" below. |
 | PayPal / Venmo | Donations | _confirm_ | | Fees per transaction | — | |
 | Google Search Console / Business Profile | SEO | _TBD_ | | Free | — | |
@@ -132,9 +132,10 @@ Vercel looks when the root directory is `apps/foafc`. Nothing else to configure.
 ### First-time setup, in order
 
 1. The Vercel account. **Currently Jeneve's personal account**, as an interim
-   measure — nobody has located the login for friendsofafiercechase@gmail.com.
-   See "Open: move hosting to the org" below; this is a deliberate deviation
-   from ADR 0004, not an oversight.
+   measure. See "Open: move hosting to the org" below; this is a deliberate
+   deviation from ADR 0004, not an oversight. Note that the reason has changed
+   — the friendsofafiercechase@gmail.com login is not lost, John Chase has it;
+   what is missing is the decision and the setup.
 2. Import `parrish-studio/foafc-site` and apply the settings above. Deploy.
    The public site works at this point; only `/keystatic` is incomplete.
 3. Note the assigned `*.vercel.app` URL. Keystatic's GitHub App needs it.
@@ -193,6 +194,32 @@ not reach us.
 Local builds are a different matter: keep the machine's Node current, which is
 what `.nvmrc` and the version guard in `scripts/verify.mjs` are for.
 
+### Open: the contact address
+
+**friendsofafiercechase@gmail.com is the organisation's published contact
+address.** It is printed as body text on the current Wix site, so the public
+already has it and mail already arrives there. John Chase holds the account.
+
+Nothing about the website needs access to that inbox. The Drive assets are
+shared with the webmaster read-only, Keystatic uses GitHub accounts, and DNS
+lives with the Wix/registrar account. What it does need is **redundancy**: one
+person's inbox is currently the organisation's front door, and the June 2026
+audit already flagged a second contact as a continuity requirement.
+
+Three ways to fix it, all free, in rising order of effort. Put to the board
+2026-11-01; John's call:
+
+1. **Forwarding.** John forwards a copy to a second board member. Two minutes.
+   The second person cannot reply as the organisation.
+2. **Gmail delegation.** John grants another Google account read-and-send
+   access from his own settings. No password is shared, it is reversible, and
+   the delegate can answer properly.
+3. **A group address** published instead, reaching several board members. Mail
+   reaches everyone and survives any one person leaving.
+
+Until one is chosen, the new site should show the same address the Wix site
+shows, which is no worse than today.
+
 ### Open: move hosting to the org
 
 **The site is hosted on the webmaster's personal Vercel account.** ADR 0004
@@ -218,11 +245,12 @@ What it costs while it stands:
 
 To close it, when the time comes:
 
-1. Find who holds the friendsofafiercechase@gmail.com login and record it in
-   the accounts table above. Worth doing early and independently of hosting —
-   that account owns the Drive, the brand assets and the org's identity, and
-   nobody currently having it is a gap on its own.
-2. Create a Vercel account with that address.
+1. Ask John Chase, who holds the friendsofafiercechase@gmail.com login. This
+   is no longer a search; it is a handover conversation.
+2. Create a Vercel account with that address. Check first whether a Hobby
+   account can carry more than one person — if it cannot, moving hosting to
+   the org produces another single-holder login rather than shared ownership,
+   which is worth weighing against leaving it where it is. Unverified.
 3. Transfer the project (Vercel → Project Settings → Transfer). Projects move
    between accounts; the deployment URL and git connection carry over.
 4. Re-point the Keystatic GitHub App callback URL if the domain changes, or
@@ -265,9 +293,9 @@ action, and it is the prerequisite for the link.
 
 **Two things are needed to do it**, both open:
 
-1. **The Bonfire admin login.** Nobody has recorded who holds it. Same class of
-   problem as the friendsofafiercechase@gmail.com password, and worth finding
-   at the same time.
+1. **The Bonfire admin login.** Nobody has recorded who holds it. This is now
+   the only genuinely missing credential — the Google account turned out to be
+   John's.
 2. **A board decision to relaunch as a store rather than another campaign.**
 
 Merch proceeds are **not** donations, and the site must never imply they are:

@@ -88,7 +88,7 @@ Prototype nav as built: Home · Trails · About · Blog · Events · Admin, plus
 - [ ] About Monson and other things to do in town
 
 Notes at the end of the board brief (Sept 19 meeting):
-- **Day pass is $20, not $10, and there is also a Family pass.** The prototype and Canva donate copy still show $10.
+- **Day pass is $20, not $10, and there is also a Family pass.** The prototype and Canva donate copy still show $10. Day $20 and season $150 were confirmed verbally by the board on 2026-11-01; the Family pass amount is still unrecorded.
 - Link trail cards to photos, Facebook, or voting
 - "93 days" (context unclear — possibly the season length)
 - Dynamic content wanted: the trail report, projects, articles
@@ -108,5 +108,5 @@ Notes at the end of the board brief (Sept 19 meeting):
 5. How to pull Facebook events and posts in automatically
 6. Donation processor
 7. ~~Heading typeface~~ — resolved (Fraunces + Libre Franklin). Still open: whether amber and cream follow the prototype or the brand docs
-8. Pricing: Day $20, Family pass amount, Season $150?
+8. ~~Pricing: Day $20, Season $150~~ — **confirmed verbally, 2026-11-01.** Still open: the **Family pass amount**, which has never been written down.
 9. ~~Whether the Shop/Bonfire link appears in the new nav~~ — **resolved 2026-11-01, ADR 0007.** A single link out to a Bonfire store, branded on Bonfire's side. Blocked on the board relaunching the ended campaign as an on-demand store, and on finding who holds the Bonfire login.

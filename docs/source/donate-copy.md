@@ -1,7 +1,7 @@
 # Donate Page Copy — "Keep the Trails Open"
 _Copied from the Canva doc "Keep the Trails Open."_
 
-> **Pricing update:** the Sept 19 board brief notes say the **Day pass is $20** and there is also a **Family pass** (amount not recorded). The tiers below are the older values.
+> **Pricing update:** the **Day pass is $20** and the **Season pass is $150** — both confirmed verbally by the board on 2026-11-01. A **Family pass** exists but its amount has still never been recorded. The tiers below are the older Canva values and the $10 day pass is wrong.
 
 **Headline:** Keep the Trails Open
 **Subhead:** Support our volunteer-maintained trail system.

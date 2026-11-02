@@ -99,7 +99,17 @@ Record each decision as an ADR in `docs/decisions/`.
   Canva prototype's text and the logo usage guide's prose that lowercase it, and those
   two are wrong on this point — do not use them as authority for the casing.
 
-- Day pass is **$20** (not $10 as in the prototype), and there is a **Family pass** (amount TBD). Season pass $150 — confirm. Present all passes as **suggested donations**, never as purchases (ADR 0004).
+- Day pass **$20** and season pass **$150** — both confirmed verbally by the
+  board, 2026-11-01. The prototype's $10 day pass is wrong. A **Family pass**
+  exists but its amount has never been recorded anywhere; it is deliberately
+  absent from the site rather than guessed, and is the one open pricing
+  question. Present all passes as **suggested donations**, never as purchases
+  (ADR 0004).
+- **The trail history timeline is invented.** Three of the four entries in
+  `apps/foafc/src/data/board.ts` were written to give the page a shape; only
+  the 2024 501(c)(3) entry is real. John Chase's own bio dates the trails to
+  **1999**, which is the first hard founding date anyone has given and
+  contradicts the placeholder 2012. Confirm with him before rewriting it.
 - Wolf Chase Loop km figure in the source looks wrong; see `packages/module-trails/data/trails.json`.
 - ~~Heading typeface~~ — **resolved 2026-10-11.** The prototype uses **Fraunces** bold
   (serif) for headings and **Libre Franklin** for body, not Archivo Black / Source Sans 3.
